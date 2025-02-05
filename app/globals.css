@@ -19,3 +19,44 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.mainbackground{
+  background-image: url('../public/Background.jpg');
+  width: 98%;
+  height: calc(100vh - 100px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10px;
+  border-radius: 25px;
+  overflow: hidden;
+  z-index: -3;
+
+}
+.haundredlanguage{
+  z-index: -2;
+  position: absolute;
+  right: 45px;
+  bottom: -65px;
+  width: 340px;
+  height: 400px;
+  transform: rotate(15deg);
+}
+.ChatWithOtherPeople{
+  z-index: -2;
+  position: absolute;
+  left: 45px;
+  top: 35px;
+  width: 360px;
+  height: 400px;
+  transform: rotate(-15deg);
+}
+.maintittle{
+  backdrop-filter: blur(2px);
+}
+.maindesc{
+  backdrop-filter: blur(2px);
+}
+.mainword{
+  backdrop-filter: blur(2px);
+}
