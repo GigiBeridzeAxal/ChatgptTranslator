@@ -8,7 +8,7 @@ export default function Main() {
 
       <div className="learnlanguage text-[20px]">Learn 100+ Language</div>
       <div className="chatwithpeople text-center w-[80%] ">Talk To Real People And Master Any Language In Short Time</div>
-      <button className='p-[10px] bg-blue-500 w-[150px] rounded-[5px]' >Start now</button>
+      <a href='/register'  className= 'startnowbtn p-[10px] text-center bg-blue-500 w-[150px] rounded-[5px]' >Start now</a>
       <img width={300} src="PhoneMessaging.png" className='mt-[15px]' alt="" />
    
  

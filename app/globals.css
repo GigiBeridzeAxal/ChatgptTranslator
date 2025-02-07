@@ -35,7 +35,6 @@ body {
 
 
   overflow: hidden;
-  z-index: -3;
 
 }
 header{
@@ -44,6 +43,7 @@ header{
   padding: 10px;
   justify-content: space-between;
   color: white;
+  z-index: 15;
 }
 .logo h1{
   font-weight: 700;
@@ -81,6 +81,29 @@ header{
   width: 320px;
 
 
+}
+.startnowbtn{
+  z-index: 15;
+}
+.lastname{
+  text-transform: uppercase;
+}
+.clickheretoupload{
+
+  width: 100px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+}
+.profileuploader{
+  background-image: url("../public/Uploadprofile.png");
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @media (max-width:900px) {
   section{
