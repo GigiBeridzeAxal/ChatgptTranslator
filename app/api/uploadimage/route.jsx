@@ -8,11 +8,12 @@ import { NextResponse } from "next/server"
 
 export async function POST(req,res) {
 
-    const body = req.json()
+    const body = await req.json()
 
 
     const dirpath = path.join(process.cwd() , 'images')
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
     let randomname = () => {
         let random = ''
         for (let index = 0; index < 16; index++) {
@@ -27,19 +28,20 @@ export async function POST(req,res) {
     }
 
 
-    console.log(randomname())
+    let random = randomname()
 
     
 
-    const filedir = path.join(dirpath , `${randomname()}.txt`)
+    const filedir = path.join(dirpath , `${random}.txt`)
 
 
     if(!fs.existsSync(dirpath)){
         fs.mkdirSync(dirpath)
     }
 
-    fs.writeFileSync(filedir , "hello world")
+    fs.writeFileSync(filedir , body.image)
+    
 
-    return new NextResponse(randomname() , {status:200})
+    return new NextResponse(random , {status:200})
 
 }

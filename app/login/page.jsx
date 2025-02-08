@@ -15,6 +15,7 @@ export default function page() {
       password:formref.current[1].value
     }) 
 
+    console.log(send.status)
     setregcode(send.status)
     if(send.status == 200){
      const setcookie = await axios.post('/api/jwtcookieset' , {jwt:send.data})
@@ -32,9 +33,8 @@ export default function page() {
     <div className="register w-[100%] h-[100vh] flex items-center justify-center">
       <div className="registerframe">
         <form onSubmit={(e) => SubmitForm(e)} ref={formref} className='authform flex flex-col items-center gap-[15px] ' >
-
-        {registercode == 203 ? <div className="text-red-500">Email Already Registered</div> : null}
-        {registercode == 204 ? <div className="text-red-500">Password Didn't Match !</div> : null}
+      
+      
           <h1 className='text-[24px]' >Sign Up With</h1>
           <br />
 
@@ -44,16 +44,17 @@ export default function page() {
             Sign Up
             <div className="line1 w-[120px] h-[1px] bg-black "></div>
           </div>
-          
-
+          {registercode == 202 ? <div className="text-red-500">Account Didn't Exist</div> : null}
+          {registercode == 203 ? <div className="text-red-500">Email Already Registered</div> : null}
+          {registercode == 204 ? <div className="text-red-500">Password Didn't Match !</div> : null}
           <input required type="email" placeholder='Enter Your Email' />
 
 
           <input required minLength={8} style={registercode == 204 ? {border:'1px solid red'} : null} type="text" placeholder='Enter Your Password' />
 
-          <button required className='w-[320px] p-[6px] bg-teal-500 text-white ' >Sign Up</button>
+          <button required className='w-[320px] p-[6px] bg-teal-500 text-white ' >Sign In</button>
 
-          <div className="alreadyhaveaccount flex items-center justify-center gap-[5px]">Already Have Account ? <a className='text-blue-500' href="/login">Click Here</a></div>
+          <div className="alreadyhaveaccount flex items-center justify-center gap-[5px]">Dosen't Have Account ? <a className='text-blue-500' href="/register">Click Here</a></div>
 
         </form>
       </div>
