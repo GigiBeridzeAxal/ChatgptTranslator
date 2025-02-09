@@ -1,16 +1,21 @@
 'use client'
 import useAuth from '@/app/hooks/useAuth'
+import useJwtauth from '@/app/hooks/useJwtauth'
 import React, { useEffect, useState } from 'react'
 
 export default function DashHeader() {
    const {userinfo , user , profile , logout} = useAuth()
+   const {decoded} = useJwtauth()
 
    const [profileopened , setprofileopened] = useState(false)
+
+
+
 
    
 
 
-   if(!userinfo.lastname){
+   if(!decoded){
     return null
    }
 
@@ -24,7 +29,7 @@ export default function DashHeader() {
 
           <div onClick={() => setprofileopened(false)} className="exit flex items-center gap-[5px]"><img width={30} src="Back.png" alt="" /> Back</div>
           <div className="profilemenupic flex items-center gap-[5px]"> <div className="profile flex items-center justify-center gap-[10px]">
-     <div className="s text-black flex items-center font-[500] gap-[3px]">{userinfo.firstname}, <div className="lastname">{userinfo.lastname[0]}</div></div>
+     <div className="s text-black flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
         <img  width={50} src={profile !== false ? profile : "Profile.png"} alt="" />
       
     </div></div>
@@ -55,8 +60,11 @@ export default function DashHeader() {
     <div className="profile relative">
     <div className="name"></div>
     <div className="profile flex items-center justify-center gap-[10px]">
-     <div className="s text-black flex items-center font-[500] gap-[3px]">{userinfo.firstname}, <div className="lastname">{userinfo.lastname[0]}</div></div>
-        <img className='ProfilePic' onClick={() => setprofileopened(true)} width={50} height={50} src={profile !== false ? profile : "Profile.png"} alt="" />
+     <div className="s text-black flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+      {profile == false ? <div className="loaderprofileimage">
+                        <div className="loaderline"></div>
+                    </div> : 
+                    <img className='ProfilePic' onClick={() => setprofileopened(true)} width={50} height={50} src={profile !== false ? profile : null} alt="" />}
       
     </div>
 

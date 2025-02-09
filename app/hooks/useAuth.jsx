@@ -44,13 +44,13 @@ export default function useAuth() {
              if(user.status == 200){
                 setuser(user.data)
              }
-             console.log(user.data[0])
+
 
              if(user.data[0].compleatedprofile){
-               const find = await axios.post('/api/imagefinder' , {imagename:user.data[0].profilepicture})
+              // const find = await axios.post('/api/imagefinder' , {imagename:user.data[0].profilepicture})
 
-               if(find.status == 200){
-                setprofile(find.data)
+               if(user.status == 200){
+                setprofile(user.data[0].profilepicture)
                }else{
                 setprofile('Not Defined')
                }

@@ -11,20 +11,19 @@ export default function Completeprofile() {
 
     const Finish = async() => {
 
-       const uploadimageindir = await axios.post('/api/uploadimage' , {image:uploadedpic})
+      // const uploadimageindir = await axios.post('/api/uploadimage' , {image:uploadedpic})
 
 
 
 
-       if(uploadimageindir.status == 200){
-        const setprofilepic = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changeprofilepic" , {image:uploadimageindir.data , email:userinfo.email})
+   
+        const setprofilepic = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changeprofilepic" , {image:uploadedpic , email:userinfo.email})
 
-        console.log(setprofilepic.status)
         if(setprofilepic.status == 200){
             window.location = '/'
         }
 
-       }
+
 
       
 

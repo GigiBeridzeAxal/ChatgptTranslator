@@ -10,7 +10,7 @@ export default function page() {
   const SubmitForm = async(e) => {
     e.preventDefault();
 
-    console.log(formref.current[0].value)
+
     const send = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "register" , {
       email:formref.current[0].value,
       firstname:formref.current[1].value,

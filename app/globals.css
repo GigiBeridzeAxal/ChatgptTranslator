@@ -143,10 +143,84 @@ header{
 }
 .ProfilePictop{
   background-color: rgb(238, 238, 238);
-  width: 100px;
-  height: 100px;
+  width: 100px !important;
+  height: 100px !important;
   border-radius: 50%;
   background-size: cover;
+}
+.loaderimage{
+  position: relative;
+  background-color: rgb(238, 238, 238);
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+.loaderimage::before{
+  content: '';
+  width: 200%;
+  height: 0px;
+  background: none;
+  box-shadow: 0px 0px 25px 6px rgb(255, 255, 255);
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  animation: Loading 0.8s infinite linear;
+  transform: rotate(-30deg);
+}
+.profilesloading{
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+.loaderprofileimage{
+  position: relative;
+  background-color: rgb(238, 238, 238);
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+.loaderprofileimage::before{
+  content: '';
+  width: 200%;
+  height: 0px;
+  background: none;
+  box-shadow: 0px 0px 25px 6px rgb(255, 255, 255);
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  animation: Loading 0.8s infinite linear;
+  transform: rotate(-30deg);
+}
+
+@keyframes Loading {
+
+  0%{
+    left: -25px;
+    top: -75%;
+  }
+
+  100%{
+
+    top: 100%;
+  }
+  
+}
+
+.profileimages{
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+.profileimages::-webkit-scrollbar{
+  width: 0px;
+  height: 0px;
+  background: none;
 }
 @media (max-width:900px) {
   section{

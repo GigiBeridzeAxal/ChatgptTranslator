@@ -16,7 +16,7 @@ export default function Mainpeople() {
 
     useEffect(() => {
       
-        console.log(user , profile)
+
 
         const getalluser = async() => {
             const getusers = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "gettopuser")
@@ -24,25 +24,11 @@ export default function Mainpeople() {
                 
                 if(user){
                     const alluser = getusers.data.filter(data => data.email !== user[0].email)
-                    console.log(alluser)
+   
 
-                    setusers(alluser)
+                   setusers(alluser)
 
-                    alluser.map(async(data) => {
-                        console.log(data)
-                        const getpictures = await axios.post('/api/imagefinder' , {imagename:data.profilepicture})
-                        const updated = [...userpictures , {imagename:data.profilepicture , image:getpictures.data}]
-                        setuserpictures(prevUserPictures => [
-                            ...prevUserPictures, 
-                            { imagename: data.profilepicture, image: getpictures.data }
-                          ]);
-                          
-  
-                        
-                       
-
-                    
-                    })
+                  
                     
                 }
   
@@ -53,7 +39,7 @@ export default function Mainpeople() {
     
             }
         }
-        getalluser()
+       getalluser()
 
     },[user])
 
@@ -64,15 +50,45 @@ export default function Mainpeople() {
     
   return (
     <div className="mainpeople">
-        <div className="mainpeopleframe pt-[130px]">
+        <div className="mainpeopleframe flex items-center justify-center flex-col gap-[15px] pt-[130px]">
+
+            <div className="peoplemayyoulike w">People Should You like</div>
 
             <div className="profileimages gap-[15px] p-[15px] flex items-center ">
-            {users.map((data) => {
-            const find = userpictures.find(pic => pic.imagename === data.profilepicture)
-           return <div key={data._id} >{find ? <img width={50} className='ProfilePictop' height={50} src={find.image} alt="" /> : null }</div>
-           }
+
+                {users[0] == undefined ? <div className="profilesloading flex items-center justify-center gap-[25px] w-[100%] ">
+                    <div className="loaderimage">
+                        <div className="loaderline"></div>
+                    </div>
+                    <div className="loaderimage">
+                        <div className="loaderline"></div>
+                    </div>
+
+                    <div className="loaderimage">
+                        <div className="loaderline"></div>
+                    </div>
+
+                    <div className="loaderimage">
+                        <div className="loaderline"></div>
+                    </div>
+
+
+
+                </div> : users.map(data => {
+               return <>
+               <div key={data._id} className="profileinfo flex flex-col w-[100px] items-center justify-center">
+               <img  className='ProfilePictop' width={50} height={50} src={data.profilepicture} />
+               <div  className="name flex items-center justify-center gap-[2px]"><div className="online bg-teal-500 w-[8px] rounded h-[8px]"></div> {data.firstname}</div>
+               </div>
+    
+               
+               </>
+               
+            }) }
+
+          
+           
   
-           )}
             </div>
 
 

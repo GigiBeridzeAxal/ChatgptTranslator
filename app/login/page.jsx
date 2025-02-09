@@ -9,13 +9,13 @@ export default function page() {
   const SubmitForm = async(e) => {
     e.preventDefault();
 
-    console.log(formref.current[0].value)
+
     const send = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "Login" , {
       email:formref.current[0].value,
       password:formref.current[1].value
     }) 
 
-    console.log(send.status)
+
     setregcode(send.status)
     if(send.status == 200){
      const setcookie = await axios.post('/api/jwtcookieset' , {jwt:send.data})
