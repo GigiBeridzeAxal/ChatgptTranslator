@@ -11,7 +11,7 @@ export async function POST(req,res) {
     const body = await req.json()
 
 
-    const dirpath = path.join(process.cwd() , 'images')
+    const dirpath = path.join('/tmp' , 'images')
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     let randomname = () => {
