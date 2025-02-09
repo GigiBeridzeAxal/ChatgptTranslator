@@ -6,16 +6,25 @@ import React, { useEffect, useState } from 'react'
 export default function DashHeader() {
    const {userinfo , user , profile , logout} = useAuth()
    const {decoded} = useJwtauth()
-
+   const [serverloaded , setserverloaded] = useState(false)
    const [profileopened , setprofileopened] = useState(false)
+
 
 
 
 
    
 
+   useEffect(() => {
+    if(!decoded.lastname){
+       setserverloaded(false)
+     }else{
+      setserverloaded(true)
+     }
+   },[])
 
-   if(!decoded){
+
+   if(serverloaded == false){
     return null
    }
 

@@ -23,6 +23,7 @@ export default async function middleware(request){
          const usercompleatedprofile = await axios.post(process.env.NEXT_PUBLIC_BACKEND + 'usercompleatedprofile' , {email:decoded.email})
 
 
+
          
 
          if(usercompleatedprofile.status == 200){
