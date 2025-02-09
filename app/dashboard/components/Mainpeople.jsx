@@ -74,17 +74,17 @@ export default function Mainpeople() {
 
 
 
-                </div> : users.map(data => {
-               return <>
-               <div key={data._id} className="profileinfo flex flex-col w-[100px] items-center justify-center">
-               <img  className='ProfilePictop' width={50} height={50} src={data.profilepicture} />
-               <div  className="name flex items-center justify-center gap-[2px]"><div className="online bg-teal-500 w-[8px] rounded h-[8px]"></div> {data.firstname}</div>
-               </div>
+                </div> : users.map(data => (
+                <div key={data._id} className="profileinfo flex flex-col w-[100px] items-center justify-center">
+                <img   className='ProfilePictop' width={50} height={50} src={data.profilepicture} />
+                <div  className="name flex items-center justify-center gap-[2px]"><div className="online bg-teal-500 w-[8px] rounded h-[8px]"></div> {data.firstname}</div>
+                </div>
+             
     
                
-               </>
+            
                
-            }) }
+            )) }
 
           
            
