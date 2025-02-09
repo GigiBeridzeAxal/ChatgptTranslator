@@ -11,7 +11,7 @@ export async function POST(req) {
     let profile = ''
 
 
-    const dirpath = path.join(process.cwd() , 'images')
+    const dirpath = path.join('/tmp' , 'images')
     if(fs.existsSync(dirpath)){
 
          const filedir = path.join(dirpath , `${body.imagename}.txt`)
