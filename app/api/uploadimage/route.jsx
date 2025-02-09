@@ -11,7 +11,7 @@ export async function POST(req,res) {
     const body = await req.json()
 
 
-    const dirpath = path.join('/tmp' , 'images')
+    const dirpath = path.join('/tmp' , 'images' , )
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     let randomname = () => {
@@ -36,7 +36,7 @@ export async function POST(req,res) {
 
 
     if(!fs.existsSync(dirpath)){
-        fs.mkdirSync(dirpath)
+        fs.mkdirSync(dirpath , { recursive: true })
     }
 
     fs.writeFileSync(filedir , body.image)
