@@ -181,6 +181,9 @@ header{
   animation: Loading 0.8s infinite linear;
   transform: rotate(-30deg);
 }
+.profileinfo{
+  min-width: 100px;
+}
 
 @keyframes Loading {
 

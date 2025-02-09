@@ -7,7 +7,9 @@ import jwt from 'jsonwebtoken'
 
 
 
+
 export default async function middleware(request){
+   
    const url = new URL(request.url)
    if(url.pathname == '/completeprofile'){
       if((await cookies()).get('JWT')){
