@@ -159,11 +159,7 @@ header{
   animation: Loading 0.8s infinite linear;
   transform: rotate(-30deg);
 }
-.profilesloading{
 
-  overflow: hidden;
-  overflow-x: scroll;
-}
 .loaderprofileimage{
   position: relative;
   background-color: rgb(238, 238, 238);
@@ -200,8 +196,14 @@ header{
   
 }
 
+.profilesloading::-webkit-scrollbar{
+  width: 0px;
+  height: 0px;
+  background: none;
+}
+
 .profileimages{
-  width: 100%;
+  width: 110%;
   max-width: 100%;
   overflow: hidden;
   overflow-x: scroll;

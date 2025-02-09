@@ -56,7 +56,7 @@ export default function Mainpeople() {
 
             <div className="profileimages gap-[15px] p-[15px] flex items-center ">
 
-                {users[0] == undefined ? <div className="profilesloading flex items-center justify-center gap-[25px] w-[100%] ">
+                {users[0] == undefined ? <div className="profilesloading flex items-center justify-center gap-[25px] w-[110%] ">
                     <div className="loaderimage">
                         <div className="loaderline"></div>
                     </div>
