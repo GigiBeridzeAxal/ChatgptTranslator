@@ -6,20 +6,23 @@ import useAuth from '../hooks/useAuth'
 export default function Completeprofile() {
 
     const [uploadedpic , setuploadedpic] = useState(0)
+    const [base64 , setbase64] = useState()
     const {userinfo} = useAuth()
 
 
     const Finish = async() => {
+        const formdata = new FormData()
+        formdata.append('file' , uploadedpic)
 
-      // const uploadimageindir = await axios.post('/api/uploadimage' , {image:uploadedpic})
+       const uploadimageindir = await axios.post('/api/uploadimage' , formdata , {headers:{'Content-Type':'multipart/form-data'}})
 
 
 
 
    
-        const setprofilepic = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changeprofilepic" , {image:uploadedpic , email:userinfo.email})
+        const setprofilepic = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changeprofilepic" , {image:uploadimageindir.data , email:userinfo.email})
 
-        if(setprofilepic.status == 200){
+       if(setprofilepic.status == 200){
             window.location = '/'
         }
 
@@ -36,7 +39,8 @@ export default function Completeprofile() {
 
 
         reader.onload  = () => {
-            setuploadedpic(reader.result)
+            setuploadedpic(e.target.files[0])
+            setbase64(reader.result)
         }
     }
   return (
@@ -52,7 +56,7 @@ export default function Completeprofile() {
 
 
             <input onChange={(e) => changepicture(e)}  className='hidden' type="file" name="" id="uploadpic" />
-            <label  htmlFor="uploadpic"><div style={uploadedpic !== 0 ? {backgroundImage:`url(${uploadedpic})`} : null}  className="profileuploader">{uploadedpic !== 0 ?  null: <div className="clickheretoupload">Click Here to Upload</div> }</div> </label>
+            <label  htmlFor="uploadpic"><div style={uploadedpic !== 0 ? {backgroundImage:`url(${base64})`} : null}  className="profileuploader">{uploadedpic !== 0 ?  null: <div className="clickheretoupload">Click Here to Upload</div> }</div> </label>
 
    
                {uploadedpic !== 0 ?             <button onClick={() => Finish()} className="next bg-blue-500 rounded-[2px] text-white p-[10px] text-white w-[150px]">Finish</button> : 

@@ -1,6 +1,6 @@
 
-import fs from 'fs';
-import path from 'path';
+import fs, { mkdir, mkdirSync, writeFile, writeFileSync } from 'fs';
+import path, { join } from 'path';
 
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
@@ -8,10 +8,12 @@ import { NextResponse } from "next/server"
 
 export async function POST(req,res) {
 
-    const body = await req.json()
+    const formdata = await req.formData()
+    const file = formdata.get('file')
+
+    console.log(file)
 
 
-    const dirpath = path.join('/tmp' , 'images' , )
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     let randomname = () => {
@@ -30,18 +32,22 @@ export async function POST(req,res) {
 
     let random = randomname()
 
+
+    const bytes = await file.arrayBuffer()
+    const buffer = Buffer.from(bytes)
+
+    const dirpath = join(process.cwd() , 'public' , 'tmp')
     
 
-    const filedir = path.join(dirpath , `${random}.txt`)
+ //  const filedir = path.join(dirpath , `${random}.txt`)
+
+    const path = join(dirpath, random + '.png')
+     mkdirSync(dirpath , {recursive:true})
+     writeFileSync(path , buffer)
+     
 
 
-    if(!fs.existsSync(dirpath)){
-        fs.mkdirSync(dirpath , { recursive: true })
-    }
 
-    fs.writeFileSync(filedir , body.image)
-    
-
-    return new NextResponse(random , {status:200})
+    return new NextResponse(random + '.png' , {status:200})
 
 }

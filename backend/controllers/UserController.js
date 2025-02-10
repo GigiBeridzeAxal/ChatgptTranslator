@@ -45,13 +45,13 @@ const login = async(req,res) => {
     if(!email || !password){
         res.status(203).send("All Fields Are Required")
     }else{
-        const findifuserexist = await UserModel.find({email:email})
+        const findifuserexist = await UserModel.findOne({email:email} , "email firstname lastname password")
 
-        if(findifuserexist[0] !== undefined){
-            if(findifuserexist[0].password === password){
-                const email = findifuserexist[0].email
-                const firstname = findifuserexist[0].firstname
-                const lastname = findifuserexist[0].lastname
+        if(findifuserexist !== null){
+            if(findifuserexist.password === password){
+                const email = findifuserexist.email
+                const firstname = findifuserexist.firstname
+                const lastname = findifuserexist.lastname
                 const token = jwt.sign({email , firstname , lastname} , process.env.SECRETKEY , {expiresIn:'1d'})
                 res.status(200).send(token)
             }else{
@@ -129,10 +129,10 @@ const changeprofilepic = async(req , res) => {
         console.log("Image Not Defined")
     }else{
 
-        const finduserbyemail = await UserModel.find({email:email})
+        const finduserbyemail = await UserModel.findOne({email:email} , "compleatedprofile")
 
 
-        if(finduserbyemail[0] !== undefined){
+        if(finduserbyemail !== null){
             const updated = {
                 profilepicture:image,
                 compleatedprofile:true

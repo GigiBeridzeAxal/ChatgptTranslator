@@ -17,6 +17,7 @@ export default function DashHeader() {
 
    useEffect(() => {
     if(!decoded.lastname){
+      console.log(profile)
        setserverloaded(false)
      }else{
       setserverloaded(true)
@@ -73,7 +74,7 @@ export default function DashHeader() {
       {profile == false ? <div className="loaderprofileimage">
                         <div className="loaderline"></div>
                     </div> : 
-                    <img className='ProfilePic' onClick={() => setprofileopened(true)} width={50} height={50} src={profile !== false ? profile : null} alt="" />}
+                    <img className='ProfilePic' onClick={() => setprofileopened(true)} width={50} height={50} src={profile !== false ?  `/tmp/${profile}`: null} alt="" />}
       
     </div>
 
