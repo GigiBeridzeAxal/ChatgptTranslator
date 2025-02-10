@@ -36,7 +36,7 @@ export async function POST(req,res) {
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
 
-    const dirpath = join(process.cwd() , 'public' , 'tmp')
+    const dirpath = join('/tmp', 'tmp')
     
 
  //  const filedir = path.join(dirpath , `${random}.txt`)
