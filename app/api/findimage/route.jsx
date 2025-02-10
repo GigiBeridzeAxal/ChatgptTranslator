@@ -1,6 +1,6 @@
 import path, { join } from 'path'
 import fs from 'fs'
-export async function POST(req,res) {
+export async function GET(req,res) {
 
     const { imageName } = req.query;
 
