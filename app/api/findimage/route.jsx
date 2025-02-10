@@ -1,19 +1,19 @@
-import path, { join } from 'path'
-import fs from 'fs'
-export async function GET(req,res) {
+import fs from 'fs';
+import { NextResponse } from 'next/server';
+import path, { join } from 'path';
 
-    const { imageName } = req.query;
+export async function GET(req, res) {
+    // Extract image name from the query parameters or request
+    const searchparams = req.nextUrl.searchParams
+    const image = searchparams.get('image')
 
-    const imagepath = join('/tmp' , imageName)
+    const imagepath = join('/tmp' , "dl4PUMGnrJaCs4jo.png" )
 
-    if(fs.existsSync(imagepath)){
-        const buffer = fs.readFileSync(imagepath)
-        res.setHeader('Content-Type', 'image/png');
-        res.status(200).send(buffer)
-    }else{
-        res.status(201).send("Not Found")
-    }
+    const imagebuffer = fs.readFileSync(imagepath)
 
+
+
+    return new NextResponse(imagebuffer)
 
 
 }
