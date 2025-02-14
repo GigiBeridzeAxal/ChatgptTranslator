@@ -2,28 +2,30 @@
 import axios from 'axios';
 
 import React, { useRef, useState } from 'react'
+import toast from 'react-hot-toast';
+import { useAuthStore } from '../store/useAuthStore';
 export default function page() {
   const formref = useRef()
   const [registercode , setregcode] = useState(0)
 
+  const {signin} = useAuthStore()
+
+
+  const validateform = () => {
+
+    if(!formref.current[0].value) return toast.error("Email Is Required")
+      if(!formref.current[1].value) return toast.error("Password Is Required")
+        if(formref.current[1].value.length < 8) return toast.error("Password Must Be 8 Character or Longer")
+    return true
+  }
+
   const SubmitForm = async(e) => {
     e.preventDefault();
 
-
-    const send = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "Login" , {
-      email:formref.current[0].value,
-      password:formref.current[1].value
-    }) 
+    signin({      email:formref.current[0].value,
+      password:formref.current[1].value})
 
 
-    setregcode(send.status)
-    if(send.status == 200){
-     const setcookie = await axios.post('/api/jwtcookieset' , {jwt:send.data})
-
-     if(setcookie.status == 200){
-      window.location = '/'
-     }
-    }
 
 
   }
@@ -44,15 +46,13 @@ export default function page() {
             Sign Up
             <div className="line1 w-[120px] h-[1px] bg-black "></div>
           </div>
-          {registercode == 202 ? <div className="text-red-500">Account Didn't Exist</div> : null}
-          {registercode == 203 ? <div className="text-red-500">Email Already Registered</div> : null}
-          {registercode == 204 ? <div className="text-red-500">Password Didn't Match !</div> : null}
-          <input required type="email" placeholder='Enter Your Email' />
+
+          <input  type="email" placeholder='Enter Your Email' />
 
 
-          <input required minLength={8} style={registercode == 204 ? {border:'1px solid red'} : null} type="text" placeholder='Enter Your Password' />
+          <input  style={registercode == 204 ? {border:'1px solid red'} : null} type="text" placeholder='Enter Your Password' />
 
-          <button required className='w-[320px] p-[6px] bg-teal-500 text-white ' >Sign In</button>
+          <button  className='w-[320px] p-[6px] bg-teal-500 text-white ' >Sign In</button>
 
           <div className="alreadyhaveaccount flex items-center justify-center gap-[5px]">Dosen't Have Account ? <a className='text-blue-500' href="/register">Click Here</a></div>
 

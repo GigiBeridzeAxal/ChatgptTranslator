@@ -1,7 +1,9 @@
 'use client'
 import useAuth from '@/app/hooks/useAuth'
 import axios from 'axios'
+import { Loader, Loader2Icon, LoaderPinwheelIcon, MessagesSquare } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import { LoaderIcon } from 'react-hot-toast'
 
 export default function Mainpeople() {
 
@@ -89,15 +91,25 @@ export default function Mainpeople() {
     
   return (
     <div className="mainpeople">
-        <div className="mainpeopleframe flex items-center justify-center flex-col gap-[15px] pt-[130px]">
-
+        <div className="mainpeopleframe  flex items-center justify-center flex-col gap-[15px] pt-[120px]">
+        <div className="logoframe text-white p-[10px]">
+        <MessagesSquare className='w-[35px] h-[35px] text-indigo-500'></MessagesSquare>
+      </div>
             <div className="peoplemayyoulike w">People Should You like</div>
 
-            <div className="profileimages gap-[15px] p-[15px] flex items-center ">
+            {users[0] == undefined ? usersfinder == true ?           <>
+        <span className='text-gray-500 text-[12px] mb-[5px]' >Please Wait..</span>
+            <LoaderIcon className='size-9'></LoaderIcon>
+
+            </>  : null : null}
+
+            <div className="profileimages flex gap-[15px] p-[40px] flex items-center ">
 
                 {users[0] == undefined ?
 
                 usersfinder == true ?  <>
+                 
+  
                 <div className="loaderimage">
                       <div className="loaderline"></div>
                   </div>
@@ -123,7 +135,7 @@ export default function Mainpeople() {
                     <img   className='ProfilePictop' width={50} height={50} src={data.profilepicture} />
                     
                     <div  className="name flex items-center justify-center gap-[2px]">{( Date.now() - new Date(data.lastonline)) > 10000 ?  <div className="online bg-gray-500 w-[8px] rounded h-[8px]"></div> :  <div className="online bg-teal-500 w-[8px] rounded h-[8px]"></div> } {data.firstname}</div>
-                    <div className="div bg-black text-white mb-[25px]"></div>
+                    <div className="div bg-black text-white mb-[10px]"></div>
     
                     </button>
                  

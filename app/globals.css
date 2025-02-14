@@ -13,6 +13,8 @@ body {
   font-style: normal;
   font-variation-settings:
     "wdth" 100;
+    background-color:#111827;
+    color: white;
 }
 
 
@@ -34,6 +36,9 @@ header{
   justify-content: space-between;
   color: white;
   z-index: 15;
+  background-color: #111827;
+  box-shadow: 2px 2px 10px 1px #151e33;
+  
 }
 .logo h1{
   font-weight: 700;
@@ -116,8 +121,8 @@ header{
 .profileopenframe{
   width: 100%;
   height: 100vh;
-  background-color: rgb(255, 255, 255);
-  color: black;
+  background-color: rgb(0, 0, 0);
+
 }
 .profilemenupic{
   position: absolute;
@@ -141,7 +146,7 @@ header{
 .loaderimage{
   position: relative;
   background-color: rgb(238, 238, 238);
-  min-width: 110px;
+  min-width: 100px;
   min-height: 100px ;
   border-radius: 50%;
   background-size: cover;
@@ -152,7 +157,7 @@ header{
   width: 200%;
   height: 0px;
   background: none;
-  box-shadow: 0px 0px 25px 6px rgb(255, 255, 255);
+  box-shadow: 0px 0px 44px 10px rgba(173, 173, 173, 0.548);
   position: absolute;
   left: 0px;
   top: 0px;
@@ -169,12 +174,34 @@ header{
   background-size: cover;
   overflow: hidden;
 }
+.preloader{
+  position: relative;
+  background-color: rgb(238, 238, 238);
+
+
+
+  background-size: cover;
+  overflow: hidden;
+}
+.preloader::before{
+  content: '';
+  width: 200%;
+  height: 0px;
+  background: none;
+  box-shadow: 0px 0px 25px 6px rgb(231, 231, 231);
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  animation: Loading 0.8s infinite linear;
+  transform: rotate(-30deg);
+}
+
 .loaderprofileimage::before{
   content: '';
   width: 200%;
   height: 0px;
   background: none;
-  box-shadow: 0px 0px 25px 6px rgb(255, 255, 255);
+  box-shadow: 0px 0px 25px 6px rgba(178, 178, 178, 0.515);
   position: absolute;
   left: 0px;
   top: 0px;
@@ -238,7 +265,7 @@ header{
   left: 0px;
 }
 .profilebg{
-  box-shadow: 1px 1px 5px 2px rgb(234, 234, 234);
+
 }
 .backforprofile{
   position: absolute;
@@ -246,14 +273,19 @@ header{
   top: 20px;
 }
 .usersfetchedlsit{
-  box-shadow: 1px 1px 9px 3px rgb(225, 225, 225);
-  border: 1px solid black;
+
+  border: 1px solid rgb(238, 238, 238);
+  background-color: white;
+}
+.go1858758034{
+  width: 30px !important;
+  height: 30px !important;
 }
 @keyframes Loading {
 
   0%{
     left: -25px;
-    top: -75%;
+    top:-50px;
   }
 
   100%{
@@ -270,10 +302,12 @@ header{
 }
 
 .profileimages{
-  width: 110%;
+  width: 95%;
   max-width: 100%;
   overflow: hidden;
   overflow-x: scroll;
+  padding: 0px;
+  padding-bottom: 10px;
 
 }
 .profileimages::-webkit-scrollbar{
@@ -281,12 +315,29 @@ header{
   height: 0px;
   background: none;
 }
+
+.logoframe{
+  background-color: rgba(72, 87, 153, 0.236);
+}
+.menu{
+  display: none;
+}
+@media (max-width:700px) {
+  .profile{
+    display: none;
+  }
+  .menu{
+    display: flex;
+  }
+}
+
 @media (max-width:900px) {
   section{
     display: none !important;
   }
 }
 @media (max-width:500px) {
+
   section{
     display: none !important;
   }
