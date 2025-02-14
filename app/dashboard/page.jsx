@@ -3,6 +3,7 @@ import React from 'react'
 import DashHeader from './components/DashHeader'
 import Mainpeople from './components/Mainpeople'
 import useRenew from '../hooks/useRenew'
+import Usersbylanguage from './components/Usersbylanguage'
 
 export default function page() {
   const {renewtime} = useRenew()
@@ -16,6 +17,7 @@ export default function page() {
     <>
     <DashHeader></DashHeader>
     <Mainpeople></Mainpeople>
+    <Usersbylanguage></Usersbylanguage>
     </>
   )
 }

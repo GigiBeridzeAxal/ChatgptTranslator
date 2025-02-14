@@ -3,18 +3,14 @@ import useAuth from '@/app/hooks/useAuth'
 import useJwtauth from '@/app/hooks/useJwtauth'
 import React, { useEffect, useState } from 'react'
 
-export default function DashHeader() {
-   const {userinfo , user , profile , logout} = useAuth()
-   const {decoded} = useJwtauth()
+
+export default function Chatheader() {
+    const {userinfo , profile , logout} = useAuth()
+    const {decoded} = useJwtauth()
+    const [profileopened , setprofileopened] = useState(false)
    const [serverloaded , setserverloaded] = useState(false)
-   const [profileopened , setprofileopened] = useState(false)
-
-
-
-
 
    
-
    useEffect(() => {
     if(!decoded.lastname){
       console.log(profile)
@@ -25,15 +21,14 @@ export default function DashHeader() {
    },[])
 
 
-   if(serverloaded == false){
-    return null
-   }
+    if(!serverloaded){
+      return null
+    }
 
-
-
+    
   return (
-    <header className='flex items-center p-[20px] justify-between' >
-      {profileopened ?
+    <div className="chat p-[20px]">
+         {profileopened ?
       <div className="profileopen ">
         <div className="profileopenframe w-[100%] flex items -center flex-col relative">
 
@@ -59,29 +54,19 @@ export default function DashHeader() {
         </div>
       </div>
       : null}
-    <div className="logo flex text-black items-center gap-[5px]">
-      <img src="Logo.png" alt="" />
-      <h3 className='text-[12px]' ></h3>
-    </div>
-    <section  className='flex items-center gap-[25px]' >
-    <a href="">How To Start</a>
-    </section>
+        <div className="chatframe">
+            <div className="chattop flex items-center justify-between">Chat With People  
+                <div className='flex items-center gap-[10px]'>
 
-    <div className="profile relative">
-    <div className="name"></div>
-    <div className="profile flex items-center justify-center gap-[10px]">
-     <div className="s text-black flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+            <div className="s text-black flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
       {profile == false ? <div className="loaderprofileimage">
                         <div className="loaderline"></div>
                     </div> : 
                     <img className='ProfilePic' onClick={() => setprofileopened(true)} width={50} height={50} src={profile !== false ?  profile : null} alt="" />}
+                </div> 
       
     </div>
-
-
-  
+        </div>
     </div>
-
-    </header>
   )
 }

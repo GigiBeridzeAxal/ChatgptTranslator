@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 export default function Mainpeople() {
 
     const [users , setusers] = useState([])
+    const [usersfinder , setnotfindusers] = useState(true)
     const [userpictures , setuserpictures] = useState([
 
     ])
@@ -25,12 +26,8 @@ export default function Mainpeople() {
     
             if(getlastonlinedata.status == 200){
     
-                const lastOnlineData = getlastonlinedata.data;  // This will be the last online data you get
+                const lastOnlineData = getlastonlinedata.data;
     
-                // Let's assume lastOnlineData contains an array of objects with user id and last online timestamp
-                // Example: [{ id: 1, lastOnline: '2025-02-09T10:00:00Z' }, ...]
-          
-                // Update the users state with new last online values
                 setusers((perv) => perv.map(data => 
                 {
                     const updateddata = lastOnlineData.find(name => name.email == data.email)
@@ -64,6 +61,12 @@ export default function Mainpeople() {
 
                    setusers(alluser)
 
+
+                   if(alluser[0] === undefined){
+                    setnotfindusers(false)
+    
+                   }
+
                   
                     
                 }
@@ -93,40 +96,42 @@ export default function Mainpeople() {
             <div className="profileimages gap-[15px] p-[15px] flex items-center ">
 
                 {users[0] == undefined ?
-                <>
+
+                usersfinder == true ?  <>
+                <div className="loaderimage">
+                      <div className="loaderline"></div>
+                  </div>
                   <div className="loaderimage">
-                        <div className="loaderline"></div>
-                    </div>
-                    <div className="loaderimage">
-                        <div className="loaderline"></div>
-                    </div>
+                      <div className="loaderline"></div>
+                  </div>
 
-                    <div className="loaderimage">
-                        <div className="loaderline"></div>
-                    </div>
+                  <div className="loaderimage">
+                      <div className="loaderline"></div>
+                  </div>
 
-                    <div className="loaderimage">
-                        <div className="loaderline"></div>
-                        </div> 
-                </>
+                  <div className="loaderimage">
+                      <div className="loaderline"></div>
+                      </div> 
+              </> : <div className="notfound">users Not Found</div>
+               
                   
 
 
-
+                  
                 : users.map(data => (
-                <div key={data._id} className="profileinfo flex flex-col w-[100px] items-center justify-center">
-                <img   className='ProfilePictop' width={50} height={50} src={data.profilepicture} />
-                
-                <div  className="name flex items-center justify-center gap-[2px]">{( Date.now() - new Date(data.lastonline)) > 10000 ?  <div className="online bg-gray-500 w-[8px] rounded h-[8px]"></div> :  <div className="online bg-teal-500 w-[8px] rounded h-[8px]"></div> } {data.firstname}</div>
-                <div className="div bg-black text-white mb-[25px]"></div>
-
-                </div>
-             
+                    <button onClick={() => window.location = `/profile?id=${data._id}`} key={data._id} className="profileinfo flex flex-col w-[100px] items-center justify-center">
+                    <img   className='ProfilePictop' width={50} height={50} src={data.profilepicture} />
+                    
+                    <div  className="name flex items-center justify-center gap-[2px]">{( Date.now() - new Date(data.lastonline)) > 10000 ?  <div className="online bg-gray-500 w-[8px] rounded h-[8px]"></div> :  <div className="online bg-teal-500 w-[8px] rounded h-[8px]"></div> } {data.firstname}</div>
+                    <div className="div bg-black text-white mb-[25px]"></div>
     
-               
-            
-               
-            )) }
+                    </button>
+                 
+        
+                   
+                
+                   
+                )) }
 
           
            

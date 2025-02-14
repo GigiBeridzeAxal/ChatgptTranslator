@@ -184,7 +184,70 @@ header{
 .profileinfo{
   min-width: 100px;
 }
+.customselector{
+  width: 100%;
+  background-color: rgb(242, 242, 242);
+  padding: 10px;
+}
+.dropdown{
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  top:43px;
 
+  height: 350px;
+  background-color: rgb(242, 242, 242);
+  color: black;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 10px;
+  align-items: start;
+  z-index: 15;
+}
+.customselector input{
+
+  background: none;
+  border: 0px;
+  outline: 0px;
+}
+.speaklanguagesflags{
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+
+}
+.searchchatpeople{
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid rgb(218, 218, 218);
+  width: 95%;
+}
+.openeduser{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: white;
+  left: 0px;
+  top: 0px;
+}
+.sendmessagebox{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+.profilebg{
+  box-shadow: 1px 1px 5px 2px rgb(234, 234, 234);
+}
+.backforprofile{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+.usersfetchedlsit{
+  box-shadow: 1px 1px 9px 3px rgb(225, 225, 225);
+  border: 1px solid black;
+}
 @keyframes Loading {
 
   0%{

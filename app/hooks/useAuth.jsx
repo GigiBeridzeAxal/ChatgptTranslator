@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import jwt from 'jsonwebtoken'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import io from 'socket.io-client'
 
 import { NextResponse } from 'next/server'
+
 
 
 export default function useAuth() {
@@ -14,6 +16,8 @@ export default function useAuth() {
     const [userinfo , setuserinfo] = useState('wadasd')
     const [user , setuser] = useState('')
     const [profile , setprofile] = useState(false)
+    const decoded = jwt.decode(token)
+
 
 
     const logout = () => {
@@ -21,6 +25,12 @@ export default function useAuth() {
         window.location = '/login'
     }
 
+
+
+
+
+
+ 
  
 
     useEffect(() => {
@@ -61,17 +71,20 @@ export default function useAuth() {
             
           
              setuserinfo(decoded)
+       
     
             }
     
         }
         getuserinfo()
+
+        
   
     },[])
 
 
 
-    return {userinfo , user , profile , logout}
+    return {userinfo , user , profile , logout }
 
     
    
