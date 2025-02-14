@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Header() {
   return (
-   <header className='flex items-center p-[20px] justify-between' >
+   <div className='flex landingheader items-center  p-[20px] justify-between' >
     <div className="logo flex items-center gap-[15px]">
       <div className="logoframe bg-indigo-500 p-[10px]">
         <MessagesSquare className='w-[35px] h-[35px]'></MessagesSquare>
@@ -21,6 +21,6 @@ export default function Header() {
     <div className="Menu hidden">
       <button><img width={30} src="Menu.png" alt="" /></button>
     </div>
-   </header>
+   </div>
   )
 }

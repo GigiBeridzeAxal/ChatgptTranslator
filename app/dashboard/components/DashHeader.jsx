@@ -1,7 +1,7 @@
 'use client'
 import useAuth from '@/app/hooks/useAuth'
 import useJwtauth from '@/app/hooks/useJwtauth'
-import { Delete, DeleteIcon, Edit, Menu, MessageSquare, MessagesSquare, Recycle, RemoveFormatting, Settings, User, User2, User2Icon } from 'lucide-react'
+import { Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 export default function DashHeader() {
@@ -9,6 +9,11 @@ export default function DashHeader() {
    const {decoded} = useJwtauth()
    const [serverloaded , setserverloaded] = useState(false)
    const [profileopened , setprofileopened] = useState(false)
+   const [userurl , setuserurl] = useState()
+
+
+
+
 
 
 
@@ -17,6 +22,9 @@ export default function DashHeader() {
    
 
    useEffect(() => {
+ 
+
+ 
     if(!decoded.lastname){
       console.log(profile)
        setserverloaded(false)
@@ -36,7 +44,8 @@ export default function DashHeader() {
     <header className='flex items-center p-[20px] justify-between' >
       {profileopened ?
       <div className="profileopen ">
-        <div className="profileopenframe w-[100%]  bg-slate-900 flex items-center flex-col relative">
+        {userurl}
+        <div className="profileopenframe w-[100%]   flex items-center flex-col relative">
 
           <div onClick={() => setprofileopened(false)} className="exit flex items-center gap-[5px] text-black"><img width={30} src="Back.png" alt="" /> Back</div>
           <div className="profilemenupic flex items-center gap-[5px]"> <div className="profile flex items-center justify-center gap-[10px]">
@@ -91,16 +100,18 @@ export default function DashHeader() {
     <section  className='flex items-center gap-[25px]' >
     </section>
 
-    <div className="profile  relative flex items-center gap-[40px]">
+    <div className="profile  relative flex items-center gap-[30px]">
     <div className="name"></div>
-    <div className="referal text-white">Referal System</div>
-    <div className="referal text-white flex items-center gap-[5px] cursor-pointer"><User2 className='size-[17px]'></User2> Profile</div>
+    <a href='/referal' className="referal text-white flex items-center cursor-pointer gap-[5px]"><Link className='size-[17px]'></Link> Referal System</a>
+    <a href='/profile' className=" text-white flex items-center gap-[5px] cursor-pointer"><User2 className='size-[17px]'></User2> Profile</a>
+    <a href='/chats' className=" text-white flex items-center gap-[5px] cursor-pointer"><MessageSquare className='size-[17px]'></MessageSquare> Chats</a>
     <div className="profile flex items-center justify-center gap-[10px]">
-     <div className="s text-white flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+     <div onClick={() => setprofileopened(true)} className="s text-white flex cursor-pointer items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+     
       {profile == false ? <div className="loaderprofileimage">
                         <div className="loaderline"></div>
                     </div> : 
-                    <img className='ProfilePic' onClick={() => setprofileopened(true)} width={50} height={50} src={profile !== false ?  profile : null} alt="" />}
+                    <img className='ProfilePic cursor-pointer' onClick={() => setprofileopened(true)}  width={50} height={50} src={profile !== false ?  profile : null} alt="" />}
       
     </div>
 
