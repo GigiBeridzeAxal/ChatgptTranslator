@@ -49,7 +49,7 @@ export default function page() {
   return (
     <div className="profilepage w-[100%] h-[100vh] flex flex-col items-center justify-center">
         <button onClick={() => window.location = '/'} className="backforprofile flex items-center justify-center gap-[10px] "><img width={30} src="Back.png" alt="" /> Back</button>
-        <div className="profilepageframe p-[20px] w-[100%]">
+        <div className="profilepageframe p-[20px] w-[50%]">
             {profileinfo.map(data => (
                 <div key={data._id}  className="profileframe flex flex-col gap-[15px] w-[100%]">
  <div className="firstline gap-[15px] w-[100%] flex items-end text-white justify-between"><div className="sf flex items-center gap-[15px] text-black">
