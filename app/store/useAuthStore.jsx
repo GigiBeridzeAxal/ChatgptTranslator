@@ -77,10 +77,13 @@ export const useAuthStore = create((set , get) => ({
     },
 
     connectsocket:async() => {
+        if (typeof window !== 'undefined') {
+
+
         const socket = io(process.env.NEXT_PUBLIC_BACKEND)
 
         socket.connect()
-
+        }
         
 
     }
