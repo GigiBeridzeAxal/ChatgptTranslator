@@ -3,7 +3,11 @@ import Cookies from 'js-cookie'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect } from 'react'
 
-export default function page() {
+
+
+
+
+const  LoginSuccess = () => {
 
     const token = useSearchParams().get('token')
 
@@ -18,4 +22,13 @@ export default function page() {
   return (
     <div></div>
   )
+}
+
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginSuccess />
+    </Suspense>
+  );
 }
