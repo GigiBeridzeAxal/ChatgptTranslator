@@ -3,14 +3,18 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 import jwt from 'jsonwebtoken'
+import { useAuthStore } from "./app/store/useAuthStore"
 
 
 
 
 
 export default async function middleware(request){
+
+
    
    const url = new URL(request.url)
+
    if(url.pathname == '/completeprofile'){
       if((await cookies()).get('JWT')){
          const token = (await cookies()).get('JWT')

@@ -21,10 +21,22 @@ export default function RootLayout({ children }) {
   return (
   
     <html lang="en">
+      
+    <head>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+     
+
+
+
+    </head>
 
       <body
+      
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        
           <Toaster position="top-center" />
         {children}
       </body>

@@ -14,11 +14,14 @@ export default function page() {
     
   return (
   <>
+  <div className="bg-white w-[100%] h-[100vh] text-black">
   <Chatheader></Chatheader>
   <SearchChatPeople></SearchChatPeople>
   <br />
   <hr />
   <ChatLastmessaged></ChatLastmessaged>
+  </div>
+ 
   </>
   )
 }

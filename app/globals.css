@@ -78,12 +78,88 @@ header{
 .mainword{
   backdrop-filter: blur(2px);
 }
+.authform{
+  width: 95%;
+  
+}
+.registerframe{
+  width: 95%;
+}
 .authform input{
+
+ background: none;
+ outline: 0;
+ border: 0;
+
+
+
+}
+.languages{
+  position: relative;
+}
+
+.translatorframe{
+  position: absolute;
   padding: 10px;
-  background-color: rgb(241, 241, 241);
-  width: 320px;
+  z-index: 25;
+  width: 130px;
+  background-color: white;
+  left: 0px;
+  top: 35px;
+}
 
+.VIpgJd-ZVi9od-ORHb-OEVmcd{
+  position: absolute !important;
+  display: none !important;
 
+}
+.skiptranslate {
+  overflow: hidden;
+ overflow-x: scroll;
+ 
+}
+.landingheader{
+  background-color: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(30);
+}
+
+body{
+  top: 0px !important;
+}
+table{
+  display: none !important;
+}
+.translatorframe select{
+  width: 100px !important;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+#google_translate_element{
+  width: 100px !important;
+}
+
+.goog-te-banner-frame {
+  display: none !important; /* Hide the default Google Translate banner */
+}
+
+.goog-te-menu-value {
+  font-size: 16px;  /* Adjust font size */
+}
+.VIpgJd-ZVi9od-l4eHX-hSRGPd{
+  display: none;
+}
+.skiptranslate {
+  color: black !important;
+  font-size: 0px !important;
+
+}
+.input{
+  border: 1px solid rgb(67, 67, 67);
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
 }
 .startnowbtn{
   z-index: 15;
@@ -255,8 +331,9 @@ header{
 .searchchatpeople{
   padding: 10px;
   border-radius: 25px;
-  border: 1px solid rgb(218, 218, 218);
-  width: 95%;
+  width: 85%;
+  outline: none;
+  border: none;
 }
 .openeduser{
   width: 100%;
@@ -327,6 +404,139 @@ header{
 .menu{
   display: none;
 }
+.howitworksframe{
+  letter-spacing: 1px ;
+  color: #3392ff;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+
+}
+.steps{
+  flex-wrap: wrap;
+}
+.startnow{
+  background-image: url('../public/startnow.jpg');
+  width: 80%;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  
+}
+
+.woman1{
+  background-image: url('../public/woman1.jpg');
+  width: 600px;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.woman2{
+  position: relative;
+  background-image: url('../public/woman2.jpg');
+  width: 600px;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.womandesc{
+  position: absolute;
+
+  bottom: 45px;
+  font-size: 23px;
+  left: 0px;
+  padding: 10px;
+  background-color: #ffffff17;
+  backdrop-filter: blur(10);
+
+
+}
+.youcanalso{
+  color: #3392ff;
+}
+.footerframe{
+  border-bottom: 1px solid white;
+  padding-bottom: 40px;
+}
+.lights{
+  position: absolute;
+  top: 520px;
+  left: 350px;
+  width: 0px;
+  height: 0px;
+  transform: rotate(30deg);
+  box-shadow: 5px 5px 355px 70px #3392ff;
+}
+.howitworkstext{
+  width: 40%;
+}
+.lights2{
+  position: absolute;
+  top: 520px;
+  right: 350px;
+  width: 0px;
+  height: 0px;
+  transform: rotate(30deg);
+  box-shadow: 5px 5px 355px 70px #3392ff;
+}
+
+
+@media (max-width:1116px) {
+  .howitworkstext{
+    width: 50%;
+  }
+  .find{
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width:600px) {
+  .rights{
+    font-size: 16px;
+    width: 100%;
+  }
+  .howitworksframe h2{
+    width: 90%;
+  }
+  .howitworksframe h1{
+   font-size: 34px;
+  }
+  .steps{
+    width: 100%;
+    height: 100%;
+  }
+  .woman2{
+    width: 100%;
+    font-size: 18px;
+
+  }
+  
+  .womandesc{
+    font-size: 16px;
+  }
+  .woman1{
+    width: 100%;
+
+
+  }
+}
+
+@media (max-width:490px) {
+  .womandesc{
+    font-size: 14px;
+  }
+  .woman2{
+    height: 300px;
+  }
+  .woman1{
+    height: 300px;
+  }
+}
+
 @media (max-width:700px) {
   .profile{
     display: none;
@@ -337,11 +547,36 @@ header{
 }
 
 @media (max-width:900px) {
+  .footerframe{
+    flex-wrap: wrap;
+    gap: 25px;
+    width: 100%;
+  }
+  .leftside {
+    justify-content: start;
+   width: 100%;
+    gap: 45px;
+  }
+  .find{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   section{
     display: none !important;
   }
+  .howitworkstext{
+    width: 90%;
+    margin-top: 55px;
+  }
 }
 @media (max-width:500px) {
+  .leftside{
+    flex-wrap: wrap;
+  }
+  .profilepageframe {
+    width: 100%;
+  }
 
   section{
     display: none !important;

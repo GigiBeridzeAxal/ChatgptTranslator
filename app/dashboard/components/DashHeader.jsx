@@ -1,7 +1,8 @@
 'use client'
+import TranslatorComponent from '@/app/components/TranslatorComponent'
 import useAuth from '@/app/hooks/useAuth'
 import useJwtauth from '@/app/hooks/useJwtauth'
-import { Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon } from 'lucide-react'
+import { ArrowDownCircle, Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 export default function DashHeader() {
@@ -10,6 +11,7 @@ export default function DashHeader() {
    const [serverloaded , setserverloaded] = useState(false)
    const [profileopened , setprofileopened] = useState(false)
    const [userurl , setuserurl] = useState()
+   const [engopened , setengopened] = useState()
 
 
 
@@ -102,6 +104,15 @@ export default function DashHeader() {
 
     <div className="profile  relative flex items-center gap-[30px]">
     <div className="name"></div>
+    <div className="language flex items-center justify-center relative flex-col gap-[10px]"><button onClick={() => engopened == true ? setengopened(false) : setengopened(true) } className="languagechooser flex items-center gap-[10px]">Eng <ArrowDownCircle className='size-[18px]'></ArrowDownCircle>
+      </button> 
+      <div style={engopened == true ? {display:'flex'} : {display:'none'}} className="div">
+
+
+      </div>
+ 
+      </div>
+ 
     <a href='/referal' className="referal text-white flex items-center cursor-pointer gap-[5px]"><Link className='size-[17px]'></Link> Referal System</a>
     <a href='/profile' className=" text-white flex items-center gap-[5px] cursor-pointer"><User2 className='size-[17px]'></User2> Profile</a>
     <a href='/chats' className=" text-white flex items-center gap-[5px] cursor-pointer"><MessageSquare className='size-[17px]'></MessageSquare> Chats</a>

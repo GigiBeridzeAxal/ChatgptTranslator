@@ -22,34 +22,6 @@ export default function Mainpeople() {
 
     useEffect(() => {
 
-        const checkuserlastonline = async() => {
-
-            const getlastonlinedata = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "checkuserlastonline")
-    
-            if(getlastonlinedata.status == 200){
-    
-                const lastOnlineData = getlastonlinedata.data;
-    
-                setusers((perv) => perv.map(data => 
-                {
-                    const updateddata = lastOnlineData.find(name => name.email == data.email)
-
-                    if(updateddata){
-                        return {...data , lastonline:updateddata.lastonline}
-                    }
-                }
-                
-                ))
-    
-              
-            }
-    
-        }
-      
-        setInterval(() => {
-            checkuserlastonline()  
-        }, 15000);
-    
 
         
 

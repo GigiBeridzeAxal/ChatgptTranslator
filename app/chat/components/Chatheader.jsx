@@ -30,11 +30,11 @@ export default function Chatheader() {
     <div className="chat p-[20px]">
          {profileopened ?
       <div className="profileopen ">
-        <div className="profileopenframe w-[100%] flex items -center flex-col relative">
+        <div className="profileopenframe w-[100%] flex items text-white -center flex-col relative">
 
           <div onClick={() => setprofileopened(false)} className="exit flex items-center gap-[5px]"><img width={30} src="Back.png" alt="" /> Back</div>
           <div className="profilemenupic flex items-center gap-[5px]"> <div className="profile flex items-center justify-center gap-[10px]">
-     <div className="s text-black flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+     <div className="s text-white flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
         <img  width={50} src={profile !== false ? profile : "Profile.png"} alt="" />
       
     </div></div>
@@ -58,7 +58,7 @@ export default function Chatheader() {
             <div className="chattop flex items-center justify-between">Chat With People  
                 <div className='flex items-center gap-[10px]'>
 
-            <div className="s text-black flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+            <div className="s text-black flex items-center  font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
       {profile == false ? <div className="loaderprofileimage">
                         <div className="loaderline"></div>
                     </div> : 

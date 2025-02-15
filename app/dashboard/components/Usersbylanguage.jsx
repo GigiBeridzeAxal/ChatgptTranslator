@@ -31,36 +31,7 @@ export default function Usersbylanguage() {
   },[])
 
 
-  
-  useEffect(() => {
 
-    const checkuserlastonline = async() => {
-
-        const getlastonlinedata = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "checkuserlastonline")
-
-        if(getlastonlinedata.status == 200){
-
-            const lastOnlineData = getlastonlinedata.data;
-
-            setusersbylanguage((perv) => perv.map(data => 
-            {
-                const updateddata = lastOnlineData.find(name => name.email == data.email)
-
-                if(updateddata){
-                    return {...data , lastonline:updateddata.lastonline}
-                }
-            }
-            
-            ))
-
-          
-        }
-
-    }
-  setInterval(() => {
-    checkuserlastonline()
-  }, 20000);
-  })
 
   return (
     <div className="usersbylanguage">
