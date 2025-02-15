@@ -1,7 +1,7 @@
 'use client'
 import Cookies from 'js-cookie'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 
 
 
@@ -26,6 +26,7 @@ const  LoginSuccess = () => {
 
 
 export default function Page() {
+  
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <LoginSuccess />
