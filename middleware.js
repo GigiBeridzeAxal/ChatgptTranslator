@@ -6,10 +6,6 @@ import jwt from 'jsonwebtoken'
 import { useAuthStore } from "./app/store/useAuthStore"
 
 
-export const config = {
-   matcher: ['/'],
-   runtime: 'edge',  // This line forces Edge runtime
- };
  
 
 
