@@ -5,7 +5,6 @@ import { NextResponse } from "next/server"
 import jwt from 'jsonwebtoken'
 import { useAuthStore } from "./app/store/useAuthStore"
 
-
  
 
 
@@ -83,5 +82,5 @@ export default async function middleware(request){
       }
 
    }
-   return NextResponse.next()
+
 }

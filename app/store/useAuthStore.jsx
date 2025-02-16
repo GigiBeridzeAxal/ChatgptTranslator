@@ -5,7 +5,12 @@ import jwt from 'jsonwebtoken'
 import toast from "react-hot-toast";
 import { io, Socket } from "socket.io-client";
 
-
+export const config = {
+    unstable_allowDynamic: [
+      '/lib/utilities.js', // allows a single file
+      '**/node_modules/function-bind/**', // use a glob to allow anything in the function-bind 3rd party module
+    ],
+  }
 
 export const useAuthStore = create((set , get) => ({
 
@@ -92,7 +97,7 @@ export const useAuthStore = create((set , get) => ({
     },
 
     connectsocket:async()  => {
-        if (typeof window !== 'undefined') {
+
         console.log("Connecting To Socket")
         const socket = io(process.env.NEXT_PUBLIC_BACKEND)
         socket.connect()
@@ -100,7 +105,6 @@ export const useAuthStore = create((set , get) => ({
 
         set({socket:socket})
 
-        }
 
     },
 
