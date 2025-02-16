@@ -2,19 +2,18 @@
 import TranslatorComponent from '@/app/components/TranslatorComponent'
 import useAuth from '@/app/hooks/useAuth'
 import useJwtauth from '@/app/hooks/useJwtauth'
+import { useAuthStore } from '@/app/store/useAuthStore'
 import { ArrowDownCircle, Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 export default function DashHeader() {
-   const {userinfo , user , profile , logout} = useAuth()
+   const {userinfo , user , profile} = useAuth()
+   const {logout} = useAuthStore()
    const {decoded} = useJwtauth()
    const [serverloaded , setserverloaded] = useState(false)
    const [profileopened , setprofileopened] = useState(false)
    const [userurl , setuserurl] = useState()
    const [engopened , setengopened] = useState()
-
-
-
 
 
 

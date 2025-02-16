@@ -81,14 +81,31 @@ export const useAuthStore = create((set , get) => ({
 
     },
 
+    logout:async() => {
+
+        Cookies.remove('JWT')
+        window.location ='/'
+        get().disconnectsocket()
+        
+
+
+    },
+
     connectsocket:async()  => {
+        if (typeof window !== 'undefined') {
         console.log("Connecting To Socket")
         const socket = io(process.env.NEXT_PUBLIC_BACKEND)
         socket.connect()
         console.log(socket)
 
-        set({socket:"Socket"})
+        set({socket:socket})
 
+        }
+
+    },
+
+    disconnectsocket:async() => {
+        if(get().socket !== null) get().socket.disconnect()
     }
 
    
