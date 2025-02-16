@@ -3,6 +3,7 @@ import Cookies from "js-cookie"
 import {create} from 'zustand';
 import jwt from 'jsonwebtoken'
 import toast from "react-hot-toast";
+import { io, Socket } from "socket.io-client";
 
 
 
@@ -63,6 +64,12 @@ export const useAuthStore = create((set , get) => ({
             
             const isuserauth = await axios.post(process.env.NEXT_PUBLIC_BACKEND  + "Verify" , {token:token})
 
+            console.log("Authed" , get().socket)
+
+            if(get().socket == null){
+                get().connectsocket()
+            }
+
             set({Authuser:isuserauth.data})
 
         }catch(err){
@@ -73,6 +80,16 @@ export const useAuthStore = create((set , get) => ({
         }
 
     },
+
+    connectsocket:async()  => {
+        console.log("Connecting To Socket")
+        const socket = io(process.env.NEXT_PUBLIC_BACKEND)
+        socket.connect()
+        console.log(socket)
+
+        set({socket:"Socket"})
+
+    }
 
    
 

@@ -494,7 +494,43 @@ table{
   z-index: 135;
   background-color: black;
 }
+.usersfetchedlsit {
+  width: 350px ;
+}
+.usersbyonline{
+  width: 25px;
+  height: 25px;
+  right: 10px;
+  bottom: 5px;
+  z-index: 5;
+  border-radius: 50%;
+  border: 2px solid white;
+  position: absolute;
+}
+.usersfetchedlsit:hover{
+  background-color: rgb(245, 245, 245);
+}
+.profilepic{
+  background-size: cover;
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+  background-repeat: no-repeat;
+  
+}
+.users{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
 
+
+@media (max-width:1193px) {
+  .users{
+    justify-content: center;
+  }
+}
 
 @media (max-width:1116px) {
   .howitworkstext{
@@ -537,8 +573,25 @@ table{
 
   }
 }
+@media (max-width:350px) {
+
+  .firstline{
+    padding: 10px;
+  }
+
+}
 
 @media (max-width:490px) {
+  .users{
+    width: 100%;
+  }
+  .usersfetchedlsit {
+    width: 100%;
+  }
+
+  .usersbylanguageframe{
+    padding: 0px;
+  }
   .womandesc{
     font-size: 14px;
   }

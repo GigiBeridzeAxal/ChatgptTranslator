@@ -7,9 +7,15 @@ import Howitworks from "./components/Howitworks";
 import { useEffect } from "react";
 import TranslatorComponent from "./components/TranslatorComponent";
 import Footer from "./components/Footer";
+import { useAuthStore } from "./store/useAuthStore";
 
 export default function Home() {
+  const {checkauth} = useAuthStore()
 
+
+  useEffect(() => {
+    checkauth()
+  },[])
   
   return (
 
