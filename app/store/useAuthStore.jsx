@@ -1,3 +1,4 @@
+'use client'
 import axios from "axios"
 import Cookies from "js-cookie"
 import {create} from 'zustand';
@@ -100,7 +101,9 @@ export const useAuthStore = create((set , get) => ({
 
         console.log("Connecting To Socket")
         const socket = io(process.env.NEXT_PUBLIC_BACKEND)
-        socket.connect()
+        socket.onopen = () => {
+            console.log("Connected")
+        }
         console.log(socket)
 
         set({socket:socket})
