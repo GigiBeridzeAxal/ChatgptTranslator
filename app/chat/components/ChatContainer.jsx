@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense, useEffect, useState } from 'react'
 
- const ChatContainer = () => {
+ const Chat = () => {
 
   const sendmessageid = useSearchParams().get('sendmessage')
   const [message , setmessage] = useState()
@@ -190,12 +190,10 @@ import React, { Suspense, useEffect, useState } from 'react'
   )
 }
 
-import React from 'react'
-
 export default function ChatContainer() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ChatContainer></ChatContainer>
+      <Chat></Chat>
     </Suspense>
   )
 }
