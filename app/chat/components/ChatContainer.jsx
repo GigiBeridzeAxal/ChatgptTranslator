@@ -6,9 +6,9 @@ import { useMessagesStore } from '@/app/store/useMessagesStore'
 import { File, Image, Languages, Search, Send, Upload } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 
-export default  function ChatContainer() {
+ const ChatContainer = () => {
 
   const sendmessageid = useSearchParams().get('sendmessage')
   const [message , setmessage] = useState()
@@ -187,5 +187,15 @@ export default  function ChatContainer() {
 
       
     </div>
+  )
+}
+
+import React from 'react'
+
+export default function ChatContainer() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ChatContainer></ChatContainer>
+    </Suspense>
   )
 }
