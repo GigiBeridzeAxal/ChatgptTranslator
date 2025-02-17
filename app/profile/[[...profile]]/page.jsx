@@ -57,7 +57,7 @@ export default function page() {
  <img width={100} src={data.profilepicture} alt="" /> 
  <div className="sg flex flex-col text-slate-700">{data.firstname} <span>{data.lastname}</span></div>
     
-    </div> <button className="sendmessage rounded-[5px] bg-blue-500 mb-[25px] text-[14px] p-[5px]">Send Message</button></div>
+    </div> <a href={`/chat?sendmessage=${data._id}`}  className="sendmessage rounded-[5px] bg-blue-500 mb-[25px] text-[14px] p-[5px]">Send Message</a></div>
 
               <div className="desc p-[10px]  text-slate-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur minima quidem commodi et eaque repellendus ut ad maxime quis? Doloremque, reprehenderit debitis neque aspernatur, iusto dolorum cum rerum dolorem ex officia dolores nobis cupiditate, quod numquam. Delectus a similique nam?</div>
               

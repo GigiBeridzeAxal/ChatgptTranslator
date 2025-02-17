@@ -58,7 +58,7 @@ export default function Chatheader() {
             <div className="chattop flex items-center justify-between">Chat With People  
                 <div className='flex items-center gap-[10px]'>
 
-            <div className="s text-black flex items-center  font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+            <div className="s  flex items-center  font-[500] text-white gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
       {profile == false ? <div className="loaderprofileimage">
                         <div className="loaderline"></div>
                     </div> : 

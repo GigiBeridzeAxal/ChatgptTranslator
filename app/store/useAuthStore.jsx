@@ -6,18 +6,14 @@ import jwt from 'jsonwebtoken'
 import toast from "react-hot-toast";
 import { io, Socket } from "socket.io-client";
 
-export const config = {
-    unstable_allowDynamic: [
-      '/lib/utilities.js', // allows a single file
-      '**/node_modules/function-bind/**', // use a glob to allow anything in the function-bind 3rd party module
-    ],
-  }
 
 export const useAuthStore = create((set , get) => ({
 
     Authuser:null,
     isCheckingAuth:true,
     socket:null,
+    onlineusers:[],
+    receviedmessages:[],
 
 
 
@@ -70,14 +66,19 @@ export const useAuthStore = create((set , get) => ({
             
             const isuserauth = await axios.post(process.env.NEXT_PUBLIC_BACKEND  + "Verify" , {token:token})
 
-            console.log("Authed" , get().socket)
+            const decoded = jwt.decode(isuserauth.data)
 
+
+
+            set({Authuser:decoded})
             if(get().socket == null){
                 get().connectsocket()
             }
 
-            set({Authuser:isuserauth.data})
+    
 
+
+         
         }catch(err){
             console.log(err)
         }finally{
@@ -99,17 +100,38 @@ export const useAuthStore = create((set , get) => ({
 
     connectsocket:async()  => {
 
-        console.log("Connecting To Socket")
-        const socket = io(process.env.NEXT_PUBLIC_BACKEND)
-        socket.onopen = () => {
-            console.log("Connected")
-        }
-        console.log(socket)
+
+        const userid = get().Authuser.id
+
+
+        const socket = io(process.env.NEXT_PUBLIC_BACKEND , {
+            query:{userID:userid}
+        })
+        socket.connect()
+
+        socket.on('NewUser' , (users) => {
+
+            
+
+            set({onlineusers:users})
+
+        })
+
+        socket.on("NewMessage" , (data) => {
+            console.log(data)
+            toast.success(`You Have New Message ${data.message}` )
+
+        })
+
+
+
 
         set({socket:socket})
 
 
     },
+
+    
 
     disconnectsocket:async() => {
         if(get().socket !== null) get().socket.disconnect()

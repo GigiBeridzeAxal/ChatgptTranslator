@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/app/store/useAuthStore'
 import axios from 'axios'
 import { ArrowRight } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
@@ -7,7 +8,15 @@ export default function Usersbylanguage() {
 
   const [usersbylanguage , setusersbylanguage] = useState([])
     const [countries , setcountries] = useState([])
-    const [onlineusers , setonlineusers] = useState([])
+    const {onlineusers} = useAuthStore()
+
+
+
+
+
+
+
+
   useEffect(() => {
 
     const getusers = async() => {

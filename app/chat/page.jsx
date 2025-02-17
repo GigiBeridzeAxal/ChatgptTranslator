@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import useJwtauth from '../hooks/useJwtauth'
 import Chatheader from './components/Chatheader'
-import SearchChatPeople from './components/SearchChatPeople'
-import ChatLastmessaged from './components/ChatLastmessaged'
+
+import ChatLastmessaged from './components/ChatContainer'
 
 export default function page() {
     const {userinfo , profile} = useAuth()
@@ -14,11 +14,9 @@ export default function page() {
     
   return (
   <>
-  <div className="bg-white w-[100%] h-[100vh] text-black">
+  <div className="bg-slate-950 w-[100%] h-[100vh] text-white">
   <Chatheader></Chatheader>
-  <SearchChatPeople></SearchChatPeople>
-  <br />
-  <hr />
+
   <ChatLastmessaged></ChatLastmessaged>
   </div>
  

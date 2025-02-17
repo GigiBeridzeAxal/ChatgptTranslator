@@ -58,7 +58,8 @@ export default function Completeprofile() {
 
     const Finish = async() => {
         const formdata = new FormData()
-        formdata.append('file' , uploadedpic)
+        formdata.append('image' , uploadedpic)
+        formdata.append('email' , userinfo.email)
 
      //  const uploadimageindir = await axios.post('/api/uploadimage' , formdata , {headers:{'Content-Type':'multipart/form-data'}})
 
@@ -66,7 +67,11 @@ export default function Completeprofile() {
 
 
    
-        const setprofilepic = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changeprofilepic" , {image:base64 , email:userinfo.email})
+        const setprofilepic = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changeprofilepic" , formdata , {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+        })
         const changecanspeaklanguages = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changecanspeak" , {canspeak:selectedcountries , email:userinfo.email})
         const changewanttolearn = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changewanttolearn" , {wanttolearn:wanttolearn , email:userinfo.email})
 

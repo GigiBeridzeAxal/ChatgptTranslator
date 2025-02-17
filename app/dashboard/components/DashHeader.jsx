@@ -114,7 +114,7 @@ export default function DashHeader() {
  
     <a href='/referal' className="referal text-white flex items-center cursor-pointer gap-[5px]"><Link className='size-[17px]'></Link> Referal System</a>
     <a href='/profile' className=" text-white flex items-center gap-[5px] cursor-pointer"><User2 className='size-[17px]'></User2> Profile</a>
-    <a href='/chats' className=" text-white flex items-center gap-[5px] cursor-pointer"><MessageSquare className='size-[17px]'></MessageSquare> Chats</a>
+    <a href='/chat' className=" text-white flex items-center gap-[5px] cursor-pointer"><MessageSquare className='size-[17px]'></MessageSquare> Chats</a>
     <div className="profile flex items-center justify-center gap-[10px]">
      <div onClick={() => setprofileopened(true)} className="s text-white flex cursor-pointer items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
      
