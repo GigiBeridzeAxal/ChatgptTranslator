@@ -531,6 +531,16 @@ background: none;
   border: 2px solid white;
   position: absolute;
 }
+.usersbyonlineforchat{
+  width: 15px;
+  height: 15px;
+  left: 60px;
+  top: 60px;
+  z-index: 5;
+  border-radius: 50%;
+
+  position: absolute;
+}
 .usersfetchedlsit:hover{
   background-color: rgb(245, 245, 245);
 }
@@ -558,7 +568,70 @@ background: none;
   background-color: rgba(255, 255, 255, 0.091);
   border-radius: 3px;
 }
+.translator{
+  position: absolute;
+  left: 0px;
+  top: -330px;
+  background-color: #111827;
+  width: 84%;
 
+  height: 300px;
+  
+}
+.translatorheader{
+  border-bottom: 1px solid rgba(255, 255, 255, 0.598);
+}
+.lefttranslator{
+  outline: 0;
+  border: 0px;
+  border-right: 1px solid rgba(255, 255, 255, 0.598);
+}
+.lefttranslator textarea{
+  outline: 0;
+  border: 0px;
+}
+
+.countriesselector{
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  z-index: 15;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.customlanguagesdropdown{
+  overflow: hidden;
+  height: 600px;
+  overflow-y: auto;
+
+  z-index: 35;
+}
+.searchbg{
+  background: none;
+  border: 0px;
+  outline: 0px;
+  color: white;
+}
+.headerprofilename{
+  width: fit-content;
+  border-bottom: 1px solid white;
+}
+.planpremium{
+  background: linear-gradient(45deg, orange, rgb(255, 184, 52), rgb(255, 225, 170), orange);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.premiumplantittle{
+  background: linear-gradient(45deg, rgb(179, 124, 22), rgb(255, 47, 0), rgb(125, 82, 3), orange);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.premiumplan{
+  height: 500px;
+}
 
 @media (max-width:1193px) {
   .users{

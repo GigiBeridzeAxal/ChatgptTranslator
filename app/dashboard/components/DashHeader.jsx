@@ -3,12 +3,12 @@ import TranslatorComponent from '@/app/components/TranslatorComponent'
 import useAuth from '@/app/hooks/useAuth'
 import useJwtauth from '@/app/hooks/useJwtauth'
 import { useAuthStore } from '@/app/store/useAuthStore'
-import { ArrowDownCircle, Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon } from 'lucide-react'
+import { ArrowDownCircle, BugPlayIcon, Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 export default function DashHeader() {
    const {userinfo , user , profile} = useAuth()
-   const {logout} = useAuthStore()
+   const {logout , Authuser , checkauth , userdata , getuserdata} = useAuthStore()
    const {decoded} = useJwtauth()
    const [serverloaded , setserverloaded] = useState(false)
    const [profileopened , setprofileopened] = useState(false)
@@ -17,12 +17,21 @@ export default function DashHeader() {
 
 
 
+   useEffect(() => {
+
+    if(Authuser == null) return ;
+    getuserdata()
+
+
+   },[Authuser])
 
 
 
    
 
    useEffect(() => {
+
+    checkauth()
  
 
  
@@ -103,6 +112,7 @@ export default function DashHeader() {
 
     <div className="profile  relative flex items-center gap-[30px]">
     <div className="name"></div>
+    <a href='/Plans' className="referal text-white flex items-center cursor-pointer gap-[5px]"><BugPlayIcon className='size-[17px]'></BugPlayIcon> Plans</a>
     <div className="language flex items-center justify-center relative flex-col gap-[10px]"><button onClick={() => engopened == true ? setengopened(false) : setengopened(true) } className="languagechooser flex items-center gap-[10px]">Eng <ArrowDownCircle className='size-[18px]'></ArrowDownCircle>
       </button> 
       <div style={engopened == true ? {display:'flex'} : {display:'none'}} className="div">
@@ -116,7 +126,12 @@ export default function DashHeader() {
     <a href='/profile' className=" text-white flex items-center gap-[5px] cursor-pointer"><User2 className='size-[17px]'></User2> Profile</a>
     <a href='/chat' className=" text-white flex items-center gap-[5px] cursor-pointer"><MessageSquare className='size-[17px]'></MessageSquare> Chats</a>
     <div className="profile flex items-center justify-center gap-[10px]">
-     <div onClick={() => setprofileopened(true)} className="s text-white flex cursor-pointer items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+      <div className="userminiinfo flex flex-col ">
+      <div onClick={() => setprofileopened(true)} className="headerprofilename text-white flex cursor-pointer items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+      
+      <div className={`plan text-[16px]  ${userdata.plan == "Free" ? '' : "planpremium"} `}>{userdata.plan}</div>
+      </div>
+   
      
       {profile == false ? <div className="loaderprofileimage">
                         <div className="loaderline"></div>

@@ -14,6 +14,7 @@ export const useAuthStore = create((set , get) => ({
     socket:null,
     onlineusers:[],
     receviedmessages:[],
+    userdata:[],
 
 
 
@@ -58,6 +59,25 @@ export const useAuthStore = create((set , get) => ({
        }
 
     },
+
+    getuserdata:async() =>{
+
+
+        try{
+
+            const user = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "getuserinfo" , {email:get().Authuser.email})
+
+            console.log(user.data[0])
+
+            set({userdata:user.data[0]})
+
+
+        }catch(err){
+            console.log(err)
+        }
+
+    },
+
 
     checkauth: async () => {
 

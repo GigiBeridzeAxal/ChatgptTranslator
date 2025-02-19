@@ -23,8 +23,8 @@ export default function page() {
   return (
     <>
     <DashHeader></DashHeader>
-    <Mainpeople></Mainpeople>
-    <Usersbylanguage></Usersbylanguage>
+  
+    <Usersbylanguage  ></Usersbylanguage>
     </>
   )
 }

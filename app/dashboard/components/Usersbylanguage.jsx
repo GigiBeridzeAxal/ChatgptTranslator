@@ -45,7 +45,7 @@ export default function Usersbylanguage() {
 
 
   return (
-    <div className="usersbylanguage">
+    <div className="usersbylanguage pt-[100px]">
       <div className="usersbylanguageframe p-[40px]">
 
         <div className="userlist flex flex-col  items-center gap-[5px]">
@@ -90,7 +90,8 @@ export default function Usersbylanguage() {
 const flag = countries.find(name => name.name.common == data.selectedlanguage)
 
   if(index < 2){
-    return <img key={index} className='speaklanguagesflags' width={25}  src={flag.flags.png} ></img>
+    return flag.flags ? <img key={index} className='speaklanguagesflags' width={25}  src={flag.flags.png} ></img> : null
+   
   }else{
     return null
   }
