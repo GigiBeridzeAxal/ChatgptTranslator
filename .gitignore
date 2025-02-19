@@ -11,6 +11,9 @@
 !.yarn/versions
 /images
 /backend
+.backend
+/.backend
+
 
 # testing
 /coverage
