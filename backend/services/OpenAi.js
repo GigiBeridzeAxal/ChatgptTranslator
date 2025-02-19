@@ -12,7 +12,7 @@ const OpenAimod = async(texttotranslate , language) => {
     const texttosend = `Translate This Words:${options.text} And Return Only Translated Version if you cant translate just return "I Cant Translate" TranslateLanguage:${options.translateLanguage}`
 
     const openai = new OpenAI({
-        apiKey: "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",
+        apiKey: process.env.openaikey,
       });
       const completion = openai.chat.completions.create({
         model: "gpt-4o-mini",
