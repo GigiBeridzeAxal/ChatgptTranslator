@@ -4,7 +4,7 @@ import useJwtauth from '@/app/hooks/useJwtauth'
 import { useAuthStore } from '@/app/store/useAuthStore'
 import { useMessagesStore } from '@/app/store/useMessagesStore'
 import axios from 'axios'
-import { ArrowBigDown, ArrowDown, ArrowLeft, BoxSelect, File, Image, Languages, LucideArrowsUpFromLine, Search, SearchIcon, Send, SendIcon, Upload, Verified } from 'lucide-react'
+import { ArrowBigDown, ArrowDown, ArrowLeft, BoxSelect, File, Image, Languages, LucideArrowsUpFromLine, Play, Search, SearchIcon, Send, SendIcon, Stars, Upload, Verified } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense, useEffect, useState } from 'react'
@@ -20,11 +20,11 @@ import React, { Suspense, useEffect, useState } from 'react'
 
   const [countries , setcountries] = useState([])
   const [countriesropdown , setcountriesdropdown] = useState(false)
-  const [selectedlanguage , setselectedlanguage] = useState('english')
+  const [selectedlanguage , setselectedlanguage] = useState('taiwan')
   const [languagesearch , setlanguagesearch] = useState('')
   const [texttotranslate , settexttotranslate] = useState()
   
-  const [translatedtext , settranslatedtext] = useState()
+  const [translatedtext , settranslatedtext] = useState('')
  
    const {decoded} = useJwtauth()
   const translate = async() => {
@@ -151,7 +151,7 @@ import React, { Suspense, useEffect, useState } from 'react'
 
         {Authuser !== null ? <div className='flex items-center gap-[10px]' >
 
-          <img className='rounded-[50%]' src={profile ? profile : null} width={60} alt="" />
+          <img className='rounded-[50%] orangcirc w-[60px] h-[60px]' src={profile ? profile : null} width={60} alt="" />
 
           <div className="chatleftheaderdesc flex flex-col justify-between">
 
@@ -197,7 +197,7 @@ import React, { Suspense, useEffect, useState } from 'react'
      
    
             
-           return <Link href={`/chat?sendmessage=${data._id}`} key={data._id} className={`users relative cursor-pointer ${queryuser ? queryuser._id === data._id ? "bg-slate-700/50" : "bg-slate-900/50" : "bg-slate-900/50"}  rounded-[5px] mt-[35px] `}>
+           return <Link href={`/chat?sendmessage=${data._id}`} key={data._id} className={`users trace relative cursor-pointer ${queryuser ? queryuser._id === data._id ? "bg-slate-700/50" : "bg-slate-900/50" : "bg-slate-900/50"}  rounded-[5px] mt-[35px] `}>
             <div className={`user flex items-center gap-[15px]   w-[350px] p-[10px] rounded-[15px]`}>
               <div  style={{backgroundImage:`url(${data.profilepicture})`}}  className="chatprofiles w-[60px] rounded-[15px]  h-[60px] "></div>
               {onlineusers.includes(data._id) ?<div className="usersbyonlineforchat  bg-teal-500"></div> :<div className="usersbyonlineforchat bg-gray-500"></div> }
@@ -226,44 +226,50 @@ import React, { Suspense, useEffect, useState } from 'react'
       </div>
 
       {queryuser ?
+    
       
-      <div className="chatmainpanel items-center flex flex-col  bg-slate-900/50 w-[100%] ">
+      <div className="chatmainpanel pb-[10px] justify-between items-center flex flex-col  bg-slate-900/50 w-[100%] ">
 
 
-      <div className='p-[10px] w-[100%] bg-white mainchattopheader'>
+      <div className=' w-[100%] '>
         {
         queryuser ?
 
-        <div className='flex items-center text-black gap-[10px]'>
+        <div className="mainchattopheader w-[100%] p-[10px] bg-white">
+
+<div className='flex items-center text-black gap-[10px]'>
                   <Link href='/chat' className="back"> <ArrowLeft></ArrowLeft> Back</Link>
                   <br />
-<img className='rounded-[50%]' src={queryuser.profilepicture} width={60} alt="" />
+<img className='rounded-[50%] w-[60px] h-[60px]' src={queryuser.profilepicture} width={60} alt="" />
 <div className="chatuserinfo flex flex-col justify-start">
   <h1>{queryuser.firstname} , {queryuser.lastname[0].toUpperCase()}</h1>
   <hr />
 </div>
+
         </div>
+        
+        </div>
+
+       
         : null}
-      </div>
-
-      <div className='msg w-[100%] mt-[25px]' >
+         <div  className={`msg w-[100%] ${translatoropened ? "reducedsize" : ''} mt-[25px]`} >
 
 
-      {queryuser ?  allmessage.filter(filt => filt.sendby === queryuser._id || filt.sendto === queryuser._id).map((data , index) => {
+{queryuser ?  allmessage.filter(filt => filt.sendby === queryuser._id || filt.sendto === queryuser._id).map((data , index) => {
 
 return data.sendto === queryuser._id ? 
 (
- 
-  <div key={index} className="w-[95%] flex items-end m-[15px] justify-end gap-[5px]"> 
 
-  <div className="messagebyusers bg-slate-950/50 p-[10px]">{data.message}</div>
-  
-  <img width={40} className='rounded-[50%]' src={profile} alt="" />
+<div key={index} className="w-[95%] flex items-end m-[15px] justify-end gap-[5px]"> 
 
-  </div>
+<div className="messagebyusers bg-slate-950/50 p-[10px]">{data.message}</div>
+
+<img width={40} height={40} className='rounded-[50%] w-[40px] h-[40px]' src={profile} alt="" />
+
+</div>
 )
 :   <div  key={index} className="w-[100%] flex m-[15px] items-end justify-start gap-[5px]"> 
-<img width={40} className='rounded-[50%]' src={profile} alt="" />
+<img width={40} className='rounded-[50%] w-[40px] h-[40px]' src={queryuser.profilepicture} alt="" />
 
 <div className="messagebyusers bg-slate-950/50 p-[10px]">{data.message}</div>
 
@@ -271,12 +277,86 @@ return data.sendto === queryuser._id ?
 </div>
 }) : null}
 
+</div>
+      </div>
+      
+
+      {countriesropdown ?
+          <div className="countriesselector bg-gray-500/50 ">
+
+            <div className="countriedropdown text-center text-black bg-white flex flex-col gap-[50px] p-[40px] w-[30%]">
+
+             <h1>Select Language</h1>
+
+             <div className="searcher flex items-center w-[100%] bg-slate-500/100 p-[10px]">
+
+             <input  type="text" className='searchbg w-[95%]' onChange={(e) => setlanguagesearch(e.target.value)} placeholder='Search Language...' />
+             <SearchIcon className='text-white' ></SearchIcon>
+
+             </div>
+
+
+             <div className="customlanguagesdropdown">
+
+             {countries.filter(filt => filt.name.common.toUpperCase().includes(languagesearch.toUpperCase())).map((data, id) => {
+
+            console.log(data)
+
+               return <button onClick={() => setselectedlanguage(data.name.common) || setcountriesdropdown(false)} key={id} className='w-[100%] p-[20px] bg-gray-200 flex justify-between' ><div className="left flex items-center gap-[25px]"><img width={30} src={data.flags.png} alt="" />
+
+               {data.name.common.slice(0,20)}
+               
+               </div>  <div className="isselected"> {selectedlanguage == 
+               data.name.common ? <Verified></Verified> :<BoxSelect></BoxSelect>
+                }  </div></button>
+
+             })}
+
+             </div>
+
+            </div>
+
+
+          </div>
+          : null}
+     
+
+      {translatoropened ?
+      <div className="translator p-[10px] flex items-center flex-col justify-center bg-gray-800">
+
+        <div className="w-[100%] flex items-center justify-center">
+          <div className="leftranslatortop w-[50%]"><div className=" p-[10px] sizer flex justify-center  items-center bg-slate-950/50 w-[200px] gap-[10px] rounded-[5px]"><Stars className='text-indigo-300' ></Stars> Auto Detect</div></div>
+          <div className="righttranslatortop flex justify-end w-[50%]">
+          <button onClick={() => setcountriesdropdown(true)} className=" p-[10px] flex justify-center sizer  items-center bg-slate-950/50 w-[200px] gap-[10px] rounded-[5px] nobreak"><img  width={30} src={'awd'} alt="" /> {selectedlanguage.slice(0,8)}  <ArrowDown className='size-[17px]'></ArrowDown></button>
+
+          
+
+          </div>
+        </div>
+
+        <div className="maintranslator flex items-start justify-center w-[100%]">
+          
+        <div className="translatorinput p-[10px] w-[50%] h-[250px] ">
+          <textarea onChange={(e) => settexttotranslate(e.target.value)} className='w-[100%]  p-[10px]  h-[230px] bg-slate-900/50'  name="" placeholder='Enter Text To Translate...' id=""></textarea>
+
+</div>
+<div className="translatoranswer w-[50%] p-[10px] h-[250px]">
+
+<textarea className='w-[100%]  p-[10px] p-[10px] h-[230px] bg-slate-900/50' value={translatedtext} name="" placeholder='Click Generate To Genreate Text' id=""></textarea>
+</div>
+
+
+        </div>
+
+        <button onClick={() => translate(texttotranslate)} className="generate flex items-center justify-center p-[8px] rounded-[5px] gap-[10px] bg-purple-500"><Play></Play> Generate</button>
+
       </div>
 
+      : null}
+<br />
+      <div className='flex w-[100%] items-center justify-center gap-[15px]'>
 
-      <div className='flex w-[90%] items-center justify-center gap-[15px]'>
-
-        <button className="sendmsg flex w-[90%] items-center  justify-center gap-[5px] bg-slate-900/50"><input onChange={(e) => setmessage(e.target.value)} className='w-[100%] p-[10px]' type="text" style={{background:'none' , outline:0 , border:0}} placeholder='Type Message Here...' /> <Languages></Languages> </button ><SendIcon onClick={() => sendmessage({sendto:queryuser._id , sendby:Authuser.id , message:message})} ></SendIcon>
+        <button className="sendmsg flex w-[90%] items-center  justify-center gap-[5px] bg-slate-900/50"><input onChange={(e) => setmessage(e.target.value)} className='w-[100%] p-[10px]' type="text" style={{background:'none' , outline:0 , border:0}} placeholder='Type Message Here...' /> <Languages onClick={() => translatoropened ? settranslatoropened(false) :  settranslatoropened(true)}></Languages> </button ><SendIcon onClick={() => sendmessage({sendto:queryuser._id , sendby:Authuser.id , message:message})} ></SendIcon>
       </div>
 
       </div>

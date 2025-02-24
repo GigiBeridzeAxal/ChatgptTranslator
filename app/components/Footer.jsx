@@ -16,7 +16,7 @@ export default function Footer() {
 
     <h1  className='text-[24px] text-blue-500'>Translator Ai 
     </h1>
-    <div className="desc text-[20px] w-[250px]" >Everything You Need To Start Learning</div>
+    <div className="desca text-[20px] w-[250px]" >Everything You Need To Start Learning</div>
             </div>
 
 

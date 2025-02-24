@@ -69,8 +69,8 @@ export default function Usersbylanguage() {
 {bestprofiles.map(data => (
   <button onClick={() => window.location = `/profile?id=${data._id}`} key={data._id} className="usersfetchedlsit bg-white text-black m-[10px] p-[10px] flex flex-col rounded-[15px] ">
 
-    <div className="firstline p-[20px] flex items-center justify-between">
-      <div className="left relative"><div className='profilepic ' width={130} style={{ backgroundImage: `url(${data.profilepicture})` }} alt="" /> 
+    <div className="firstline flex-wrap  p-[20px] flex items-center justify-between">
+      <div className="left relative"><div className='profilepic profileforusersbylanguage ' width={130} style={{ backgroundImage: `url(${data.profilepicture})` }} alt="" /> 
       {onlineusers.includes(data._id) ?<div className="usersbyonline bg-teal-500"></div> :<div className="usersbyonline bg-gray-500"></div> }
 
       </div>
@@ -78,7 +78,7 @@ export default function Usersbylanguage() {
 
          <div className="firstname text-start">
           <div className="tittle text-gray-500 text-[12px]">First Name</div>
-          <div className="name text-[24px]">{data.firstname}</div>
+          <div className="name breakword  text-[20px]">{data.firstname}</div>
          </div>
 
          <div className="lastname text-start">
@@ -188,7 +188,7 @@ null
 { sortedusers.length !== 0 ?  sortedusers.map(data =>  (
   <button onClick={() => window.location = `/profile?id=${data._id}`} key={data._id} className="usersfetchedlsit bg-white text-black m-[10px] p-[10px] flex flex-col rounded-[15px] ">
 
-    <div className="firstline p-[20px] flex items-center justify-between">
+    <div className="firstline flex-wrap p-[20px] flex items-center justify-between">
       <div className="left relative"><div className='profilepic ' width={130} style={{ backgroundImage: `url(${data.profilepicture})` }} alt="" /> 
       {onlineusers.includes(data._id) ?<div className="usersbyonline bg-teal-500"></div> :<div className="usersbyonline bg-gray-500"></div> }
 
@@ -197,7 +197,7 @@ null
 
          <div className="firstname text-start">
           <div className="tittle text-gray-500 text-[12px]">First Name</div>
-          <div className="name text-[24px]">{data.firstname}</div>
+          <div className="name breakword text-[20px]">{data.firstname}</div>
          </div>
 
          <div className="lastname text-start">

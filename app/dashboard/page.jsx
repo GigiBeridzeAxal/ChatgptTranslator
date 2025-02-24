@@ -5,6 +5,7 @@ import Mainpeople from './components/Mainpeople'
 import useRenew from '../hooks/useRenew'
 import Usersbylanguage from './components/Usersbylanguage'
 import { useAuthStore } from '../store/useAuthStore'
+import Footer from '../components/Footer'
 
 
 export default function page() {
@@ -25,6 +26,8 @@ export default function page() {
     <DashHeader></DashHeader>
   
     <Usersbylanguage  ></Usersbylanguage>
+
+    <Footer></Footer>
     </>
   )
 }

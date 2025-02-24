@@ -146,7 +146,7 @@ export default function Completeprofile() {
      
         
 
-     }) )}key={id} className="customselector  relative">
+     }) )}key={id} className="customselector   relative">
 
         {data.selectedlanguage == false ? <div className="selectlang flex items-center justify-between">Select Language {data.dropdown == true ?  <img width={20} src="Collapse.png" alt="" /> :  <img width={20} src="Expand.png" alt="" /> }</div> : <div className='flex justify-between items-center'><div className="left flex items-center gap-[10px]">{data.selectedlanguage}  <img width={20} src={countries.find(name => name.name.common === data.selectedlanguage).flags.png } alt="" /> </div> {data.dropdown == true ?  <img width={20} src="Collapse.png" alt="" /> :  <img width={20} src="Expand.png" alt="" /> } </div>} 
                
