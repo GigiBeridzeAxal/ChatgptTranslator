@@ -167,9 +167,9 @@ export default function DashHeader() {
         <br /><br />
 
         <div className="sections flex flex-col gap-[25px]">
-        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><MessageSquare className=' size-[18px]'></MessageSquare> Chats</a>
+        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href="/chat"><MessageSquare className=' size-[18px]'></MessageSquare> Chats</a>
 
-        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><BugPlayIcon className=' size-[18px]'></BugPlayIcon> Plans</a>
+        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href="/Plans"><BugPlayIcon className=' size-[18px]'></BugPlayIcon> Plans</a>
  
         <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><Link className=' size-[18px]'></Link> Referal System</a>
  
