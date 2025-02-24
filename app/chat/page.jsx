@@ -14,8 +14,8 @@ export default function page() {
     
   return (
   <>
-  <div className="bg-slate-950 w-[100%] h-[100vh] text-white">
-  <Chatheader></Chatheader>
+  <div className="bg-slate-950 w-[100%] p-[10px] h-[100vh] text-white">
+  
 
   <ChatLastmessaged></ChatLastmessaged>
   </div>

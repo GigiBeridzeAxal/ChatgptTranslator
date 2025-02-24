@@ -1,6 +1,7 @@
 import React from 'react'
 import DashHeader from '../dashboard/components/DashHeader'
 import { Verified } from 'lucide-react'
+import Link from 'next/link'
 
 export default function page() {
   return (
@@ -19,7 +20,7 @@ export default function page() {
 
                 <div className="desc text-gray-600">You can use Premium to perform your activities better and faster</div>
 
-                <button className='w-[100%] mt-[10px] p-[10px] bg-blue-500 rounded-[3px] text-white'>Get Started</button>
+                <Link href='/Payment?plan=Premium' className='w-[100%] text-center mt-[10px] p-[10px] bg-blue-500 rounded-[3px] text-white'>Get Started</Link>
 <br />
                 <hr />
 

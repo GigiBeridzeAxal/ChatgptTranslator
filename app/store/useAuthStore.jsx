@@ -15,6 +15,7 @@ export const useAuthStore = create((set , get) => ({
     onlineusers:[],
     receviedmessages:[],
     userdata:[],
+    userplan:'Free',
 
 
 
@@ -69,7 +70,27 @@ export const useAuthStore = create((set , get) => ({
 
             console.log(user.data[0])
 
-            set({userdata:user.data[0]})
+            if(user.data[0]){
+
+
+                if(user.data[0].plan[0].plan == "Premium"){
+                    if ((Date.now() - new Date(user.data[0].plan[0].activationtime) ) / 1000 > 2628000  ) {
+
+                        console.log("Working" ,get().Authuser.id )
+
+                        const endplan = await axios.post(process.env.NEXT_PUBLIC_BACKEND + 'planend' , {userid:get().Authuser.id})
+    
+                    }else{
+                        set({userplan:user.data[0].plan[0].plan})
+                    }
+                }
+
+               
+
+                set({userdata:user.data[0]})
+
+            }
+
 
 
         }catch(err){

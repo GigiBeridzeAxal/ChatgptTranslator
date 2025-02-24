@@ -47,20 +47,26 @@ export default function page() {
     },[])
 
   return (
-    <div className="profilepage w-[100%] h-[100vh] bg-white text-black flex flex-col items-center justify-center">
+    <div className="profilepage w-[100%] h-[100vh] bg-white text-black flex flex-col items-center ">
+        <div className='banner' alt="" />
         <button onClick={() => window.location = '/'} className="backforprofile flex items-center justify-center gap-[10px] "><img width={30} src="Back.png" alt="" /> Back</button>
-        <div className="profilepageframe p-[20px] w-[50%]">
+        <div className="profilepageframe p-[20px] w-[100%]">
             {profileinfo[0] !== undefined  ?  profileinfo.map(data => (
                 <div key={data._id}  className="profileframe flex flex-col gap-[15px] w-[100%]">
  <div className="firstline gap-[15px] w-[100%] flex items-end text-white justify-between"><div className="sf flex items-center gap-[15px] text-black">
 
- <img width={100} src={data.profilepicture} alt="" /> 
- <div className="sg flex flex-col text-slate-700">{data.firstname} <span>{data.lastname}</span></div>
+ <img width={150}  src={data.profilepicture} alt="" /> 
+
     
     </div> <a href={`/chat?sendmessage=${data._id}`}  className="sendmessage rounded-[5px] bg-blue-500 mb-[25px] text-[14px] p-[5px]">Send Message</a></div>
-
-              <div className="desc p-[10px]  text-slate-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur minima quidem commodi et eaque repellendus ut ad maxime quis? Doloremque, reprehenderit debitis neque aspernatur, iusto dolorum cum rerum dolorem ex officia dolores nobis cupiditate, quod numquam. Delectus a similique nam?</div>
               
+    <div className="sg flex flex-col text-slate-700 text-[26px] ">{data.firstname}  {data.lastname}</div>
+              <h1 className='text-[14px]' >Description</h1>
+              <div className="desc p-[10px] flex items-center justify-center  text-slate-600">
+                <div className="s w-[100%]"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur minima quidem commodi et eaque repellendus ut ad maxime quis? Doloremque, reprehenderit debitis neque aspernatur, iusto dolorum cum rerum dolorem ex officia dolores nobis cupiditate, quod numquam. Delectus a similique nam?</div>
+                </div>
+                <br />
+ 
               <div className="languages bg-gray-100 text-black profilebg p-[10px] gap-[10px] flex flex-col">
 
               <div className="speaks  flex items-center gap-[10px]">Speaks: {data.canspeak.map((data ,index) => {

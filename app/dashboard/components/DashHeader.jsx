@@ -3,17 +3,18 @@ import TranslatorComponent from '@/app/components/TranslatorComponent'
 import useAuth from '@/app/hooks/useAuth'
 import useJwtauth from '@/app/hooks/useJwtauth'
 import { useAuthStore } from '@/app/store/useAuthStore'
-import { ArrowDownCircle, BugPlayIcon, Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon } from 'lucide-react'
+import { ArrowDownCircle, BugPlayIcon, Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon, X } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 export default function DashHeader() {
    const {userinfo , user , profile} = useAuth()
-   const {logout , Authuser , checkauth , userdata , getuserdata} = useAuthStore()
+   const {logout , Authuser , userplan , checkauth , userdata , getuserdata} = useAuthStore()
    const {decoded} = useJwtauth()
    const [serverloaded , setserverloaded] = useState(false)
    const [profileopened , setprofileopened] = useState(false)
    const [userurl , setuserurl] = useState()
    const [engopened , setengopened] = useState()
+   const [menuopened , setmenuopened] = useState(false)
 
 
 
@@ -21,6 +22,8 @@ export default function DashHeader() {
 
     if(Authuser == null) return ;
     getuserdata()
+
+    console.log(userdata.plan)
 
 
    },[Authuser])
@@ -126,10 +129,10 @@ export default function DashHeader() {
     <a href='/profile' className=" text-white flex items-center gap-[5px] cursor-pointer"><User2 className='size-[17px]'></User2> Profile</a>
     <a href='/chat' className=" text-white flex items-center gap-[5px] cursor-pointer"><MessageSquare className='size-[17px]'></MessageSquare> Chats</a>
     <div className="profile flex items-center justify-center gap-[10px]">
-      <div className="userminiinfo flex flex-col ">
+    <div className="userminiinfo flex flex-col ">
       <div onClick={() => setprofileopened(true)} className="headerprofilename text-white flex cursor-pointer items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
       
-      <div className={`plan text-[16px]  ${userdata.plan == "Free" ? '' : "planpremium"} `}>{userdata.plan}</div>
+      <div className={`plan text-[16px]  ${  userplan == "Free" ? '' : "planpremium" } `}>{ userplan}</div>
       </div>
    
      
@@ -143,7 +146,46 @@ export default function DashHeader() {
 
   
     </div>
-    <div className="menu"><Menu></Menu></div>
+    {menuopened?
+    <div className="menuframe p-[20px]">
+
+      <div className='flex w-[100%] text-white items-center justify-between '><div className="menuttittle flex items-center justify-center gap-[5px]"> 
+      {profile == false ? <div className="loaderprofileimage">
+                        <div className="loaderline"></div>
+                    </div> : 
+                    <img className='ProfilePic cursor-pointer' onClick={() => setprofileopened(true)}  width={50} height={50} src={profile !== false ?  profile : null} alt="" />}
+      <div className="userminiinfo flex flex-col ">
+      <div onClick={() => setprofileopened(true)} className="headerprofilename text-white flex cursor-pointer items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
+      
+      <div className={`plan text-[16px]  ${userplan == "Free" ? '' : "planpremium"} `}>{userplan}</div>
+      </div>
+   
+     
+
+        
+        </div> <div className=""><X onClick={() => setmenuopened(false)}></X></div></div>
+        <br /><br />
+
+        <div className="sections flex flex-col gap-[25px]">
+        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><MessageSquare className=' size-[18px]'></MessageSquare> Chats</a>
+
+        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><BugPlayIcon className=' size-[18px]'></BugPlayIcon> Plans</a>
+ 
+        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><Link className=' size-[18px]'></Link> Referal System</a>
+ 
+
+        </div>
+
+
+    </div>
+    : null}
+    <div className="menu flex items-center justify-center gap-[20px]">
+      
+      <Menu onClick={() => menuopened == true ?  setmenuopened(false) : setmenuopened(true)}></Menu>  
+
+   
+      
+    </div>
 
     </header>
   )

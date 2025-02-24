@@ -366,6 +366,9 @@ background: none;
   bottom: 0px;
   left: 0px;
 }
+.messagebox{
+  justify-content: center;
+}
 .profilebg{
 
 }
@@ -570,13 +573,22 @@ background: none;
 }
 .translator{
   position: absolute;
-  left: 0px;
+  left: 7%;
   top: -330px;
   background-color: #111827;
   width: 84%;
 
   height: 300px;
   
+}
+.leftcontainer {
+  height: calc(100vh - 50px);
+
+  border-radius: 15px;
+}
+.chatmainpanel{
+  height: calc(100vh - 50px);
+  border-radius: 15px;
 }
 .translatorheader{
   border-bottom: 1px solid rgba(255, 255, 255, 0.598);
@@ -632,7 +644,105 @@ background: none;
 .premiumplan{
   height: 500px;
 }
+.paymentheader > div{
+  width: 500px;
+  color: white !important;
+}
 
+#zoid-paypal-buttons-uid_3b0de286a3_mta6mjg6mty{
+  width: 500px !important;
+}
+.menuframe{
+  width: 50%;
+  height: 100vh;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  background-color: black;
+}
+.firstline .flex {
+  justify-content: start;
+}
+.listheadersearch{
+  background: none;
+  border: 0px;
+  outline: 0px;
+}
+.banner{
+  background: url('../public/bannferforprofiles.jpg');
+  width: 100%;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+}
+.profilepageframe {
+  width: 90%;
+  z-index: 5;
+  margin-top: 200px;
+
+}
+.sf img{
+  border-radius: 50%;
+  border: 2px solid saddlebrown;
+  padding: 1px;
+  background-color: white;
+}
+.profilepageframe{
+  max-width: 1000px;
+}
+.desc{
+  border: 1px solid gray;
+}
+.chatprofiles {
+  border-radius: 50% !important;
+  width: 70px;
+  height: 70px;
+}
+.mainchatframe::-webkit-scrollbar{
+  width: 5px;
+  height: 5px;
+}
+
+.chatcontainer{
+  height: auto;
+  padding: 10px;
+}
+.mainchattopheader{
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.messagebyusers{
+  max-width: 300px;
+  height: auto;
+  word-wrap: break-word; /* Breaks long words */
+
+}
+.msg{
+  max-height: 75vh;
+  overflow: hidden;
+  overflow-y: auto;
+  
+
+}::-webkit-scrollbar{
+  width: 0px;
+  height: 0px;
+}
+
+@media (max-width:1515px) {
+ .paymentheader  {
+  width: 100%;
+ }
+}
+
+@media (max-width:1075px) {
+  .leftpaymentinfo  {
+   display: none;
+  }
+ }
 @media (max-width:1193px) {
   .users{
     justify-content: center;
@@ -653,6 +763,9 @@ background: none;
 @media (max-width:600px) {
   .rights{
     font-size: 16px;
+    width: 100%;
+  }
+  .menuframe{
     width: 100%;
   }
   .howitworksframe h2{
@@ -682,8 +795,15 @@ background: none;
 }
 @media (max-width:350px) {
 
-  .firstline{
-    padding: 10px;
+
+  .leftcontainer {
+    margin-top: 25px;
+
+    padding: 0px;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+
   }
 
 }
@@ -691,6 +811,53 @@ background: none;
 @media (max-width:490px) {
   .users{
     width: 100%;
+  }
+
+  .leftcontainer{
+    width: 100% !important;
+    border-radius: 0px;
+    padding: 10px !important;
+
+  }
+  .chatleftheaderdesc {
+    display: flex !important;
+  }
+  .usersforchatdesc {
+    display: flex !important;
+    width: 70% !important;
+  }
+  .searchinput{
+    width: 100% !important;
+  }
+  .users{
+    width: 100% !important;
+    justify-content: start !important;
+  }
+  .user{
+    width: 100% !important;
+  }
+  .chatmainpanel {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(30);
+    z-index: 15;
+    border-radius: 0px;
+  }
+  .mainchattopheader{
+    border-radius: 0px ;
+  }
+  .listheadersearch{
+    width: 90%;
+  }
+  .listheader {
+    flex-wrap: wrap;
+    width: auto;
+  }
+  .userssearch{
+    flex-wrap: wrap;
   }
   .usersfetchedlsit {
     width: 100%;
@@ -711,15 +878,49 @@ background: none;
 }
 
 @media (max-width:700px) {
-  .profile{
-    display: none;
+
+  .usersfetchedlsit {
+    width: 100%;
   }
-  .menu{
-    display: flex;
+  .firstline{
+    justify-content: start;
+    gap: 25px ;
   }
+  .firstline .flex {
+    justify-content: start;
+  }
+
 }
 
 @media (max-width:900px) {
+  .profile{
+    display: none;
+  }
+  .chatleftheaderdesc {
+    display: none;
+  }
+  .mainchatframe{
+    height: 88vh;
+  }
+  .usersforchatdesc{
+    display: none;
+  }
+  .users {
+    width: 90px;
+  }
+  .searchinput{
+    width: 30px;
+  }
+  .leftcontainer {
+    width: 150px;
+  }
+  .messagebyusers {
+    max-width: 200px;
+  }
+
+  .menu{
+    display: flex;
+  }
   .footerframe{
     flex-wrap: wrap;
     gap: 25px;
