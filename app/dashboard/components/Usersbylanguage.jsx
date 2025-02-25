@@ -78,12 +78,12 @@ export default function Usersbylanguage() {
 
          <div className="firstname text-start">
           <div className="tittle text-gray-500 text-[12px]">First Name</div>
-          <div className="name breakword  text-[20px]">{data.firstname}</div>
+          <div className="name breakword  text-[20px]">{data.firstname.length > 8 ? data.firstname.slice(0,8) + ".." : data.firstname}</div>
          </div>
 
          <div className="lastname text-start">
           <div className="tittle text-gray-500 text-[12px]">Last Name</div>
-          <div style={{textTransform:'lowercase'}} className="text-[24px] flex items-center justify-center "> <div className="lastname">{data.lastname[0]} </div> {data.lastname.replace(data.lastname[0] , '')}</div>
+          <div style={{textTransform:'lowercase'}} className="text-[24px] flex items-center justify-center "> <div className="lastname">{ data.lastname[0]} </div> { data.lastname.length > 8 ?  data.lastname.replace(data.lastname[0] , '').slice(0,8) + ".." : data.lastname.replace(data.lastname[0] , '') }</div>
          </div>
 
 
@@ -188,7 +188,7 @@ null
 { sortedusers.length !== 0 ?  sortedusers.map(data =>  (
   <button onClick={() => window.location = `/profile?id=${data._id}`} key={data._id} className="usersfetchedlsit bg-white text-black m-[10px] p-[10px] flex flex-col rounded-[15px] ">
 
-    <div className="firstline flex-wrap p-[20px] flex items-center justify-between">
+    <div className="firstline wrapedcomp p-[20px] flex items-center justify-between">
       <div className="left relative"><div className='profilepic ' width={130} style={{ backgroundImage: `url(${data.profilepicture})` }} alt="" /> 
       {onlineusers.includes(data._id) ?<div className="usersbyonline bg-teal-500"></div> :<div className="usersbyonline bg-gray-500"></div> }
 
@@ -197,12 +197,12 @@ null
 
          <div className="firstname text-start">
           <div className="tittle text-gray-500 text-[12px]">First Name</div>
-          <div className="name breakword text-[20px]">{data.firstname}</div>
+          <div className="name breakword  text-[16px]">{data.firstname.length > 8 ? data.firstname.slice(0,8) + ".." : data.firstname}</div>
          </div>
 
          <div className="lastname text-start">
           <div className="tittle text-gray-500 text-[12px]">Last Name</div>
-          <div style={{textTransform:'lowercase'}} className="text-[24px] flex items-center justify-center "> <div className="lastname">{data.lastname[0]} </div> {data.lastname.replace(data.lastname[0] , '')}</div>
+          <div style={{textTransform:'lowercase'}} className="text-[16px] flex items-center justify-center "> <div className="lastname">{ data.lastname[0]} </div> { data.lastname.length > 8 ?  data.lastname.replace(data.lastname[0] , '').slice(0,8) + ".." : data.lastname.replace(data.lastname[0] , '') }</div>
          </div>
 
 

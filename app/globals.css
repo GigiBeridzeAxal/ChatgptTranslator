@@ -861,6 +861,11 @@ min-height: 3%0px !important;
   .countriedropdown {
     min-width: 320px;
   }
+  .profilepic{
+    width: 100px;
+    height: 100px;
+
+  }
   
 }
 
