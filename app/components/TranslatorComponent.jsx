@@ -22,6 +22,7 @@ export default function TranslatorComponent() {
             new window.google.translate.TranslateElement(
                 {
                     pageLanguage: 'en',
+                    // layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
                 },
                 'google_translate_element'
             );
@@ -32,11 +33,10 @@ export default function TranslatorComponent() {
     
 
   return (
-    <div className="translatorframe text-[14px] text-black">
-        Select Language
+
     <div ref={translatorref}  id="google_translate_element"></div>
 
-    </div>
+
 
   )
 }

@@ -117,7 +117,9 @@ export default function DashHeader() {
     <div className="name"></div>
     <a href='/Plans' className="referal text-white flex items-center cursor-pointer gap-[5px]"><BugPlayIcon className='size-[17px]'></BugPlayIcon> Plans</a>
     <div className="language flex items-center justify-center relative flex-col gap-[10px]"><button onClick={() => engopened == true ? setengopened(false) : setengopened(true) } className="languagechooser flex items-center gap-[10px]">Eng <ArrowDownCircle className='size-[18px]'></ArrowDownCircle>
+
       </button> 
+
       <div style={engopened == true ? {display:'flex'} : {display:'none'}} className="div">
 
 
@@ -172,6 +174,9 @@ export default function DashHeader() {
         <a className='flex items-center justify-center gap-[5px] w-[100%] ' href="/Plans"><BugPlayIcon className=' size-[18px]'></BugPlayIcon> Plans</a>
  
         <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><Link className=' size-[18px]'></Link> Referal System</a>
+
+        <TranslatorComponent></TranslatorComponent>
+
  
 
         </div>

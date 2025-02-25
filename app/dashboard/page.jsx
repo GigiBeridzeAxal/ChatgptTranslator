@@ -27,7 +27,6 @@ export default function page() {
   
     <Usersbylanguage  ></Usersbylanguage>
 
-    <Footer></Footer>
     </>
   )
 }

@@ -42,8 +42,10 @@ export default function Header() {
     </section>
 
     <div className="headerbuttons flex items-center gap-[10px]">
-      <div className="language flex items-center justify-center relative flex-col gap-[10px]"><button onClick={() => engopened == true ? setengopened(false) : setengopened(true) } className="languagechooser flex items-center gap-[10px]">Eng <ArrowDownCircle className='size-[18px]'></ArrowDownCircle>
+      <div className="language flex items-center justify-center relative flex-col gap-[10px]"><button onClick={() => engopened == true ? setengopened(false) : setengopened(true) } className="languagechooser flex items-center gap-[10px]">Eng 
+      <TranslatorComponent></TranslatorComponent>
       </button> 
+
       <div style={engopened == true ? {display:'flex'} : {display:'none'}} className="div">
              
 

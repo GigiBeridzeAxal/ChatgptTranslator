@@ -1,5 +1,7 @@
+'use client'
 import { Copyright, MessagesSquare } from 'lucide-react'
 import React from 'react'
+import TranslatorComponent from './TranslatorComponent'
 
 export default function Footer() {
   return (
@@ -17,6 +19,7 @@ export default function Footer() {
     <h1  className='text-[24px] text-blue-500'>Translator Ai 
     </h1>
     <div className="desca text-[20px] w-[250px]" >Everything You Need To Start Learning</div>
+    <div className="lng"> Language:<TranslatorComponent></TranslatorComponent></div>
             </div>
 
 
@@ -57,6 +60,7 @@ export default function Footer() {
                     <button className="buttons text-[16px]">
                         Cookies Policy
                     </button>
+    
 
 
                 </div>

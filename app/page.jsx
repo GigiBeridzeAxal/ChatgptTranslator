@@ -23,10 +23,15 @@ export default function Home() {
    <Header></Header>
 
 
+
    <Main></Main>
    <Howitworks></Howitworks>
-   <Footer></Footer>
+
+
+   
 
    </>
+
+   
   );
 }
