@@ -63,10 +63,10 @@ export default function page() {
       <div className="logoframe bg-indigo-500 w-[55px] rounded-[5px] h-[55px] p-[10px]">
         <MessagesSquare className='w-[35px] h-[35px]'></MessagesSquare>
       </div>
-      <h1 className='text-[24px]' >Create Account</h1>
-      <h1 className='text-[18px] text-gray-500' >Get Started With Your Free Account</h1>
+      <h1 className='text-[24px]' >계정 생성</h1>
+      <h1 className='text-[18px] text-gray-500' >무료 계정으로 시작하세요</h1>
           <br />
-          <button className='w-[320px] bg-white p-[10px] flex items-center justify-center gap-[15px] text-black rounded-[5px]' onClick={() => window.location = process.env.NEXT_PUBLIC_BACKEND + 'google'} ><img width={30} src="Google.png" alt="" /> Countinue With Google</button>
+          <button className='w-[320px] bg-white p-[10px] flex items-center justify-center gap-[15px] text-black rounded-[5px]' onClick={() => window.location = process.env.NEXT_PUBLIC_BACKEND + 'google'} ><img width={30} src="Google.png" alt="" />Google로 계속하기</button>
   
         <form onSubmit={(e) => SubmitForm(e)} ref={formref} className='authform flex flex-col mt-[15px] items-center gap-[15px] ' >
 
@@ -75,13 +75,13 @@ export default function page() {
 
           <div className="line flex w-[100%] justify-center gap-[10px] items-center">
             <div className="line1 w-[120px] h-[1px] bg-white "></div>
-            Sign Up
+            가입하기
             <div className="line1 w-[120px] h-[1px] bg-white "></div>
           </div>
           
            
               <div className='w-[100%] text-start flex items-center justify-center flex-col'>
-                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">Email</label>
+                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">이메일</label>
          
                       <div className="input flex items-center gap-[5px] w-[100%]">
                 <User className='size-[20px]'></User>
@@ -91,7 +91,7 @@ export default function page() {
                       </div>
             
                       <div className='w-[100%] text-start flex items-center justify-center flex-col'>
-                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">First Name</label>
+                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">이름</label>
               <div className="input flex items-center gap-[5px] w-[100%]">
                 <Book className='size-[20px]'></Book>
                 <input  type="text" placeholder='Enter Your First Name' />
@@ -100,7 +100,7 @@ export default function page() {
                       </div>
             
                       <div className='w-[100%] text-start flex items-center justify-center flex-col'>
-                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">Last Name</label>
+                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">성</label>
                       <div className="input flex items-center gap-[5px] w-[100%]">
                 <Book className='size-[20px]'></Book>
           
@@ -111,7 +111,7 @@ export default function page() {
               
              
                       <div className='w-[100%] text-start flex items-center justify-center flex-col'>
-                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">Password</label>
+                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">비밀번호</label>
               <div className="input flex items-center gap-[5px] w-[100%]">
                 <Lock className='size-[20px]' ></Lock>
  
@@ -127,9 +127,9 @@ export default function page() {
 <br />
 
 
-          <button style={{maxWidth:"400px"}}  className='w-[100%] rounded-[5px] p-[10px] bg-orange-600 text-white ' >Sign Up</button>
+          <button style={{maxWidth:"400px"}}  className='w-[100%] rounded-[5px] p-[10px] bg-orange-600 text-white ' >가입하기</button>
 
-          <div className="alreadyhaveaccount flex items-center justify-center gap-[5px]">Already Have Account ? <a className='text-blue-500' href="/login">Click Here</a></div>
+          <div className="alreadyhaveaccount flex items-center justify-center gap-[5px]">이미 계정이 있으신가요? <a className='text-blue-500' href="/login">여기를 클릭하세요</a></div>
 
         </form>
       </div>

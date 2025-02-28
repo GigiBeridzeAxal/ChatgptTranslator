@@ -19,6 +19,27 @@ export const useAuthStore = create((set , get) => ({
 
 
 
+    buyitem:async(email , item) => {
+
+        try{
+
+           const updateuser = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "buyitem" , {email:email , item:item})
+             
+           set({userdata:{...get().userdata , credits:updateuser.data}})
+           console.log(updateuser.data)
+           if(updateuser.status == 200){
+            toast.success("You Succesfuly Buy Translate")
+           }
+           
+
+        }catch(err){
+            console.log(err)
+        }
+
+
+
+    },
+
     signin:async(data) => {
 
         try{

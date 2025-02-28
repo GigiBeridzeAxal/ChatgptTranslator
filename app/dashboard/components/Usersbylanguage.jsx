@@ -62,7 +62,7 @@ export default function Usersbylanguage() {
 
       <div className="userlist flex flex-col  items-center gap-[5px]">
 
-           <h1 className='w-[100%] p-[20px] flex items-center gap-[15px]' ><Stars></Stars> Best Profiles For You</h1>
+           <h1 className='w-[100%] p-[20px] flex items-center gap-[15px]' ><Stars></Stars>당신을 위한 최고의 프로필</h1>
 {bestprofiles[0] !== undefined ? 
 
 <div className="users">
@@ -77,12 +77,12 @@ export default function Usersbylanguage() {
       <div className="right flex-col flex gap-[15px]">
 
          <div className="firstname text-start">
-          <div className="tittle text-gray-500 text-[12px]">First Name</div>
+          <div className="tittle text-gray-500 text-[12px]">이름</div>
           <div className="name breakword  text-[20px]">{data.firstname.length > 8 ? data.firstname.slice(0,8) + ".." : data.firstname}</div>
          </div>
 
          <div className="lastname text-start">
-          <div className="tittle text-gray-500 text-[12px]">Last Name</div>
+          <div className="tittle text-gray-500 text-[12px]">성</div>
           <div style={{textTransform:'lowercase'}} className="text-[24px] flex items-center justify-center "> <div className="lastname">{ data.lastname[0]} </div> { data.lastname.length > 8 ?  data.lastname.replace(data.lastname[0] , '').slice(0,8) + ".." : data.lastname.replace(data.lastname[0] , '') }</div>
          </div>
 
@@ -93,11 +93,11 @@ export default function Usersbylanguage() {
     <hr />
 
     <div className="speaks pl-[20px]   text-start">
-      <div className="tittle pt-[10px] text-[13px] text-gray-500">Languages</div>
+      <div className="tittle pt-[10px] text-[13px] text-gray-500">언어</div>
       <br />
            
            <div className="langs ">
-           <div className="speakinglanguages  flex f items-center gap-[5px]"> Speak:
+           <div className="speakinglanguages  flex f items-center gap-[5px]"> 말하다:
       {data.canspeak.map((data ,index) => {
 
 const flag = countries.find(name => name.name.common == data.selectedlanguage)
@@ -112,7 +112,7 @@ return null
 
 
 })} <div className="plus">{data.canspeak.length > 2 ? <div className="plusone bg-red-500 rounded-[50%] w-[23px] h-[23px] flex items-center justify-center p-[px] text-[13px] text-white">+{data.canspeak.length - 2}</div> : null}</div> </div>
-<div className="speaks mt-[10px] flex items-center  gap-[10px]">Want To Learn: {data.wanttolearn.map((data ,index) => {
+<div className="speaks mt-[10px] flex items-center  gap-[10px]">배우고 싶다: {data.wanttolearn.map((data ,index) => {
 
 const flag = countries.find(name => name.name.common == data.selectedlanguage)
 if(index < 2){
@@ -150,7 +150,7 @@ null
 <>
 
 
-<span className='text-gray-500 text-[12px] mb-[5px]' >Please Wait..</span>
+<span className='text-gray-500 text-[12px] mb-[5px]' >기다리세요..</span>
   <LoaderIcon className='size-9'></LoaderIcon>
 
 
@@ -180,7 +180,7 @@ null
 
       <div className="userlist flex flex-col  items-center gap-[5px]">
       <br /><br />
-<div className="listheader w-[100%] p-[20px] flex items-center justify-between"><h1>All Users</h1> <div className="userssearch flex items-center gap-[15px]"> <div className="search bg-slate-950/50 p-[10px] flex items-center gap-[10px]"><input className='listheadersearch w-[300px]' onChange={(e) => setsearch(e.target.value)}  type="text" placeholder='Search User...' /> <Search></Search></div> <div className="filter p-[10px] bg-slate-700/40"><FilterIcon></FilterIcon></div>  </div> </div>
+<div className="listheader w-[100%] p-[20px] flex items-center justify-between"><h1>모든 사용자</h1> <div className="userssearch flex items-center gap-[15px]"> <div className="search bg-slate-950/50 p-[10px] flex items-center gap-[10px]"><input className='listheadersearch w-[300px]' onChange={(e) => setsearch(e.target.value)}  type="text" placeholder='사용자 검색...' /> <Search></Search></div> <div className="filter p-[10px] bg-slate-700/40"><FilterIcon></FilterIcon></div>  </div> </div>
 
 {usersbylanguage[0] !== undefined ? 
 
@@ -196,12 +196,12 @@ null
       <div className="right flex-col flex gap-[15px]">
 
          <div className="firstname text-start">
-          <div className="tittle text-gray-500 text-[12px]">First Name</div>
+          <div className="tittle text-gray-500 text-[12px]">이름</div>
           <div className="name breakword  text-[16px]">{data.firstname.length > 8 ? data.firstname.slice(0,8) + ".." : data.firstname}</div>
          </div>
 
          <div className="lastname text-start">
-          <div className="tittle text-gray-500 text-[12px]">Last Name</div>
+          <div className="tittle text-gray-500 text-[12px]">성</div>
           <div style={{textTransform:'lowercase'}} className="text-[16px] flex items-center justify-center "> <div className="lastname">{ data.lastname[0]} </div> { data.lastname.length > 8 ?  data.lastname.replace(data.lastname[0] , '').slice(0,8) + ".." : data.lastname.replace(data.lastname[0] , '') }</div>
          </div>
 
@@ -212,11 +212,11 @@ null
     <hr />
 
     <div className="speaks pl-[20px]   text-start">
-      <div className="tittle pt-[10px] text-[13px] text-gray-500">Languages</div>
+      <div className="tittle pt-[10px] text-[13px] text-gray-500">언어</div>
       <br />
            
            <div className="langs ">
-           <div className="speakinglanguages  flex f items-center gap-[5px]"> Speak:
+           <div className="speakinglanguages  flex f items-center gap-[5px]"> 말하다:
       {data.canspeak.map((data ,index) => {
 
 const flag = countries.find(name => name.name.common == data.selectedlanguage)
@@ -231,7 +231,7 @@ return null
 
 
 })} <div className="plus">{data.canspeak.length > 2 ? <div className="plusone bg-red-500 rounded-[50%] w-[23px] h-[23px] flex items-center justify-center p-[px] text-[13px] text-white">+{data.canspeak.length - 2}</div> : null}</div> </div>
-<div className="speaks mt-[10px] flex items-center  gap-[10px]">Want To Learn: {data.wanttolearn.map((data ,index) => {
+<div className="speaks mt-[10px] flex items-center  gap-[10px]">배우고 싶다: {data.wanttolearn.map((data ,index) => {
 
 const flag = countries.find(name => name.name.common == data.selectedlanguage)
 if(index < 2){
@@ -265,7 +265,7 @@ null
 
   <RibbonIcon className='size-[150px]' ></RibbonIcon>
 
-  <h1 className='text-white text-[24px]'>Sorry We Cant Find User</h1>
+  <h1 className='text-white text-[24px]'>죄송합니다. 사용자를 찾을 수 없습니다.</h1>
 
   
   </div>}
@@ -276,7 +276,7 @@ null
 <>
 
 
-<span className='text-gray-500 text-[12px] mb-[5px]' >Please Wait..</span>
+<span className='text-gray-500 text-[12px] mb-[5px]' >기다리세요..</span>
   <LoaderIcon className='size-9'></LoaderIcon>
 
 

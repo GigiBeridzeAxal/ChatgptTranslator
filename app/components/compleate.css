@@ -1,0 +1,9 @@
+
+
+@media (max-height:800px) {
+
+    header{
+        display: none !important;
+    }
+    
+}

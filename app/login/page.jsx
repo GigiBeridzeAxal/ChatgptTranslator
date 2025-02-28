@@ -39,23 +39,23 @@ export default function page() {
   <div className="logoframe bg-indigo-500 w-[55px] rounded-[5px] h-[55px] p-[10px]">
          <MessagesSquare className='w-[35px] h-[35px]'></MessagesSquare>
        </div>
-       <h1 className='text-[24px] mt-[10px] mb-[10px]' >Login</h1>
-       <h1 className='text-[18px] text-gray-500' >Welcome Back ! </h1>
+       <h1 className='text-[24px] mt-[10px] mb-[10px]' >로그인</h1>
+       <h1 className='text-[18px] text-gray-500' >환영합니다! </h1>
        <br /><br />
         <form onSubmit={(e) => SubmitForm(e)} ref={formref} className='authform flex flex-col items-center gap-[15px] ' >
-        <button className='w-[320px] bg-white p-[10px] mb-[10px] flex items-center justify-center gap-[15px] text-black rounded-[5px]' onClick={() => window.location = process.env.NEXT_PUBLIC_BACKEND + 'google'} ><img width={30} src="Google.png" alt="" /> Countinue With Google</button>
+        <button className='w-[320px] bg-white p-[10px] mb-[10px] flex items-center justify-center gap-[15px] text-black rounded-[5px]' onClick={() => window.location = process.env.NEXT_PUBLIC_BACKEND + 'google'} ><img width={30} src="Google.png" alt="" />Google로 계속하기</button>
 
 
 
           <div className="line flex w-[100%] justify-center gap-[10px] items-center">
             <div className="line1 w-[120px] h-[1px] bg-white "></div>
-            Sign Up
+            가입하기
             <div className="line1 w-[120px] h-[1px] bg-white "></div>
           </div>
 
   
           <div className='w-[100%] text-start flex items-center justify-center flex-col'>
-                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">Email</label>
+                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">이메일</label>
          
                       <div className="input flex items-center gap-[5px] w-[100%]">
                 <User className='size-[20px]'></User>
@@ -64,7 +64,7 @@ export default function page() {
               </div>
                       </div>
                       <div className='w-[100%] text-start flex items-center justify-center flex-col'>
-                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">Password</label>
+                      <label style={{maxWidth:"400px"}} className='w-[100%]  text-start text-[14px] text-gray-400' htmlFor="">비밀번호</label>
               <div className="input flex items-center gap-[5px] w-[100%]">
                 <Lock className='size-[20px]' ></Lock>
  
@@ -78,7 +78,7 @@ export default function page() {
             <br />
                       <button style={{maxWidth:"400px"}}  className='w-[100%] rounded-[5px] p-[10px] bg-orange-600 text-white ' >Sign In</button>
 
-          <div className="alreadyhaveaccount flex items-center justify-center gap-[5px]">Dosen't Have Account ? <a className='text-blue-500' href="/register">Click Here</a></div>
+          <div className="alreadyhaveaccount flex items-center justify-center gap-[5px]">계정이 없으신가요? <a className='text-blue-500' href="/register">여기를 클릭하세요</a></div>
 
         </form>
       </div>

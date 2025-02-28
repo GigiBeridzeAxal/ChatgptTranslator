@@ -16,49 +16,49 @@ export default function Footer() {
       </div>
     </div>
 
-    <h1  className='text-[24px] text-blue-500'>Translator Ai 
+    <h1  className='text-[24px] text-blue-500'>번역자 당신
     </h1>
-    <div className="desca text-[20px] w-[250px]" >Everything You Need To Start Learning</div>
-    <div className="lng"> Language:<TranslatorComponent></TranslatorComponent></div>
+    <div className="desca text-[20px] w-[250px]" >학습을 시작하는 데 필요한 모든 것</div>
+    <div className="lng"> 언어:<TranslatorComponent></TranslatorComponent></div>
             </div>
 
 
             <div className="leftside w-[50%] flex items-start justify-evenly">
 
                 <div className="footerlist flex flex-col items-start justify-start gap-[10px] text-[26px]">
-                    Navigate
+                탐색하다
 
                     <button className="buttons text-[16px]">
-                        How It Works 
+                    작동 원리
                     </button>
 
                     <button className="buttons text-[16px]">
-                        Register
+                    등록하다
                     </button>
 
                     <button className="buttons text-[16px]">
-                        Login
+                    로그인
                     </button>
 
                     <button className="buttons text-[16px]">
-                        Dashboard
+                    계기반
                     </button>
 
                 </div>
 
                 <div className="footerlist flex flex-col items-start justify-start gap-[10px] text-[26px]">
-                    Legal
+                합법적인
 
                     <button className="buttons text-[16px]">
-                        Tearms Of Service
+                    서비스 약관
                     </button>
 
                     <button className="buttons text-[16px]">
-                        Privacy Policy
+                    개인정보 보호정책
                     </button>
 
                     <button className="buttons text-[16px]">
-                        Cookies Policy
+                    쿠키 정책
                     </button>
     
 
@@ -77,7 +77,7 @@ export default function Footer() {
 
         </div>
 
-        <div className="rights w-[85%] mt-[40px] flex items-center  gap-[5px] text-[20px]"><div className="allrightsserved flex items-center gap-[5px]"><Copyright></Copyright> 2025 Translator Ai. All Rights Served.</div></div>
+        <div className="rights w-[85%] mt-[40px] flex items-center  gap-[5px] text-[20px]"><div className="allrightsserved flex items-center gap-[5px]"><Copyright></Copyright>2025 번역기 Ai. 모든 권리 제공.</div></div>
           
     </div>
   )

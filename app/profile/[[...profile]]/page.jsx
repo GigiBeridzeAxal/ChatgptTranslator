@@ -55,28 +55,28 @@ export default function page() {
                 <div key={data._id}  className="profileframe flex flex-col gap-[15px] w-[100%]">
  <div className="firstline gap-[15px] w-[100%] flex items-end text-white justify-between"><div className="sf flex items-center gap-[15px] text-black">
 
- <img width={150}  src={data.profilepicture} alt="" /> 
+ <img width={150} height={150} className='h-[150px] w-[150px]'  src={data.profilepicture} alt="" /> 
 
     
-    </div> <a href={`/chat?sendmessage=${data._id}`}  className="sendmessage rounded-[5px] bg-blue-500 mb-[25px] text-[14px] p-[5px]">Send Message</a></div>
+    </div> <a href={`/chat?sendmessage=${data._id}`}  className="sendmessage rounded-[5px] bg-blue-500 mb-[25px] text-[14px] p-[5px]">메시지 보내기</a></div>
               
     <div className="sg flex flex-col text-slate-700 text-[26px] ">{data.firstname}  {data.lastname}</div>
-              <h1 className='text-[14px]' >Description</h1>
+              <h1 className='text-[14px]' >설명</h1>
               <div className="desc p-[10px] flex items-center justify-center  text-slate-600">
-                <div className="s w-[100%]"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur minima quidem commodi et eaque repellendus ut ad maxime quis? Doloremque, reprehenderit debitis neque aspernatur, iusto dolorum cum rerum dolorem ex officia dolores nobis cupiditate, quod numquam. Delectus a similique nam?</div>
+                <div className="s w-[100%]">{data.aboutme}</div>
                 </div>
                 <br />
  
               <div className="languages bg-gray-100 text-black profilebg p-[10px] gap-[10px] flex flex-col">
 
-              <div className="speaks  flex items-center gap-[10px]">Speaks: {data.canspeak.map((data ,index) => {
+              <div className="speaks  flex items-center gap-[10px]">말한다: {data.canspeak.map((data ,index) => {
 
 const flag = countries.find(name => name.name.common == data.selectedlanguage)
 
 return <img key={index} className='speaklanguagesflags' width={25}  src={flag.flags.png} ></img>
 
 })}</div>
- <div className="speaks  mt-[10px] flex items-center gap-[10px]">Want To Learn: {data.wanttolearn.map((data ,index) => {
+ <div className="speaks  mt-[10px] flex items-center gap-[10px]">배우고 싶다: {data.wanttolearn.map((data ,index) => {
 
 const flag = countries.find(name => name.name.common == data.selectedlanguage)
 

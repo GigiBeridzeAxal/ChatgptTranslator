@@ -172,15 +172,19 @@ export const useMessagesStore = create((set,get) => ({
                 set({allmessage:[...get().allmessage , data]})
                 set({userlistisloading:false})
 
-                console.log(queryuser , Authuser)
+                console.log(data)
                 set({rerender: Date.now()})
                 get().filterpositions()
+
+               if( data.sendby !== Authuser.id){
+
+                toast.success(`You Have New Message ${data.message}` )
+               }
                 
           
 
 
    
-            toast.success(`You Have New Message ${data.message}` )
 
     
         })

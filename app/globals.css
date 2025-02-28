@@ -377,11 +377,27 @@ background: none;
   left: 20px;
   top: 20px;
 }
+.uploaderline{
+  border: 1px solid rgb(221, 221, 221);
+}
 .usersfetchedlsit{
 
   border: 1px solid rgb(238, 238, 238);
   background-color: white;
 }
+.compleateform {
+  overflow: hidden;
+  overflow-y: auto;
+
+}
+.canspeaklangaugesframe{
+  background-color: rgb(248, 254, 255);
+  max-height: 400px;
+  padding: 10px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
 
 @keyframes Loading {
 
@@ -664,6 +680,7 @@ min-height: 3%0px !important;
   border: 0px;
   outline: 0px;
 }
+
 .banner{
   background: url('../public/bannferforprofiles.jpg');
   width: 100%;
@@ -768,6 +785,12 @@ min-height: 3%0px !important;
 }
 
 @media (max-width:1515px) {
+  .listheader  h1{
+    display: none;
+  }
+}
+
+@media (max-width:1515px) {
  .paymentheader  {
   width: 100%;
  }
@@ -794,6 +817,14 @@ min-height: 3%0px !important;
     flex-wrap: wrap;
   }
 }
+@media (max-width:500px) {
+  .compleateform {
+    width: 100%;
+  }
+  .compleateprofileframe  {
+    width: 100%;
+  }
+}
 
 @media (max-width:600px) {
   .rights{
@@ -814,6 +845,13 @@ min-height: 3%0px !important;
   .menuframe{
     width: 100%;
   }
+  .fixedbtn{
+    position: fixed;
+    left: 0px;
+      bottom: 15px;
+      backdrop-filter: blur(30px);
+  }
+
   .howitworksframe h2{
     width: 90%;
   }
@@ -856,6 +894,7 @@ min-height: 3%0px !important;
   }
 
 }
+
 @media (max-width:400px) {
 
   .countriedropdown {
@@ -865,6 +904,16 @@ min-height: 3%0px !important;
     width: 100px;
     height: 100px;
 
+  }
+  .leftranslatortop {
+
+    font-size: 14px;
+    
+  }
+  .lefttranslatortop{
+
+    font-size: 10px;
+    
   }
   
 }

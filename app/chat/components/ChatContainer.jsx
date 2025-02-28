@@ -4,18 +4,21 @@ import useJwtauth from '@/app/hooks/useJwtauth'
 import { useAuthStore } from '@/app/store/useAuthStore'
 import { useMessagesStore } from '@/app/store/useMessagesStore'
 import axios from 'axios'
-import { ArrowBigDown, ArrowDown, ArrowLeft, BoxSelect, File, Image, Languages, LucideArrowsUpFromLine, Play, Search, SearchIcon, Send, SendIcon, Stars, Upload, Verified } from 'lucide-react'
+import { ArrowBigDown, ArrowDown, ArrowLeft, BoxSelect, Coins, File, Image, Languages, LucideArrowsUpFromLine, Mic, Play, Search, SearchIcon, Send, SendIcon, Speaker, Stars, Upload, Verified, Voicemail } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
+import './VoiceTranslator.css'
+import toast from 'react-hot-toast'
 
  const Chat = () => {
   const [translatoropened  , settranslatoropened] = useState(false)
+  const msgref = useRef(0)
 
   const sendmessageid = useSearchParams().get('sendmessage')
   const [message , setmessage] = useState()
     const {profile} = useAuth()
-  const {checkauth , userplan , Authuser , onlineusers} = useAuthStore()
+  const {checkauth , buyitem, getuserdata , userplan , userdata, Authuser , onlineusers} = useAuthStore()
   const {userfromquery , rerender, userlistisloading, isfiltering, filterpositions ,  queryuser ,queryisloading , userswhosentmessage, sendmessage , subscribemessages , getmessages, unsubscribemessages , allmessage , userslist} = useMessagesStore()
 
   const [countries , setcountries] = useState([])
@@ -23,21 +26,80 @@ import React, { Suspense, useEffect, useState } from 'react'
   const [selectedlanguage , setselectedlanguage] = useState('taiwan')
   const [languagesearch , setlanguagesearch] = useState('')
   const [texttotranslate , settexttotranslate] = useState()
+  const [voicetranslator , setvoicetranslator] = useState(false)
+  const [voicetospeech , setvoicetospech] = useState()
   
   const [translatedtext , settranslatedtext] = useState('')
  
    const {decoded} = useJwtauth()
+   useEffect(() => {
+    if (msgref.current) {
+      msgref.current.scrollTo({
+        top: msgref.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [allmessage]);
+
+
+  useEffect(() => {
+    if (msgref.current) {
+      msgref.current.scrollTo({
+        top: msgref.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [msgref]);
+
+
+   const Voicehandler = () => {
+
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+   // recognition.lang = "ka-GE, en-US";
+    recognition.start()
+
+    recognition.onresult = (event) => {
+      const speechToText = event.results[0][0].transcript;
+      settranslatedtext(speechToText);
+    }; 
+
+   }
+
+   const changemsgscroll = () => {
+    if (msgref.current) {
+      msgref.current.scrollTo({
+        top: msgref.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+   }
+
   const translate = async() => {
 
 
+    console.log(userdata.credits)
 
-    const translatetext = await axios.post(process.env.NEXT_PUBLIC_BACKEND + 'TranslateText' , {
-      texttotranslate:texttotranslate,
-      language:selectedlanguage
-    })
 
-    settranslatedtext(translatetext.data)
 
+    if(userdata.credits >= 3){
+      
+      const item = 'Translate'
+      const email = userdata.email
+      buyitem(email , item)
+      const translatetext = await axios.post(process.env.NEXT_PUBLIC_BACKEND + 'TranslateText' , {
+        texttotranslate:texttotranslate,
+        language:selectedlanguage
+      })
+  
+      settranslatedtext(translatetext.data)
+  
+  
+    }else{
+      toast.error("You Dont Have Enough Credits")
+    }
+
+
+    
 
 
   }
@@ -89,6 +151,7 @@ import React, { Suspense, useEffect, useState } from 'react'
     if(Authuser !== null){
       getmessages(Authuser)
       userslist(Authuser , sendmessageid) 
+      getuserdata()
     }
 
 
@@ -103,6 +166,7 @@ import React, { Suspense, useEffect, useState } from 'react'
     checkauth()
 
       userfromquery(sendmessageid)
+  
 
 
 
@@ -203,7 +267,7 @@ import React, { Suspense, useEffect, useState } from 'react'
               {onlineusers.includes(data._id) ?<div className="usersbyonlineforchat  bg-teal-500"></div> :<div className="usersbyonlineforchat bg-gray-500"></div> }
               <div className="flex usersforchatdesc items-start w-[200px] flex flex-col gap-[10px]">
               <div className="w-[100%]"><div className=" flex w-[100%] items-center justify-between">{data.firstname} {data.lastname} <div className="sendtime text-[13px] text-gray-400">{minutes ? minutes < 1 ? "Just Now" : minutes + "m" : "Never"}</div></div></div>
-              <div className="secondline"><div className="lastmassage flex items-center"><div className="msg">{ lastmessage ?   lastmessage.sendby == Authuser.id ? <div className="sendme">You: { lastmessage ? lastmessage.message.length > 14 ?  lastmessage.message.slice(0 , 14) + "..." : lastmessage.message : null }</div> :                
+              <div className="secondline"><div className="lastmassage flex items-center"><div className="msg ">{ lastmessage ?   lastmessage.sendby == Authuser.id ? <div className="sendme">You: { lastmessage ? lastmessage.message.length > 14 ?  lastmessage.message.slice(0 , 14) + "..." : lastmessage.message : null }</div> :                
                 <div className="sendme">{data.firstname}: { lastmessage.message.length > 14 ?  lastmessage.message.slice(0 , 14) + "..." : lastmessage.message}</div> : <div className="waitingyou text-gray-500 text-[13px]">He is Waiting You</div>
               
             
@@ -252,7 +316,7 @@ import React, { Suspense, useEffect, useState } from 'react'
 
        
         : null}
-         <div  className={`msg w-[100%] ${translatoropened ? "reducedsize" : ''} mt-[25px]`} >
+         <div ref={msgref} className={`msg h-[75vh] w-[100%] ${translatoropened || voicetranslator ? "reducedsize" : ''} mt-[25px]`} >
 
 
 {queryuser ?  allmessage.filter(filt => filt.sendby === queryuser._id || filt.sendto === queryuser._id).map((data , index) => {
@@ -342,21 +406,40 @@ return data.sendto === queryuser._id ?
 </div>
 <div className="translatoranswer w-[50%] p-[10px] h-[250px]">
 
-<textarea className='w-[100%]  p-[10px] p-[10px] h-[230px] bg-slate-900/50' value={translatedtext} name="" placeholder='Click Generate To Genreate Text' id=""></textarea>
+<textarea className='w-[100%]  p-[10px] p-[10px] h-[230px] bg-slate-900/50' value={translatedtext} readOnly name="" placeholder='Click Generate To Genreate Text' id=""></textarea>
 </div>
 
 
         </div>
 
-        <button onClick={() => translate(texttotranslate)} className="generate flex items-center justify-center p-[8px] rounded-[5px] gap-[10px] bg-purple-500"><Play></Play> Generate</button>
+          <div className='flex items-center justify-center gap-[25px]'>
+
+          <button onClick={() => translate(texttotranslate)} className="generate flex items-center justify-center p-[8px] rounded-[5px] gap-[10px] bg-purple-500"><Play></Play> Generate</button>
+          <div className="creditvalue flex items-center justify-center gap-[5px]">{userdata.credits} <Coins className='text-yellow-400'></Coins></div>
+
+          </div>
 
       </div>
 
       : null}
-<br />
-      <div className='flex w-[100%] items-center justify-center gap-[15px]'>
 
-        <button className="sendmsg flex w-[90%] items-center  justify-center gap-[5px] bg-slate-900/50"><input onChange={(e) => setmessage(e.target.value)} className='w-[100%] p-[10px]' type="text" style={{background:'none' , outline:0 , border:0}} placeholder='Type Message Here...' /> <Languages onClick={() => translatoropened ? settranslatoropened(false) :  settranslatoropened(true)}></Languages> </button ><SendIcon onClick={() => sendmessage({sendto:queryuser._id , sendby:Authuser.id , message:message})} ></SendIcon>
+      {voicetranslator ? 
+      <div className="voicetranslator flex flex-col p-[10px] flex items-center gap-[50px]  bg-gray-800 h-[300px] w-[70%] ">
+
+        <h1>Voice Translator {translatedtext}</h1>
+
+        <Mic onClick={() => Voicehandler()} className='size-[150px] rounded-[50%] p-[30px] bg-slate-900/50' ></Mic>
+
+      
+      </div>
+      
+      : null}
+
+
+<br />
+      <div className='flex w-[100%] fixedbtn items-center justify-center gap-[15px]'>
+
+          <div className="sendmsg flex w-[90%] items-center  justify-center gap-[5px] bg-slate-900/50"> <button onClick={() => !voicetranslator ?  setvoicetranslator(true) : setvoicetranslator(false) } className="voice p-[10px] bg-slate-900/50"><Mic></Mic></button> <input onChange={(e) => setmessage(e.target.value)} className='w-[100%] p-[10px]' type="text" style={{background:'none' , outline:0 , border:0}} placeholder='Type Message Here...' /> <Languages onClick={() => translatoropened ? settranslatoropened(false) :  settranslatoropened(true) || changemsgscroll() }></Languages> </div ><SendIcon onClick={() => sendmessage({sendto:queryuser._id , sendby:Authuser.id , message:message})} ></SendIcon>
       </div>
 
       </div>

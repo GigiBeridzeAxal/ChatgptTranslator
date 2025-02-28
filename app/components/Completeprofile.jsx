@@ -2,6 +2,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import useAuth from '../hooks/useAuth'
+import { BoxSelect, Database, File, Languages, SearchIcon, Upload, UploadCloud, UploadCloudIcon, Verified, X } from 'lucide-react'
+import toast from 'react-hot-toast'
+import './compleate.css'
 
 export default function Completeprofile() {
 
@@ -9,18 +12,18 @@ export default function Completeprofile() {
     const [base64 , setbase64] = useState()
     const [countries , setcountries] = useState([])
     const [next , setnext] = useState(0)
-    const [wanttolearn , setwanttolearn] = useState([
-        {
-            selectedlanguage:false,
-            dropdown:false
-        }
-    ])
-    const [selectedcountries , setselectedcountrie] = useState([
-        {
-            selectedlanguage:false,
-            dropdown:false
-        }
-    ])
+    const [wanttotalk , setwanttotalk] = useState()
+    const [canspeakcountriesropdown , setcanspeakcountriesropdown] = useState(false)
+    const [aboutme , setaboutme] = useState() 
+    const [languagesearch , setlanguagesearch] = useState('')
+    const [selectedlanguage , setselectedlanguage] = useState([
+ 
+
+]) 
+    const [wanttolearn , setwanttolearn] = useState([ 
+])
+    const [wanttolearncountriesdropdown , setwanttolearncountriesdropdown] = useState(false)
+  
     const {userinfo} = useAuth()
 
     useEffect(() => {
@@ -42,6 +45,14 @@ export default function Completeprofile() {
         setselectedcountrie((perv) => [...perv , {     selectedlanguage:false,
             dropdown:false}])
 
+
+    }
+    const removechildfromselectedlanguage= (id) => {
+        setselectedlanguage(perv => perv.filter((data ,index) => index !== id ))
+
+    }
+    const removechildfromwantlearn = (id) => {
+        setwanttolearn(perv => perv.filter((data ,index) => index !== id ))
 
     }
 
@@ -72,8 +83,10 @@ export default function Completeprofile() {
                 'Content-Type': 'multipart/form-data',
               },
         })
-        const changecanspeaklanguages = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changecanspeak" , {canspeak:selectedcountries , email:userinfo.email})
+        const changecanspeaklanguages = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changecanspeak" , {canspeak:selectedlanguage , email:userinfo.email})
         const changewanttolearn = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changewanttolearn" , {wanttolearn:wanttolearn , email:userinfo.email})
+        const changeabout = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "changeabout" , {about:aboutme , email:userinfo.email})
+        const liketotalk = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "liketotalk" , {liketotalk:wanttotalk , email:userinfo.email})
 
        if(setprofilepic.status == 200){
             window.location = '/'
@@ -96,177 +109,234 @@ export default function Completeprofile() {
             setbase64(reader.result)
         }
     }
+
+
   return (
-    <div className="compleateprofile w-[100%] h-[100vh] flex items-center justify-center ">
+    <div className="compleateprofile  w-[100%] h-[100vh] flex items-center justify-center ">
         <div className="compleateprofileframe flex flex-col gap-[75px] items-center justify-center">
 
-            {next === 0 ?<>
-                <div className="process hidden flex items-center justify-center gap-[50px] font-[500]">
-                <div className="completer">Profile Picture</div>
-                <div className="completer text-gray-300">Select Language</div>
+            {next === 0 ? 
+            <div className="compleateform p-[20px] w-[500px] h-[500px] bg-white">
+                
+                <div className="details text-black">
+                   <h1 className=' flex items-center gap-[15px]'><UploadCloudIcon className='size-[55px] p-[10px] h-[55px] text-gray-800 rounded-[50%] bg-gray-200'></UploadCloudIcon> Upload Your Profile Picture  </h1>
+                   <br />
+
+                   <div className="lines flex gap-[5px] w-[100%]">
+                    <div className="line h-[2px] w-[33.3%] bg-blue-500"></div>
+                    <div className="line h-[2px] w-[33.3%] bg-gray-200"></div>
+                    <div className="line h-[2px] w-[33.3%] bg-gray-200"></div>
+                   </div>
+                   <div className="sections text-[14px] mt-[5px] flex w-[100%] justify-between">
+                        <h3 className='w-[33.3%] text-blue-500' >Picture</h3>
+                        <h3  className='w-[33.3%]'>About Me</h3>
+                        <h3  className='w-[33.3%]'>Langauges</h3>
+                    </div>
+                </div>
+
+                <div className="uploader flex items-center justify-center w-[100%] h-[300px]">
+
+                   <input onChange={(e) => changepicture(e)} type="file" id='uploaderfile' className='hidden' />
+
+                   <label htmlFor="uploaderfile" className="uploaderline w-[100%] h-[250px] flex items-center justify-center">
+                   {base64 ? <img width={150} height={150} src={base64} alt="" /> : <label htmlFor=""><Upload className='text-black size-[50px]' ></Upload></label> } 
+                   </label>
+         
+
+                </div>
+
+                <div className="buttons gap-[15px] flex w-[100%] justify-end">
+                <button className='bg-gray-500 p-[7px] text-gray-300 w-[80px] rounded-[2px]'>Back</button> 
+                {base64 ?        <button onClick={() => setnext(1)} className='bg-blue-500 p-[7px] w-[80px] rounded-[2px]'>Next</button> :        <button className='bg-blue-500 p-[7px] w-[80px] text-gray-300 rounded-[2px]'>Next</button> }
+             
+                </div>
+
+
             </div>
+                   : null}
 
-            <div className="processtittle text-[26px] text-gray-600 font-[300]">Choose Your Profile Picture</div>
+                   
+            {next === 1 ? 
+            <div className="compleateform p-[20px] w-[500px] h-[620px] bg-white">
+                
+                <div className="details text-black">
+                   <h1 className=' flex items-center gap-[15px]'><File className='size-[55px] p-[10px] h-[55px] text-gray-800 rounded-[50%] bg-gray-200'></File> Tell Us More About You </h1>
+                   <br />
 
-
-            <input onChange={(e) => changepicture(e)}  className='hidden' type="file" name="" id="uploadpic" />
-            <label  htmlFor="uploadpic"><div style={uploadedpic !== 0 ? {backgroundImage:`url(${base64})`} : null}  className="profileuploader">{uploadedpic !== 0 ?  null: <div className="clickheretoupload">Click Here to Upload</div> }</div> </label>
+                   <div className="lines flex gap-[5px] w-[100%]">
+                    <div className="line h-[2px] w-[33.3%] bg-teal-500"></div>
+                    <div className="line h-[2px] w-[33.3%] bg-blue-500"></div>
+                    <div className="line h-[2px] w-[33.3%] bg-gray-200"></div>
+                   </div>
+                   <div className="sections text-[14px] mt-[5px] flex w-[100%] justify-between">
+                        <h3 className='w-[33.3%] text-teal-500' >Picture</h3>
+                        <h3  className='w-[33.3%]  text-blue-500'>About Me</h3>
+                        <h3  className='w-[33.3%]'>Langauges</h3>
+                    </div>
+                </div>
 
    
-        </> : null}
+                <div className="w-[100%] h-[400px] mt-[35px]">
+                <h3 className='text-black text-[14px] p-[5px]'>Tell Us More About You</h3>
+                    <textarea value={aboutme} maxLength={240} onChange={(e) => setaboutme(e.target.value) } className='bg-gray-100 text-black p-[10px] w-[100%] h-[150px]' placeholder='Tell Us More About You...' name="" id=""></textarea>
+                    <div className="lengthleft text-black text-[13px] text-end">{ aboutme ? 240 - aboutme.length : 240} Character Left</div>
+                    <h3 className='text-black text-[14px] mt-[15px] p-[5px]'>Tell Us What You Like To Talk</h3>
+                    <textarea value={wanttotalk} maxLength={100} onChange={(e) => setwanttotalk(e.target.value) } className='bg-gray-100 text-black p-[10px] w-[100%] h-[100px]' placeholder='Tell Us What You Like To Talk...' name="" id=""></textarea>
+                    <div className="lengthleft text-black text-[13px] text-end">{ wanttotalk ? 100 - wanttotalk.length : 100} Character Left</div>
+                </div>
 
-        {next === 1 ? <>
-                                      <div className="process hidden flex items-center justify-center gap-[10px] font-[500]">
-                <div className="completer">Profile Picture</div>
-                <div className="completer text-gray-300">Select Language</div>
+           
+                <div className="buttons gap-[15px] flex w-[100%] justify-end">
+                <button  onClick={() => setnext(perv=> perv - 1)} className='bg-gray-500 p-[7px]  w-[80px] rounded-[2px]'>Back</button> 
+                { !wanttotalk || !aboutme  ?   <button className='bg-blue-500 p-[7px] w-[80px] text-gray-300 rounded-[2px]'>Next</button>  :   <button onClick={() => setnext(2)} className='bg-blue-500 p-[7px] w-[80px] rounded-[2px]'>Next</button> }
+             
+                </div>
+
+
+            </div>
+                   : null}
+
+                          
+            {next === 2 ? 
+            <div className="compleateform p-[20px] w-[500px] h-[620px] bg-white">
+                
+                <div className="details text-black">
+                   <h1 className=' flex items-center gap-[15px]'><Languages className='size-[55px] p-[10px] h-[55px] text-gray-800 rounded-[50%] bg-gray-200'></Languages> Select Langauges </h1>
+                   <br />
+
+                   <div className="lines flex gap-[5px] w-[100%]">
+                    <div className="line h-[2px] w-[33.3%] bg-teal-500"></div>
+                    <div className="line h-[2px] w-[33.3%] bg-teal-500"></div>
+                    <div className="line h-[2px] w-[33.3%] bg-blue-500"></div>
+                   </div>
+                   <div className="sections text-[14px] mt-[5px] flex w-[100%] justify-between">
+                        <h3 className='w-[33.3%] text-teal-500' >Picture</h3>
+                        <h3  className='w-[33.3%] text-teal-500'>About Me</h3>
+                        <h3  className='w-[33.3%] text-blue-500'>Langauges</h3>
+                    </div>
+                </div>
+
+   
+                <div className="w-[100%] text-black h-[400px] mt-[35px]">
+
+                {wanttolearncountriesdropdown ?
+          <div className="countriesselector bg-gray-500/50 ">
+
+            <div className="countriedropdown text-center text-black bg-white flex flex-col gap-[50px] p-[40px] w-[30%]">
+
+             <h1 className='flex items-center justify-between' >Select Language <X className='cursor-pointer ' onClick={() => setwanttolearncountriesdropdown(false)}></X></h1>
+
+             <div className="searcher flex items-center w-[100%] bg-slate-500/100 p-[10px]">
+
+             <input  type="text" className='searchbg w-[95%]' onChange={(e) => setlanguagesearch(e.target.value)} placeholder='Search Language...' />
+             <SearchIcon className='text-white' ></SearchIcon>
+
+             </div>
+
+
+             <div className="customlanguagesdropdown">
+
+             {countries.filter(filt => filt.name.common.toUpperCase().includes(languagesearch.toUpperCase())).map((data, id) => {
+
+            console.log(data)
+
+               return <button onClick={() => wanttolearn.map(data => data.selectedlanguage).includes(data.name.common) ? toast.error("Already Choosed") : setwanttolearn((perv) => [...perv , {selectedlanguage:data.name.common}])} key={id} className='w-[100%] p-[20px] bg-gray-200 flex justify-between' ><div className="left flex items-center gap-[25px]"><img width={30} src={data.flags.png} alt="" />
+
+               {data.name.common.slice(0,20)}
+               
+               </div>  <div className="isselected"> {wanttolearn.map(data => data.selectedlanguage).includes(data.name.common) ? <Verified></Verified> :<BoxSelect></BoxSelect>
+                }  </div></button>
+
+             })}
+
+             </div>
+
             </div>
 
-            <div className="processtittle text-[22px] text-gray-600 font-[300]">Select Languages You Can Speak</div>
 
-       
+          </div>
+          : null}
+                {canspeakcountriesropdown ?
+          <div className="countriesselector  bg-gray-500/50 " onClick={() => console.log("Clice")}>
+
+            <div className="countriedropdown text-center text-black bg-white flex flex-col gap-[50px] p-[40px] w-[30%]">
+
+             <h1 className='flex items-center justify-between' >Select Language <X className='cursor-pointer ' onClick={() => setcanspeakcountriesropdown(false)}></X></h1>
+
+             <div className="searcher flex items-center w-[100%] bg-slate-500/100 p-[10px]">
+
+             <input  type="text" className='searchbg w-[95%]' onChange={(e) => setlanguagesearch(e.target.value)} placeholder='Search Language...' />
+             <SearchIcon className='text-white' ></SearchIcon>
+
+             </div>
 
 
+             <div className="customlanguagesdropdown">
 
-                <div className="allslider flex flex-col w-[90%] gap-[20px]">
-                {selectedcountries.map((data , id) => 
-     <div onClick={() => setselectedcountrie(perv => perv.map((pervdata ,pervid) => {
+             {countries.filter(filt => filt.name.common.toUpperCase().includes(languagesearch.toUpperCase())).map((data, id) => {
 
+            console.log(data)
 
-        if(pervid == id){
-            if(pervdata.dropdown == false){
-                return {...pervdata , dropdown:true}
-            }else{
-                return {...pervdata , dropdown:false}
-            }
-    
-        }else{
-            return {...pervdata , dropdown:false}
-        }
+               return <button onClick={() => selectedlanguage.map(data => data.selectedlanguage).includes(data.name.common) ? toast.error("Already Choosed") : setselectedlanguage((perv) => [...perv , {selectedlanguage:data.name.common}] )} key={id} className='w-[100%] p-[20px] bg-gray-200 flex justify-between' ><div className="left flex items-center gap-[25px]"><img width={30} src={data.flags.png} alt="" />
 
-     
-        
-
-     }) )}key={id} className="customselector   relative">
-
-        {data.selectedlanguage == false ? <div className="selectlang flex items-center justify-between">Select Language {data.dropdown == true ?  <img width={20} src="Collapse.png" alt="" /> :  <img width={20} src="Expand.png" alt="" /> }</div> : <div className='flex justify-between items-center'><div className="left flex items-center gap-[10px]">{data.selectedlanguage}  <img width={20} src={countries.find(name => name.name.common === data.selectedlanguage).flags.png } alt="" /> </div> {data.dropdown == true ?  <img width={20} src="Collapse.png" alt="" /> :  <img width={20} src="Expand.png" alt="" /> } </div>} 
+               {data.name.common.slice(0,20)}
                
-                
-     {data.dropdown == true ? <div  className="dropdown flex flex-col gap-[5px]">
-    {countries.map((data ,ider) => (<button onClick={() => setselectedcountrie(perv => perv.map((pervdata ,pervid) => {
-        
-        if(pervid == id ){
-            
-       
-                return {...pervdata , selectedlanguage:data.name.common}
-      
-    
-        }else{
-            return pervdata
-        }
+               </div>  <div className="isselected"> {selectedlanguage.map(data => data.selectedlanguage).includes(data.name.common) ? <Verified></Verified> :<BoxSelect></BoxSelect>
+                }  </div></button>
 
+             })}
 
-    }))} className='flex items-center gap-[15px]' key={ider} value={data.name.official} >{data.name.common} <img width={20} src={data.flags.png} alt="" /></button>))}
-      </div>  : null}
-                
-              
-      </div>
+             </div>
 
-                )}
-              
-                    
-                </div>
-             
-                   
-           
-
-       
-            <div onClick={() => AddnewLanguage()} className="addbutton bg-teal-500 text-white p-[7px]">Add New</div>
-
-           
-</>  : null}
-
-
-{next === 2 ? <>
-                                      <div className="process hidden flex items-center justify-center gap-[10px] font-[500]">
-                <div className="completer">Profile Picture</div>
-                <div className="completer text-gray-300">Select Language</div>
             </div>
 
-            <div className="processtittle text-[22px] text-gray-600 font-[300]">Select Languages You Want To Learn</div>
 
-       
+          </div>
+          : null}
 
+             <div className="canspeaklangaugesframe">
+             <div className="canspeaklanguages ">
+                        Can Speak: <div className="languagelist bg-gray-200/50 p-[10px] flex gap-[10px] items-start flex-wrap ">{selectedlanguage[0] ? selectedlanguage.map((data ,id) => <button onClick={() => removechildfromselectedlanguage(id)}  key={id} className='text-blue-700' >{data.selectedlanguage}</button>) : "Choose languages You Already Can Speak" }</div>
+                        <br />
 
+                        <button onClick={() => setcanspeakcountriesropdown(true)} className="canspeadropdownbutton bg-blue-500 text-white p-[10px]">
 
-                <div className="allslider flex flex-col w-[90%] gap-[20px]">
-                {wanttolearn.map((data , id) => 
-     <div onClick={() => setwanttolearn(perv => perv.map((pervdata ,pervid) => {
+                            Select Langauges
 
+                        </button>
 
-        if(pervid == id){
-            if(pervdata.dropdown == false){
-                return {...pervdata , dropdown:true}
-            }else{
-                return {...pervdata , dropdown:false}
-            }
-    
-        }else{
-            return {...pervdata , dropdown:false}
-        }
+                    </div>
+                    <br /><br />
+                    <div className="canspeaklanguages ">
+                        Want To learn: <div className="languagelist bg-gray-200/50 p-[10px] flex gap-[10px] items-start flex-wrap ">  {wanttolearn[0] ? wanttolearn.map((data ,id)  => <button key={id} className='text-blue-700' onClick={() => removechildfromwantlearn(id)} >{data.selectedlanguage}</button> ) : "Choose Languages You can Want To Learn" } </div>
+        <br />
 
-     
-        
+                        <button onClick={() => setwanttolearncountriesdropdown(true)} className="canspeadropdownbutton bg-blue-500 text-white p-[10px]">
 
-     }) )}key={id} className="customselector  relative">
+                            Select Langauges
 
-        {data.selectedlanguage == false ? <div className="selectlang flex items-center justify-between">Select Language {data.dropdown == true ?  <img width={20} src="Collapse.png" alt="" /> :  <img width={20} src="Expand.png" alt="" /> }</div> : <div className='flex justify-between items-center'><div className="left flex items-center gap-[10px]">{data.selectedlanguage}  <img width={20} src={countries.find(name => name.name.common === data.selectedlanguage).flags.png } alt="" /> </div> {data.dropdown == true ?  <img width={20} src="Collapse.png" alt="" /> :  <img width={20} src="Expand.png" alt="" /> } </div>} 
-               
-                
-     {data.dropdown == true ? <div  className="dropdown flex flex-col gap-[5px]">
-    {countries.map((data ,ider) => (<button onClick={() => setwanttolearn(perv => perv.map((pervdata ,pervid) => {
-        
-        if(pervid == id ){
-            
-       
-                return {...pervdata , selectedlanguage:data.name.common}
-      
-    
-        }else{
-            return pervdata
-        }
+                        </button>
 
+                    </div>
+             </div>
 
-    }))} className='flex items-center gap-[15px]' key={ider} value={data.name.official} >{data.name.common} <img width={20} src={data.flags.png} alt="" /></button>))}
-      </div>  : null}
-                
               
-      </div>
-
-                )}
               
-                    
+              
                 </div>
+                
+
+           
+                <div className="buttons fixedbtns bg-white p-[10px] gap-[15px] flex w-[100%] justify-end">
+                <button  onClick={() => setnext(perv=> perv - 1)} className='bg-gray-500 p-[7px]  w-[80px] rounded-[2px]'>Back</button> 
+                { !selectedlanguage[0] || !wanttolearn[0]  ?   <button className='bg-blue-500 p-[7px] w-[80px] text-gray-300 rounded-[2px]'>Finish</button>  :   <button onClick={() => Finish()} className='bg-blue-500 p-[7px] w-[80px] rounded-[2px]'>Finish</button> }
              
-                   
-           
-
-       
-            <div onClick={() => AddnewLanguageforwanttolearn()} className="addbutton bg-teal-500 text-white p-[7px]">Add New</div>
-
-           
-</>  : null}
+                </div>
 
 
+            </div>
+                   : null}
 
-
-{next == 0 ?            uploadedpic !== 0 ?             <button onClick={() => setnext(1)} className="next bg-blue-500 rounded-[2px] text-white p-[10px] text-white w-[150px]">Next</button> : 
-                           <button  className="next bg-gray-400 text-gray-500 p-[10px] rounded-[2px] text-gray-700 w-[150px]">Next</button>  : null}
-
-{next == 1 ?            selectedcountries[0].selectedlanguage !== false ?             <button onClick={() => setnext(2)} className="next bg-blue-500 rounded-[2px] text-white p-[10px] text-white w-[150px]">Next</button> : 
-                           <button  className="next bg-gray-400 text-gray-500 p-[10px] rounded-[2px] text-gray-700 w-[150px]">Next</button>  : null}
-                           
-{next == 2 ? wanttolearn[0].selectedlanguage !== false ?             <button onClick={() => Finish()} className="next bg-blue-500 rounded-[2px] text-white p-[10px] text-white w-[150px]">Finish</button> : 
-                           <button  className="next bg-gray-400 text-gray-500 p-[10px] rounded-[2px] text-gray-700 w-[150px]">Finish</button>  : null}
         </div>
     </div>
   )

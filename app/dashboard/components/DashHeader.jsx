@@ -3,7 +3,7 @@ import TranslatorComponent from '@/app/components/TranslatorComponent'
 import useAuth from '@/app/hooks/useAuth'
 import useJwtauth from '@/app/hooks/useJwtauth'
 import { useAuthStore } from '@/app/store/useAuthStore'
-import { ArrowDownCircle, BugPlayIcon, Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon, X } from 'lucide-react'
+import { ArrowDownCircle, BugPlayIcon, Coins, CreditCard, Delete, DeleteIcon, Edit, Link, Link2, Menu, MessageSquare, MessagesSquare, Recycle, RefreshCcw, RemoveFormatting, Settings, User, User2, User2Icon, X } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 export default function DashHeader() {
@@ -23,11 +23,10 @@ export default function DashHeader() {
     if(Authuser == null) return ;
     getuserdata()
 
-    console.log(userdata.plan)
+
 
 
    },[Authuser])
-
 
 
    
@@ -60,7 +59,7 @@ export default function DashHeader() {
         {userurl}
         <div className="profileopenframe w-[100%]   flex items-center flex-col relative">
 
-          <div onClick={() => setprofileopened(false)} className="exit flex items-center gap-[5px] text-black"><img width={30} src="Back.png" alt="" /> Back</div>
+          <div onClick={() => setprofileopened(false)} className="exit flex items-center gap-[5px] text-black"><img width={30} src="Back.png" alt="" /> 뒤쪽에</div>
           <div className="profilemenupic flex items-center gap-[5px]"> <div className="profile flex items-center justify-center gap-[10px]">
      <div className="s text-black flex items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
         <img  width={50} src={profile !== false ? profile : "Profile.png"} alt="" />
@@ -68,33 +67,33 @@ export default function DashHeader() {
     </div></div>
 
           <div className="mainprofile w-[100%] flex items-center justify-between bg-white text-black h-[100vh] gap-[25px] flex-col">
-          <div className="profiletittle mt-[100px]">Manage Your Profile</div>
+          <div className="profiletittle mt-[100px]">프로필 관리</div>
 
           <div className="options h-[60vh] w-[100%]  flex flex-col gap-[5px]">
             <button className="option justify-center w-[100%] p-[10px] bg-gray-100 cursor-pointer flex items-center gap-[5px]">
-            <Edit></Edit> Edit Your Privacy Information
+            <Edit></Edit> 개인정보 정보 수정
             </button>
 
 
 
             <button className="option justify-center  w-[100%] p-[10px] bg-gray-100 cursor-pointer flex items-center gap-[5px]">
-            <User></User> Edit Your Profile
+            <User></User> 프로필 편집
             </button>
 
                  
             <button className="option justify-center w-[100%] p-[10px] bg-gray-100 cursor-pointer flex items-center gap-[5px]">
-            <Settings></Settings> Translator Options
+            <Settings></Settings> 번역기 옵션
             </button>
                    
             <button className="option justify-center w-[100%] p-[10px] bg-gray-100 text-red-500 cursor-pointer flex items-center gap-[5px]">
-            Delete Account
+            계정 삭제
             </button>
 
 
           </div>
 
 <div className="logout w-[100%]">
-  <button onClick={() => logout()} className="logout p-[10px] w-[100%] bg-slate-100 text-red-500 flex items-center gap-[5px] justify-center">Logout <img width={20} src="Logout.png" alt="" /></button>
+  <button onClick={() => logout()} className="logout p-[10px] w-[100%] bg-slate-100 text-red-500 flex items-center gap-[5px] justify-center">로그아웃 <img width={20} src="Logout.png" alt="" /></button>
 </div>
           </div>
 
@@ -108,15 +107,15 @@ export default function DashHeader() {
     <div className="logoframe text-white p-[10px]">
         <MessagesSquare className='w-[35px] h-[35px] text-indigo-500'></MessagesSquare>
       </div>
-      <h1 className='text-white' >Translator Ai</h1>
+      <h1 className='text-white' >번역자 당신</h1>
     </div>
     <section  className='flex items-center gap-[25px]' >
     </section>
 
     <div className="profile  relative flex items-center gap-[30px]">
     <div className="name"></div>
-    <a href='/Plans' className="referal text-white flex items-center cursor-pointer gap-[5px]"><BugPlayIcon className='size-[17px]'></BugPlayIcon> Plans</a>
-    <div className="language flex items-center justify-center relative flex-col gap-[10px]"><button onClick={() => engopened == true ? setengopened(false) : setengopened(true) } className="languagechooser flex items-center gap-[10px]">Eng <ArrowDownCircle className='size-[18px]'></ArrowDownCircle>
+    <a href='/Plans' className="referal text-white flex items-center cursor-pointer gap-[5px]"><BugPlayIcon className='size-[17px]'></BugPlayIcon> 계획</a>
+    <div className="language flex items-center justify-center relative flex-col gap-[10px]"><button onClick={() => engopened == true ? setengopened(false) : setengopened(true) } className="languagechooser flex items-center gap-[10px]">영어 <ArrowDownCircle className='size-[18px]'></ArrowDownCircle>
 
       </button> 
 
@@ -127,9 +126,9 @@ export default function DashHeader() {
  
       </div>
  
-    <a href='/referal' className="referal text-white flex items-center cursor-pointer gap-[5px]"><Link className='size-[17px]'></Link> Referal System</a>
-    <a href='/profile' className=" text-white flex items-center gap-[5px] cursor-pointer"><User2 className='size-[17px]'></User2> Profile</a>
-    <a href='/chat' className=" text-white flex items-center gap-[5px] cursor-pointer"><MessageSquare className='size-[17px]'></MessageSquare> Chats</a>
+    <a href='/referal' className="referal text-white flex items-center cursor-pointer gap-[5px]"><Link className='size-[17px]'></Link> 추천 시스템</a>
+    <a href='/profile' className=" text-white flex items-center gap-[5px] cursor-pointer"><User2 className='size-[17px]'></User2> 윤곽</a>
+    <a href='/chat' className=" text-white flex items-center gap-[5px] cursor-pointer"><MessageSquare className='size-[17px]'></MessageSquare> 채팅</a>
     <div className="profile flex items-center justify-center gap-[10px]">
     <div className="userminiinfo flex flex-col ">
       <div onClick={() => setprofileopened(true)} className="headerprofilename text-white flex cursor-pointer items-center font-[500] gap-[3px]">{decoded.firstname}, <div className="lastname">{decoded.lastname[0]}</div></div>
@@ -169,13 +168,13 @@ export default function DashHeader() {
         <br /><br />
 
         <div className="sections flex flex-col gap-[25px]">
-        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href="/chat"><MessageSquare className=' size-[18px]'></MessageSquare> Chats</a>
+        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href="/chat"><MessageSquare className=' size-[18px]'></MessageSquare> 채팅</a>
 
-        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href="/Plans"><BugPlayIcon className=' size-[18px]'></BugPlayIcon> Plans</a>
+        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href="/Plans"><BugPlayIcon className=' size-[18px]'></BugPlayIcon> 계획</a>
  
-        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><Link className=' size-[18px]'></Link> Referal System</a>
-
-        <TranslatorComponent></TranslatorComponent>
+        <a className='flex items-center justify-center gap-[5px] w-[100%] ' href=""><Link className=' size-[18px]'></Link> 추천 시스템</a>
+ 
+        <a className='flex items-center justify-center gap-[5px] w-[100%] text-[24px]' href=""> {userdata.credits} <Coins className='text-yellow-500'></Coins></a>
 
  
 

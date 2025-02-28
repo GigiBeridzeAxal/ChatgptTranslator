@@ -55,9 +55,8 @@ const Checkout = () => {
 
                 <div className="price text-[22px] flex items-center gap-[10px]" ><div className="s text-[44px]">$15</div> per month/user</div>
 
-                <div className="desc text-gray-600">You can use Premium to perform your activities better and faster</div>
+                <div className="desca text-gray-600">You can use Premium to perform your activities better and faster</div>
 
-                <button className='w-[100%] text-center mt-[10px] p-[10px] bg-blue-500 rounded-[3px] text-white'>Best Offer</button>
 <br />
                 <hr />
 

@@ -67,10 +67,10 @@ export default function Mainpeople() {
         <div className="logoframe text-white p-[10px]">
         <MessagesSquare className='w-[35px] h-[35px] text-indigo-500'></MessagesSquare>
       </div>
-            <div className="peoplemayyoulike w">People Should You like</div>
+            <div className="peoplemayyoulike w">사람들은 당신이 좋아해야</div>
 
             {users[0] == undefined ? usersfinder == true ?           <>
-        <span className='text-gray-500 text-[12px] mb-[5px]' >Please Wait..</span>
+        <span className='text-gray-500 text-[12px] mb-[5px]' >기다리세요..</span>
             <LoaderIcon className='size-9'></LoaderIcon>
 
             </>  : null : null}
@@ -96,7 +96,7 @@ export default function Mainpeople() {
                   <div className="loaderimage">
                       <div className="loaderline"></div>
                       </div> 
-              </> : <div className="notfound">users Not Found</div>
+              </> : <div className="notfound">사용자를 찾을 수 없습니다</div>
                
                   
 
