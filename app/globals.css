@@ -783,6 +783,67 @@ min-height: 3%0px !important;
 .nobreak{
   word-break: keep-all;
 }
+.voicetranslator{
+  z-index: 25;
+}
+.shadow{
+  position: fixed;
+  z-index: 10;
+  width: 0px;
+  height: 0px;
+  left: 60%;
+  bottom: 20%;
+  box-shadow: 1px 1px 501px 75px rgba(179, 15, 255, 0.74);
+}
+.shadow::after{
+  content: '';
+  position: fixed;
+  z-index: 10;
+  width: 0px;
+  height: 0px;
+  left: 30%;
+  bottom: 40%;
+  box-shadow: 1px 1px 501px 75px rgba(107, 15, 255, 0.74);
+}
+.shadowformic{
+  box-shadow: 0px 0px 12px 1px rgb(5, 134, 255);
+  cursor: pointer;
+  position: relative;
+
+  animation:shadowmicanim linear infinite 2s ;
+  
+}
+.gamelistimages img{
+  width: 300px !important;
+  height: 200px !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
+}
+
+@keyframes shadowmicanim {
+
+  0%{
+    box-shadow: 0px 0px 12px 1px rgb(0, 104, 201);
+
+
+  }
+  10%{
+    box-shadow: 0px 0px 12px 1px rgb(5, 72, 255);
+  }
+
+  50%{
+    box-shadow: 0px 0px 12px 1px rgb(155, 5, 255);
+  }
+
+  100%{
+    box-shadow: 0px 0px 12px 1px rgb(0, 20, 201);
+  }
+  
+}
+
+
 
 @media (max-width:1515px) {
   .listheader  h1{

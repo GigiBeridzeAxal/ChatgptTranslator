@@ -57,7 +57,7 @@ export default function Usersbylanguage() {
 
 
   return (
-    <div className="usersbylanguage pt-[100px]">
+    <div className="usersbylanguage ">
       <div className="usersbylanguageframe p-[40px]">
 
       <div className="userlist flex flex-col  items-center gap-[5px]">

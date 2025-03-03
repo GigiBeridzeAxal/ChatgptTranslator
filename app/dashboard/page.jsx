@@ -6,6 +6,7 @@ import useRenew from '../hooks/useRenew'
 import Usersbylanguage from './components/Usersbylanguage'
 import { useAuthStore } from '../store/useAuthStore'
 import Footer from '../components/Footer'
+import Games from './components/Games'
 
 
 export default function page() {
@@ -23,7 +24,9 @@ export default function page() {
 
   return (
     <>
-    <DashHeader></DashHeader>
+    <DashHeader ></DashHeader>
+
+    <Games></Games>
   
     <Usersbylanguage  ></Usersbylanguage>
 

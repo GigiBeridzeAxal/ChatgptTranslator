@@ -4,12 +4,13 @@ import useJwtauth from '@/app/hooks/useJwtauth'
 import { useAuthStore } from '@/app/store/useAuthStore'
 import { useMessagesStore } from '@/app/store/useMessagesStore'
 import axios from 'axios'
-import { ArrowBigDown, ArrowDown, ArrowLeft, BoxSelect, Coins, File, Image, Languages, LucideArrowsUpFromLine, Mic, Play, Search, SearchIcon, Send, SendIcon, Speaker, Stars, Upload, Verified, Voicemail } from 'lucide-react'
+import { ArrowBigDown, ArrowDown, ArrowLeft, ArrowLeftCircle, ArrowLeftFromLine, ArrowLeftSquare, BoxSelect, Coins, Construction, File, Image, Languages, LucideArrowsUpFromLine, Mic, Mic2, MicVocal, Play, Search, SearchIcon, Send, SendIcon, Speaker, Stars, Upload, Verified, Voicemail } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense, useEffect, useRef, useState } from 'react'
 import './VoiceTranslator.css'
 import toast from 'react-hot-toast'
+
 
  const Chat = () => {
   const [translatoropened  , settranslatoropened] = useState(false)
@@ -28,6 +29,17 @@ import toast from 'react-hot-toast'
   const [texttotranslate , settexttotranslate] = useState()
   const [voicetranslator , setvoicetranslator] = useState(false)
   const [voicetospeech , setvoicetospech] = useState()
+  const [voiceisstarted , setvoiceisstarted] = useState(false)
+  const mediaRecorderRef = useRef(null)
+  const audioChunksRef = useRef([]);
+  const audioContext = new (window.AudioContext)();
+const analyser = audioContext.createAnalyser();
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+
+  const [audiovoice , setaudiovoice] = useState(null)
+
   
   const [translatedtext , settranslatedtext] = useState('')
  
@@ -51,19 +63,59 @@ import toast from 'react-hot-toast'
     }
   }, [msgref]);
 
+  const audiotranslate = async() => {
+    const formData = new FormData();
+    formData.append("file", audiovoice);
+    console.log(formData.get('file'))
 
-   const Voicehandler = () => {
+    const gettranslatedversion = await axios.post(process.env.NEXT_PUBLIC_BACKEND + 'translateauido' , formData , {     headers: {
+      'Content-Type': 'multipart/form-data',
+    },})
 
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-   // recognition.lang = "ka-GE, en-US";
-    recognition.start()
+    console.log(gettranslatedversion.data)
+    
+  }
 
-    recognition.onresult = (event) => {
-      const speechToText = event.results[0][0].transcript;
-      settranslatedtext(speechToText);
-    }; 
 
-   }
+  const startvoice = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      audioChunksRef.current = []; 
+
+      mediaRecorderRef.current.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          audioChunksRef.current.push(e.data);
+        }
+      };
+
+      mediaRecorderRef.current.onstop = () => {
+        if (audioChunksRef.current.length > 0) {
+          const audioBlob = new Blob(audioChunksRef.current, { type: "audio/wav" });
+          console.log(audioBlob)
+          setaudiovoice(URL.createObjectURL(audioBlob));
+        }
+      };
+
+      mediaRecorderRef.current.start();
+      setvoiceisstarted(true);
+    } catch (error) {
+      console.error("Error accessing microphone:", error);
+    }
+  };
+
+  const stopvoice = () => {
+
+    console.log("Stop");
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+      mediaRecorderRef.current.stop();
+      setvoiceisstarted(false);
+    } else {
+      console.error("MediaRecorder is not active.");
+    }
+  };
+
+ 
 
    const changemsgscroll = () => {
     if (msgref.current) {
@@ -414,7 +466,7 @@ return data.sendto === queryuser._id ?
 
           <div className='flex items-center justify-center gap-[25px]'>
 
-          <button onClick={() => translate(texttotranslate)} className="generate flex items-center justify-center p-[8px] rounded-[5px] gap-[10px] bg-purple-500"><Play></Play> Generate</button>
+          <button onClick={() => translate()} className="generate flex items-center justify-center p-[8px] rounded-[5px] gap-[10px] bg-purple-500"><Play></Play> Generate</button>
           <div className="creditvalue flex items-center justify-center gap-[5px]">{userdata.credits} <Coins className='text-yellow-400'></Coins></div>
 
           </div>
@@ -424,12 +476,38 @@ return data.sendto === queryuser._id ?
       : null}
 
       {voicetranslator ? 
-      <div className="voicetranslator flex flex-col p-[10px] flex items-center gap-[50px]  bg-gray-800 h-[300px] w-[70%] ">
+      <div className="voicetranslator fixed left-[0px] top-[0px] zindex-[25] flex flex-col p-[10px] flex items-center gap-[50px]  bg-black h-[100vh] w-[100%] ">
+        <br />
+        <br />
+  
+        <h1 className='text-[36px] flex items-center justify-center gap-[30px]' ><button onClick={() => setvoicetranslator(false)} className="back"><ArrowLeftSquare className='size-[34px]'></ArrowLeftSquare></button> Voice Translator</h1>
+    
 
-        <h1>Voice Translator {translatedtext}</h1>
+        <div className='flex items-center justify-center gap-[100px]'>
+        <button className='flex items-center justify-center gap-[5px] bg-gray-900/50 p-[10px] rounded-[5px]' ><Stars className='text-purple-600'></Stars> Auto Detect</button>
+        <button className='flex items-center justify-center gap-[5px] bg-gray-900/50 p-[10px] rounded-[5px]' ><Construction className='rounded-[50%]'></Construction> English</button>
+        </div>
+        <button onClick={() => audiotranslate()} className="generate flex items-center justify-center p-[8px] rounded-[5px] gap-[10px] bg-purple-500"><Play></Play> Generate</button>
+       
+       
+   
 
-        <Mic onClick={() => Voicehandler()} className='size-[150px] rounded-[50%] p-[30px] bg-slate-900/50' ></Mic>
+        {audiovoice ? 
+        
+        <div className=" flex items-center justify-center gap-[10px] flex-col">Original: <audio src={audiovoice} controls></audio></div> 
+        :      <div className="anims text-[40px] text-center text-gray-700 w-[320px]">
+        <span className='text-white'>Hello !</span> Please Record Audio To Translate
+      </div>}
 
+
+        <div className="micbtns">
+          <div className="shadows">
+            <div className="shadow"></div>
+          </div>
+          <Mic onClick={() => voiceisstarted ? stopvoice() : startvoice() } className={`size-[120px] p-[30px] ${voiceisstarted ? "shadowformic" : ''}  rounded-[50%] bg-blue-500` }></Mic>
+        </div>
+
+   
       
       </div>
       
