@@ -1,5 +1,5 @@
 {
   "appId": "vercel.app.chatgpt.com",
   "appName": "my-chatgpttranslatormobile",
-  "webDir": "out"
+  "webDir": "public"
 }
