@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import DashHeader from '../dashboard/components/DashHeader';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
@@ -15,6 +15,7 @@ export default function page() {
     const id = searchparams.get('id')
 
     useEffect(() => {
+      if(!id) {return;}
 
          const gettargetuser = async() => {
 
@@ -46,6 +47,8 @@ export default function page() {
           },[])
 
     if(!targetuser){return ;}
+
+
 
   return (
     <div >
@@ -166,3 +169,4 @@ export default function page() {
    </div>
   )
 }
+    
