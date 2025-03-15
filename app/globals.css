@@ -13,8 +13,12 @@ body {
   font-style: normal;
   font-variation-settings:
     "wdth" 100;
-    background-color:#111827;
-    color: white;
+    color: black;
+
+}
+*{
+  letter-spacing: 1px;
+  
 }
 
 
@@ -34,10 +38,10 @@ header{
   width: 100%;
   padding: 10px;
   justify-content: space-between;
-  color: white;
+  color: black !important;
   z-index: 15;
-  background-color: #111827;
-  box-shadow: 2px 2px 10px 1px #151e33;
+  background-color: #eeeeee;
+
   
 }
 .landingheader{
@@ -493,7 +497,7 @@ background: none;
   color: #3392ff;
 }
 .footerframe{
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid rgb(0, 0, 0);
   padding-bottom: 40px;
 }
 .lights{
@@ -584,13 +588,17 @@ background: none;
 }
 .search{
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.091);
+  background-color: rgba(236, 236, 236, 0.829);
   border-radius: 3px;
 }
 .translator{
 width: 100%;
 min-height: 3%0px !important;
+z-index: 15;
   
+}
+.textwrapped{
+  word-wrap: break-word;
 }
 
 .leftcontainer {
@@ -618,7 +626,7 @@ min-height: 3%0px !important;
 .countriesselector{
   left: 0px;
   top: 0px;
-  position: absolute;
+  position: fixed;
   z-index: 15;
   width: 100%;
   height: 100vh;
@@ -644,8 +652,9 @@ min-height: 3%0px !important;
   border-bottom: 1px solid white;
 }
 .planpremium{
-  background: linear-gradient(45deg, orange, rgb(255, 184, 52), rgb(255, 225, 170), orange);
+  background: linear-gradient(45deg, rgb(194, 131, 14), rgb(241, 165, 23), rgb(255, 174, 24), orange);
   -webkit-background-clip: text;
+  font-weight: 900;
   -webkit-text-fill-color: transparent;
 }
 .premiumplantittle{
@@ -670,7 +679,7 @@ min-height: 3%0px !important;
   position: fixed;
   right: 0px;
   top: 0px;
-  background-color: black;
+  background-color: white;
 }
 .firstline .flex {
   justify-content: start;

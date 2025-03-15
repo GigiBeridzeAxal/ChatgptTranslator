@@ -4,7 +4,7 @@ import useJwtauth from '@/app/hooks/useJwtauth'
 import { useAuthStore } from '@/app/store/useAuthStore'
 import { useMessagesStore } from '@/app/store/useMessagesStore'
 import axios from 'axios'
-import { ArrowBigDown, ArrowDown, ArrowLeft, ArrowLeftCircle, ArrowLeftFromLine, ArrowLeftSquare, BoxSelect, Coins, Construction, File, Image, Languages, LucideArrowsUpFromLine, Mic, Mic2, MicVocal, Play, Search, SearchIcon, Send, SendIcon, Speaker, Stars, Upload, Verified, Voicemail } from 'lucide-react'
+import { ArrowBigDown, ArrowDown, ArrowLeft, ArrowLeftCircle, ArrowLeftFromLine, ArrowLeftSquare, BoxSelect, Coins, Construction, File, Image, ImageDown, Languages, LucideArrowsUpFromLine, Mic, Mic2, MicVocal, Play, Search, SearchIcon, Send, SendIcon, Speaker, Stars, Upload, Users, Verified, Voicemail } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense, useEffect, useRef, useState } from 'react'
@@ -32,10 +32,34 @@ import toast from 'react-hot-toast'
   const [voiceisstarted , setvoiceisstarted] = useState(false)
   const mediaRecorderRef = useRef(null)
   const audioChunksRef = useRef([]);
-  const audioContext = new (window.AudioContext)();
+  const audioContext = window ?  new (window.AudioContext)() : null
 const analyser = audioContext.createAnalyser();
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
+const [images , setimages] = useState([])
+const [previewimages , setpreviewimages] = useState([])
+
+useEffect(() => {
+
+  images.map((data , id) => {
+
+    if(!images.length) return;
+
+    const newpreviews = images.map(file => {
+      return new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => resolve(reader.result)
+      })
+
+
+    })
+
+    Promise.all(newpreviews).then(setpreviewimages)
+
+  })
+
+} , [images])
 
 
   const [audiovoice , setaudiovoice] = useState(null)
@@ -285,52 +309,56 @@ const dataArray = new Uint8Array(bufferLength);
       <br />
     
    
-        <div className="search flex items-center justify-around gap-[5px]"><input className='searchinput' type="text" placeholder='Search People...' /> <Search></Search></div>
+        <div className="bg-white text-black p-[10px] flex items-center justify-around gap-[5px]"><input onChange={(e) => setlanguagesearch(e.target.value)} className='searchinput' type="text" placeholder='Search People...' /> <Search className='text-black'></Search></div>
            
 
            
-          
-          {userswhosentmessage.map((data) => {
+        {userswhosentmessage[0] ?  userswhosentmessage.filter(filt =>  filt.firstname.toUpperCase().includes(languagesearch.toUpperCase()) ).map((data) => {
 
            
-           const allmesageforuser = allmessage.filter(filt => filt.sendby === data._id || filt.sendto == data._id)
+const allmesageforuser = allmessage.filter(filt => filt.sendby === data._id || filt.sendto == data._id)
 
-           let lastmessage = allmesageforuser.at(-1) == undefined ? undefined : allmesageforuser.at(-1)
-  
+let lastmessage = allmesageforuser.at(-1) == undefined ? undefined : allmesageforuser.at(-1)
+
+
+ let sendtime = lastmessage !== undefined ? lastmessage.sendtime : null
+ const date = sendtime !== null ?  new Date() - new Date(sendtime) : null
+
+
+ let minutes = date !== null ?  Math.floor(date / 60000) : null
+
+
+
+
+
+
+
+
+
  
-            let sendtime = lastmessage !== undefined ? lastmessage.sendtime : null
-            const date = sendtime !== null ?  new Date() - new Date(sendtime) : null
-
-    
-            let minutes = date !== null ?  Math.floor(date / 60000) : null
-
-
-
-
-           
-
- 
-     
+return <Link href={`/chat?sendmessage=${data._id}`} key={data._id} className={`users trace relative cursor-pointer ${queryuser ? queryuser._id === data._id ? "bg-slate-700/50" : "bg-slate-900/50" : "bg-slate-900/50"}  rounded-[5px] mt-[35px] `}>
+ <div className={`user flex items-center gap-[15px]   w-[350px] p-[10px] rounded-[15px]`}>
+   <div  style={{backgroundImage:`url(${data.profilepicture})`}}  className="chatprofiles w-[60px] rounded-[15px]  h-[60px] "></div>
+   {onlineusers.includes(data._id) ?<div className="usersbyonlineforchat  bg-teal-500"></div> :<div className="usersbyonlineforchat bg-gray-500"></div> }
+   <div className="flex usersforchatdesc items-start w-[200px] flex flex-col gap-[10px]">
+   <div className="w-[100%]"><div className=" flex w-[100%] items-center justify-between">{data.firstname} {data.lastname} <div className="sendtime text-[13px] text-gray-400">{minutes ? minutes < 1 ? "Just Now" : minutes + "m" : "Never"}</div></div></div>
+   <div className="secondline"><div className="lastmassage flex items-center"><div className="msg ">{ lastmessage ?   lastmessage.sendby == Authuser.id ? <div className="sendme">You: { lastmessage ? lastmessage.message.length > 14 ?  lastmessage.message.slice(0 , 14) + "..." : lastmessage.message : null }</div> :                
+     <div className="sendme">{data.firstname}: { lastmessage.message.length > 14 ?  lastmessage.message.slice(0 , 14) + "..." : lastmessage.message}</div> : <div className="waitingyou text-gray-500 text-[13px]">He is Waiting You</div>
    
-            
-           return <Link href={`/chat?sendmessage=${data._id}`} key={data._id} className={`users trace relative cursor-pointer ${queryuser ? queryuser._id === data._id ? "bg-slate-700/50" : "bg-slate-900/50" : "bg-slate-900/50"}  rounded-[5px] mt-[35px] `}>
-            <div className={`user flex items-center gap-[15px]   w-[350px] p-[10px] rounded-[15px]`}>
-              <div  style={{backgroundImage:`url(${data.profilepicture})`}}  className="chatprofiles w-[60px] rounded-[15px]  h-[60px] "></div>
-              {onlineusers.includes(data._id) ?<div className="usersbyonlineforchat  bg-teal-500"></div> :<div className="usersbyonlineforchat bg-gray-500"></div> }
-              <div className="flex usersforchatdesc items-start w-[200px] flex flex-col gap-[10px]">
-              <div className="w-[100%]"><div className=" flex w-[100%] items-center justify-between">{data.firstname} {data.lastname} <div className="sendtime text-[13px] text-gray-400">{minutes ? minutes < 1 ? "Just Now" : minutes + "m" : "Never"}</div></div></div>
-              <div className="secondline"><div className="lastmassage flex items-center"><div className="msg ">{ lastmessage ?   lastmessage.sendby == Authuser.id ? <div className="sendme">You: { lastmessage ? lastmessage.message.length > 14 ?  lastmessage.message.slice(0 , 14) + "..." : lastmessage.message : null }</div> :                
-                <div className="sendme">{data.firstname}: { lastmessage.message.length > 14 ?  lastmessage.message.slice(0 , 14) + "..." : lastmessage.message}</div> : <div className="waitingyou text-gray-500 text-[13px]">He is Waiting You</div>
-              
-            
+ 
 
-                
-                }</div>                </div></div>
-              </div>
      
-            </div>
-          </Link> 
- })}
+     }</div>                </div></div>
+   </div>
+
+ </div>
+</Link> 
+}) : <div className='text-white text-center flex flex-col gap-[25px] mt-[144px]'>
+  
+  <h1>You don't have any posts Find people to send a message</h1>
+  <Link href={'/'} className='text-white bg-blue-500 p-[8px] flex items-center justify-center gap-[10px]'>Find Users <Users></Users></Link>
+  </div>}
+          
           
           
 
@@ -418,7 +446,11 @@ return data.sendto === queryuser._id ?
 
             console.log(data)
 
-               return <button onClick={() => setselectedlanguage(data.name.common) || setcountriesdropdown(false)} key={id} className='w-[100%] p-[20px] bg-gray-200 flex justify-between' ><div className="left flex items-center gap-[25px]"><img width={30} src={data.flags.png} alt="" />
+               if(!data.flags){
+                return;
+               }
+
+               return  <button onClick={() => setselectedlanguage(data.name.common) || setcountriesdropdown(false)} key={id} className='w-[100%] p-[20px] bg-gray-200 flex justify-between' ><div className="left flex items-center gap-[25px]"><img width={30} src={data.flags.png} alt="" />
 
                {data.name.common.slice(0,20)}
                
@@ -492,12 +524,6 @@ return data.sendto === queryuser._id ?
        
    
 
-        {audiovoice ? 
-        
-        <div className=" flex items-center justify-center gap-[10px] flex-col">Original: <audio src={audiovoice} controls></audio></div> 
-        :      <div className="anims text-[40px] text-center text-gray-700 w-[320px]">
-        <span className='text-white'>Hello !</span> Please Record Audio To Translate
-      </div>}
 
 
         <div className="micbtns">
@@ -515,9 +541,20 @@ return data.sendto === queryuser._id ?
 
 
 <br />
+  
       <div className='flex w-[100%] fixedbtn items-center justify-center gap-[15px]'>
 
-          <div className="sendmsg flex w-[90%] items-center  justify-center gap-[5px] bg-slate-900/50"> <button onClick={() => !voicetranslator ?  setvoicetranslator(true) : setvoicetranslator(false) } className="voice p-[10px] bg-slate-900/50"><Mic></Mic></button> <input onChange={(e) => setmessage(e.target.value)} className='w-[100%] p-[10px]' type="text" style={{background:'none' , outline:0 , border:0}} placeholder='Type Message Here...' /> <Languages onClick={() => translatoropened ? settranslatoropened(false) :  settranslatoropened(true) || changemsgscroll() }></Languages> </div ><SendIcon onClick={() => sendmessage({sendto:queryuser._id , sendby:Authuser.id , message:message})} ></SendIcon>
+
+  
+
+
+          <div className="sendmsg relative flex w-[90%] items-center  justify-center gap-[5px] bg-slate-900/50"> 
+          
+      {previewimages.length > 0 ? <div className="selectedimages bg-slate-900/50 bottom-[50px] flex items-center gap-[10px] w-[100%] flex-wrap p-[10px] absolute">
+    {previewimages.map(data => <div className='p-[20px] bg-slate-900/50 rounded-[5px]'><img src={data} className='w-[150px] h-[150px]'></img></div>)}
+    </div>
+           : null}   
+           <input onChange={(e) => setmessage(e.target.value)} className='w-[100%] p-[10px]' type="text" style={{background:'none' , outline:0 , border:0}} placeholder='Type Message Here...' /> <Languages onClick={() => translatoropened ? settranslatoropened(false) :  settranslatoropened(true) || changemsgscroll() }></Languages> </div ><SendIcon onClick={() => sendmessage({sendto:queryuser._id , sendby:Authuser.id , message:message , images:images})} ></SendIcon>
       </div>
 
       </div>

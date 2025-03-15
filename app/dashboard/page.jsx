@@ -29,6 +29,7 @@ export default function page() {
     <Games></Games>
   
     <Usersbylanguage  ></Usersbylanguage>
+    <Footer></Footer>
 
     </>
   )

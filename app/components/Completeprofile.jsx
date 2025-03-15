@@ -238,7 +238,9 @@ export default function Completeprofile() {
 
              {countries.filter(filt => filt.name.common.toUpperCase().includes(languagesearch.toUpperCase())).map((data, id) => {
 
-            console.log(data)
+               if(!data.flags){
+                return;
+               }
 
                return <button onClick={() => wanttolearn.map(data => data.selectedlanguage).includes(data.name.common) ? toast.error("Already Choosed") : setwanttolearn((perv) => [...perv , {selectedlanguage:data.name.common}])} key={id} className='w-[100%] p-[20px] bg-gray-200 flex justify-between' ><div className="left flex items-center gap-[25px]"><img width={30} src={data.flags.png} alt="" />
 

@@ -114,10 +114,16 @@ export const useMessagesStore = create((set,get) => ({
 
    sendmessage:async(param) => {
 
+    console.log(param)
+
+    if(!param.message) {return toast.error("Enter Message") ;}
+
+
+
     try{
 
         console.log("Send TIme")
-        const send = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "sendprivatemssage" , {param} )
+        const send = await axios.post(process.env.NEXT_PUBLIC_BACKEND + "sendprivatemssage" , {param})
 
         console.log(send)
 

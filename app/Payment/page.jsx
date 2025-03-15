@@ -79,34 +79,43 @@ const Checkout = () => {
             <div className="rightpayment bg-white p-[30px] rounded-[5px]">
                 <h1 className='text-[24px] text-black' >Choose Payment Method</h1>
                 <br />
-            <PayPalScriptProvider  options={{clientId:"AX8henYPxNm_eJySlM7reSI2Xpmkm3oo_HqIIMpPxWfXDGFtp771BMR3V53jI0NslFlMZxiJFgVfuSl3"}}>
-            <PayPalButtons 
-        createOrder={(data, actions) => {
-            console.log("Clicked")
-          return actions.order.create({
-            application_context: {
-                shipping_preference: "NO_SHIPPING", 
-              },
-            purchase_units: [
-              {
-                amount: {
-                  value: "15.00", 
-                },
-              },
-            ],
-          });
-        }}
-        onApprove={(data, actions) => {
-          return actions.order.capture().then((details) => {
-            toast.loading("Please Wait While We Redirect You")
-            giveuserpremium()
-        
-            window.location ='/'
-          });
-        }}
-      />
-            </PayPalScriptProvider>
+                <PayPalScriptProvider options={{ clientId: "AX8henYPxNm_eJySlM7reSI2Xpmkm3oo_HqIIMpPxWfXDGFtp771BMR3V53jI0NslFlMZxiJFgVfuSl3" }}>
+  <PayPalButtons
+    createOrder={(data, actions) => {
+      console.log("Clicked");
+      return actions.order.create({
+        application_context: {
+          shipping_preference: "NO_SHIPPING",
+        },
+        purchase_units: [
+          {
+            amount: {
+              currency_code: "USD",
+              value: "2.00",
+            },
+          },
+        ],
+      }).catch((error) => console.error("Order creation failed:", error));
+    }}
+    onApprove={(data, actions) => {
+      return actions.order.capture()
+        .then((details) => {
+          toast.loading("Please Wait While We Redirect You");
 
+          try {
+            giveuserpremium();
+          } catch (error) {
+            console.error("Error in giveuserpremium:", error);
+          }
+
+          window.location = '/';
+        })
+        .catch((error) => {
+          console.error("Payment failed:", error);
+        });
+    }}
+  />
+</PayPalScriptProvider>
             </div>
            
 
