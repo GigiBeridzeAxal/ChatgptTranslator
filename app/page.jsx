@@ -66,7 +66,7 @@ export default function Home() {
       <h1 className='text-[24px]' >Chat App</h1>
       <h1 className='text-[18px] text-gray-500' >Find People</h1>
           <br />
-          <button className='w-[320px] bg-gray-200 text-black p-[10px] flex items-center justify-center gap-[15px] text-black rounded-[5px]' onClick={() => window.location = process.env.NEXT_PUBLIC_BACKEND + 'google'} ><img width={30} src="Google.png" alt="" />Countinue With Google</button>
+          <a href='https://chatgptranslatorbackend.onrender.com/google' className='w-[320px] bg-gray-200 text-black p-[10px] flex items-center justify-center gap-[15px] text-black rounded-[5px]'  ><img width={30} src="Google.png" alt="" />Countinue With Google</a>
   
         <form onSubmit={(e) => SubmitForm(e)} ref={formref} className='authform flex flex-col mt-[15px] items-center gap-[15px] ' >
 
